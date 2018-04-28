@@ -1,3 +1,11 @@
+import org.jdom2.Attribute
+import org.jdom2.Document
+import org.jdom2.Element
+import org.jdom2.input.SAXBuilder
+import org.jdom2.output.Format
+import org.jdom2.output.LineSeparator
+import org.jdom2.output.XMLOutputter
+
 class AndroidUnusedResourcesRemoverPlugin implements Plugin<Project> {
 
     @Override
@@ -7,21 +15,52 @@ class AndroidUnusedResourcesRemoverPlugin implements Plugin<Project> {
 //            println "hoe ${value.name}"
         }
 
-        String xml = new File("${project.projectDir.path}/src/main/res/values/styles.xml").text
+        Document doc = new SAXBuilder().build(new FileInputStream("${project.projectDir.path}/src/main/res/values/styles.xml"))
 
-        def parsed = new XmlParser().parseText(xml)
-        parsed.each { node ->
-            println "node: ${node.@name}"
+        Element root = doc.getRootElement()
+
+        Iterator<Element> stylesIterator = root.getChildren("style").iterator()
+
+        while (stylesIterator.hasNext()) {
+            Element style = stylesIterator.next()
+            Attribute name = style.getAttribute("name")
+
+            if (name.value == 'AppTheme') {
+                stylesIterator.remove()
+
+                println root.children
+                println "hogehoge"
+            }
         }
 
-        parsed.find { it.@name == "AppTheme" }.replaceNode {}
+        new XMLOutputter().with {
+            format = Format.getRawFormat()
+            format.setLineSeparator(LineSeparator.NONE)
+            // XmlOutputter can write to OutputStream or Writer, which is sufficient for most cases
+            output(doc, System.out)
+            output(doc, new FileOutputStream("${project.projectDir.path}/src/main/res/values/styles.xml"))
+        }
 
-        println parsed
+//
+//        def parsed = new XmlParser().parseText(xml)
+//        parsed.each { node ->
+//            println "node: ${node.@name}"
+//        }
+//
+//        parsed.find { it.@name == "AppTheme" }.replaceNode {}
+//
+//        println parsed
 
-        def printer = new XmlNodePrinter(new PrintWriter(new FileWriter(new File("${project.projectDir.path}/src/main/res/values/styles.xml"))))
-        printer.namespaceAware = true
-        printer.preserveWhitespace = true
-        printer.print(parsed)
+//        def printer = new XmlNodePrinter(new PrintWriter(new FileWriter(new File("${project.projectDir.path}/src/main/res/values/styles.xml"))))
+//        printer.namespaceAware = true
+//        printer.preserveWhitespace = true
+//        printer.print(parsed)
+
+//        def doc = DOMBuilder.parse(new StringReader(parsed.text()))
+//        def root = doc.documentElement
+//
+//        def result = groovy.xml.dom.DOMUtil.serialize(root)
+//        println result
     }
 }
 
