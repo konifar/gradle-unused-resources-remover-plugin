@@ -62,6 +62,8 @@ class AndroidUnusedResourcesRemoverPlugin implements Plugin<Project> {
             new XMLOutputter().with {
                 format = Format.getRawFormat()
                 format.setLineSeparator(LineSeparator.NONE)
+                format.setOmitEncoding(true)
+                format.setOmitDeclaration(true)
                 output(doc, new FileWriter(file))
                 // output(doc, System.out)
             }
