@@ -1,8 +1,89 @@
+import org.jdom2.Attribute
+import org.jdom2.Document
+import org.jdom2.Element
+import org.jdom2.input.SAXBuilder
+import org.jdom2.output.Format
+import org.jdom2.output.LineSeparator
+import org.jdom2.output.XMLOutputter
+
 class AndroidUnusedResourcesRemoverPlugin implements Plugin<Project> {
 
     static String toCamelCase(String text, boolean capitalized = false) {
         text = text.replaceAll("(_)([A-Za-z0-9])", { Object[] it -> it[2].toUpperCase() })
         return capitalized ? text.capitalize() : text
+    }
+
+    static def deleteEachTagIfNeed(String type, File file, File srcDirFile) {
+        def baseName = file.name
+        def tagName = type
+
+        def isChanged = false
+
+        Document doc = new SAXBuilder().build(file)
+        Element root = doc.getRootElement()
+        Iterator<Element> iterator = root.getChildren(tagName).iterator()
+
+        while (iterator.hasNext()) {
+            def isMatched = false
+
+            Element element = iterator.next()
+            Attribute attrName = element.getAttribute("name")
+
+            if (srcDirFile.exists()) {
+                srcDirFile.eachDirRecurse { dir ->
+                    dir.eachFileMatch(~/(.*\.xml)|(.*\.kt)|(.*\.java)/) { f ->
+                        def fileText = f.text.replaceAll('\n', '').replaceAll(' ', '')
+
+                        def pattern = /(.*${type}\/${attrName})|(.*R.${type}.${attrName})/
+
+                        // Considered style override
+                        if (type.startsWith("style")) {
+                            pattern = /(.*${type}\/${attrName})|(.*R.${type}\.${attrName})|(.*${attrName}\.)|(.*parent="${attrName}")/
+                        }
+
+                        if (fileText =~ pattern) {
+                            isMatched = true
+                            return true
+                        }
+                    }
+                }
+            }
+
+            if (!isMatched) {
+                println("[${type}] Delete ${attrName} in ${baseName}.")
+                iterator.remove()
+                isChanged = true
+            }
+        }
+
+        if (isChanged) {
+            new XMLOutputter().with {
+                format = Format.getRawFormat()
+                format.setLineSeparator(LineSeparator.NONE)
+                output(doc, file)
+                // output(doc, System.out)
+            }
+        } else {
+            println "[${type}] No unused tags in ${baseName}."
+        }
+
+        doc = new SAXBuilder().build(file)
+        if (doc.getRootElement().getChildren(tagName).size() == 0) {
+            println "[${type}] Delete ${baseName}."
+            file.delete()
+        }
+    }
+
+    static def deleteTag(String type, File resDirFile, File srcDirFile) {
+        if (resDirFile.exists()) {
+            resDirFile.eachDirRecurse { dir ->
+                if (dir =~ /.*\/values.*/) {
+                    dir.eachFileMatch(~/.*${type}.*/) { file ->
+                        deleteEachTagIfNeed(type, file, srcDirFile)
+                    }
+                }
+            }
+        }
     }
 
     static def deleteEachFileIfNeed(String type, File file, File srcDirFile) {
@@ -21,11 +102,11 @@ class AndroidUnusedResourcesRemoverPlugin implements Plugin<Project> {
                 dir.eachFileMatch(~/(.*\.xml)|(.*\.kt)|(.*\.java)/) { f ->
                     def fileText = f.text.replaceAll('\n', '').replaceAll(' ', '')
 
-                    def pattern = /(.*${type}\/${fileName})|(.*R.${type}.${fileName})/
+                    def pattern = /(.*${type}\/${fileName})|(.*R.${type}\.${fileName})/
 
                     // Considered data binding
                     if (type.startsWith("layout")) {
-                        pattern = /(.*${type}\/${fileName})|(.*R.${type}.${fileName})|(.*${toCamelCase(fileName, true)}Binding)/
+                        pattern = /(.*${type}\/${fileName})|(.*R.${type}\.${fileName})|(.*${toCamelCase(fileName, true)}Binding)/
                     }
 
                     if (fileText =~ pattern) {
@@ -68,7 +149,7 @@ class AndroidUnusedResourcesRemoverPlugin implements Plugin<Project> {
     void apply(Project project) {
         project.rootProject.allprojects.each { p ->
             if (p.name != project.rootProject.name) {
-                println "==================== Checking ${p.name} ===================="
+                println "================== Checking ${p.name} =================="
 
                 def moduleSrcDir = "${project.rootProject.projectDir.path}/${p.name}/src"
                 def srcDirFile = new File(moduleSrcDir)
@@ -77,56 +158,14 @@ class AndroidUnusedResourcesRemoverPlugin implements Plugin<Project> {
                 ["layout", "drawable", "mipmap", "anim", "animator", "color", "menu"].forEach {
                     deleteFile(it, resDirFile, srcDirFile)
                 }
+
+                ["style", "string", "dimen"].forEach {
+                    deleteTag(it, resDirFile, srcDirFile)
+                }
             }
         }
-
-//        Document doc = new SAXBuilder().build(new FileInputStream("${project.projectDir.path}/src/main/res/values/styles.xml"))
-//
-//        Element root = doc.getRootElement()
-//
-//        Iterator<Element> stylesIterator = root.getChildren("style").iterator()
-//
-//        while (stylesIterator.hasNext()) {
-//            Element style = stylesIterator.next()
-//            Attribute name = style.getAttribute("name")
-//
-//            if (name.value == 'AppTheme') {
-//                stylesIterator.remove()
-//
-//                println root.children
-//                println "hogehoge"
-//            }
-//        }
-//
-//        new XMLOutputter().with {
-//            format = Format.getRawFormat()
-//            format.setLineSeparator(LineSeparator.NONE)
-//            // XmlOutputter can write to OutputStream or Writer, which is sufficient for most cases
-//            output(doc, System.out)
-//            output(doc, new FileOutputStream("${project.projectDir.path}/src/main/res/values/styles.xml"))
-//        }
-
-//
-//        def parsed = new XmlParser().parseText(xml)
-//        parsed.each { node ->
-//            println "node: ${node.@name}"
-//        }
-//
-//        parsed.deleteEachFileIfNeed { it.@name == "AppTheme" }.replaceNode {}
-//
-//        println parsed
-
-//        def printer = new XmlNodePrinter(new PrintWriter(new FileWriter(new File("${project.projectDir.path}/src/main/res/values/styles.xml"))))
-//        printer.namespaceAware = true
-//        printer.preserveWhitespace = true
-//        printer.print(parsed)
-
-//        def doc = DOMBuilder.parse(new StringReader(parsed.text()))
-//        def root = doc.documentElement
-//
-//        def result = groovy.xml.dom.DOMUtil.serialize(root)
-//        println result
     }
+
 }
 
 apply plugin: AndroidUnusedResourcesRemoverPlugin
