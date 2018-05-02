@@ -1,21 +1,49 @@
 class AndroidUnusedResourcesRemoverPlugin implements Plugin<Project> {
 
-    def find(String prefix, File file, File moduleDirFile) {
+    static String toCamelCase(String text, boolean capitalized = false) {
+        text = text.replaceAll("(_)([A-Za-z0-9])", { Object[] it -> it[2].toUpperCase() })
+        return capitalized ? capitalize(text) : text
+    }
+
+    static def deleteFileIfNeed(String prefix, String moduleName, File file, File srcDirFile) {
         def baseName = file.name
         def fileName = baseName.take(baseName.lastIndexOf('.'))
 
-        if (moduleDirFile.exists()) {
-            moduleDirFile.eachDirRecurse { dir ->
+        // Considered 9patch
+        if (prefix.startsWith("drawable")) {
+            fileName = fileName - ".9"
+        }
+
+        def isMatched = false
+
+        if (srcDirFile.exists()) {
+            srcDirFile.eachDirRecurse { dir ->
                 dir.eachFileMatch(~/(.*\.xml)|(.*\.kt)|(.*\.java)/) { f ->
-                    def fileText = f.text.replaceAll('\n', '')
-                    if (fileText =~ /(.*${prefix}\/${fileName})|(.*R.${prefix}.${fileName})/) {
+                    def fileText = f.text.replaceAll('\n', '').replaceAll(' ', '')
+
+                    def pattern = /(.*${prefix}\/${fileName})|(.*R.${prefix}.${fileName})/
+
+                    // Considered data binding
+                    if (prefix.startsWith("layout")) {
+                        pattern = /(.*${prefix}\/${fileName})|(.*R.${prefix}.${fileName})|(.*${toCamelCase(fileName, true) Binding})/
+                    }
+
+                    if (fileText =~ pattern) {
+                        isMatched = true
                         return true
                     }
                 }
             }
         }
 
-        return false
+
+        if (!isMatched) {
+            println("Delete ${baseName} / ${prefix} on ${moduleName}")
+            file.delete()
+            return true
+        } else {
+            return false
+        }
     }
 
     @Override
@@ -25,15 +53,23 @@ class AndroidUnusedResourcesRemoverPlugin implements Plugin<Project> {
         project.rootProject.allprojects.each { p ->
             if (p.name != project.rootProject.name) {
                 def moduleSrcDir = "${project.rootProject.projectDir.path}/${p.name}/src"
-                def moduleSrcDirFile = new File(moduleSrcDir)
+                def srcDirFile = new File(moduleSrcDir)
+                def resDirFile = new File("${moduleSrcDir}/main/res")
 
-                if (moduleSrcDirFile.exists()) {
-                    moduleSrcDirFile.eachDirRecurse { dir ->
-                        if (dir =~ /.*\/main\/res\/${prefix}.*/) {
+                if (resDirFile.exists()) {
+                    def checkResult = false
+                    resDirFile.eachDirRecurse { dir ->
+                        if (dir =~ /.*\/${prefix}.*/) {
                             dir.eachFile { file ->
-                                find(prefix, file, moduleSrcDirFile)
+                                checkResult |= deleteFileIfNeed(prefix, p.name, file, srcDirFile)
                             }
                         }
+                    }
+
+                    if (checkResult) {
+                        println "Complete to delete: ${prefix} on ${p.name}"
+                    } else {
+                        println "No unused file about ${prefix} on ${p.name}"
                     }
                 }
             }
@@ -71,7 +107,7 @@ class AndroidUnusedResourcesRemoverPlugin implements Plugin<Project> {
 //            println "node: ${node.@name}"
 //        }
 //
-//        parsed.find { it.@name == "AppTheme" }.replaceNode {}
+//        parsed.deleteFileIfNeed { it.@name == "AppTheme" }.replaceNode {}
 //
 //        println parsed
 
