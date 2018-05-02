@@ -1,45 +1,69 @@
-import org.jdom2.Attribute
-import org.jdom2.Document
-import org.jdom2.Element
-import org.jdom2.input.SAXBuilder
-import org.jdom2.output.Format
-import org.jdom2.output.LineSeparator
-import org.jdom2.output.XMLOutputter
-
 class AndroidUnusedResourcesRemoverPlugin implements Plugin<Project> {
 
-    @Override
-    void apply(Project project) {
-        println "ls ${project.rootProject.projectDir.path}".execute().text
-        project.rootProject.allprojects.each { value ->
-//            println "hoe ${value.name}"
-        }
+    def find(String prefix, File file, File moduleDirFile) {
+        def baseName = file.name
+        def fileName = baseName.take(baseName.lastIndexOf('.'))
 
-        Document doc = new SAXBuilder().build(new FileInputStream("${project.projectDir.path}/src/main/res/values/styles.xml"))
-
-        Element root = doc.getRootElement()
-
-        Iterator<Element> stylesIterator = root.getChildren("style").iterator()
-
-        while (stylesIterator.hasNext()) {
-            Element style = stylesIterator.next()
-            Attribute name = style.getAttribute("name")
-
-            if (name.value == 'AppTheme') {
-                stylesIterator.remove()
-
-                println root.children
-                println "hogehoge"
+        if (moduleDirFile.exists()) {
+            moduleDirFile.eachDirRecurse { dir ->
+                dir.eachFileMatch(~/(.*\.xml)|(.*\.kt)|(.*\.java)/) { f ->
+                    def fileText = f.text.replaceAll('\n', '')
+                    if (fileText =~ /(.*${prefix}\/${fileName})|(.*R.${prefix}.${fileName})/) {
+                        return true
+                    }
+                }
             }
         }
 
-        new XMLOutputter().with {
-            format = Format.getRawFormat()
-            format.setLineSeparator(LineSeparator.NONE)
-            // XmlOutputter can write to OutputStream or Writer, which is sufficient for most cases
-            output(doc, System.out)
-            output(doc, new FileOutputStream("${project.projectDir.path}/src/main/res/values/styles.xml"))
+        return false
+    }
+
+    @Override
+    void apply(Project project) {
+        def prefix = "drawable"
+
+        project.rootProject.allprojects.each { p ->
+            if (p.name != project.rootProject.name) {
+                def moduleSrcDir = "${project.rootProject.projectDir.path}/${p.name}/src"
+                def moduleSrcDirFile = new File(moduleSrcDir)
+
+                if (moduleSrcDirFile.exists()) {
+                    moduleSrcDirFile.eachDirRecurse { dir ->
+                        if (dir =~ /.*\/main\/res\/${prefix}.*/) {
+                            dir.eachFile { file ->
+                                find(prefix, file, moduleSrcDirFile)
+                            }
+                        }
+                    }
+                }
+            }
         }
+
+//        Document doc = new SAXBuilder().build(new FileInputStream("${project.projectDir.path}/src/main/res/values/styles.xml"))
+//
+//        Element root = doc.getRootElement()
+//
+//        Iterator<Element> stylesIterator = root.getChildren("style").iterator()
+//
+//        while (stylesIterator.hasNext()) {
+//            Element style = stylesIterator.next()
+//            Attribute name = style.getAttribute("name")
+//
+//            if (name.value == 'AppTheme') {
+//                stylesIterator.remove()
+//
+//                println root.children
+//                println "hogehoge"
+//            }
+//        }
+//
+//        new XMLOutputter().with {
+//            format = Format.getRawFormat()
+//            format.setLineSeparator(LineSeparator.NONE)
+//            // XmlOutputter can write to OutputStream or Writer, which is sufficient for most cases
+//            output(doc, System.out)
+//            output(doc, new FileOutputStream("${project.projectDir.path}/src/main/res/values/styles.xml"))
+//        }
 
 //
 //        def parsed = new XmlParser().parseText(xml)
