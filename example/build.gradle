@@ -162,6 +162,9 @@ class AndroidUnusedResourcesRemoverPlugin implements Plugin<Project> {
                 ["style", "string", "dimen"].forEach {
                     deleteTag(it, resDirFile, srcDirFile)
                 }
+
+                // TODO Support theme
+                // TODO Support attr
             }
         }
     }
