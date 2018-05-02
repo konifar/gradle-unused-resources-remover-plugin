@@ -2,15 +2,15 @@ class AndroidUnusedResourcesRemoverPlugin implements Plugin<Project> {
 
     static String toCamelCase(String text, boolean capitalized = false) {
         text = text.replaceAll("(_)([A-Za-z0-9])", { Object[] it -> it[2].toUpperCase() })
-        return capitalized ? capitalize(text) : text
+        return capitalized ? text.capitalize() : text
     }
 
-    static def deleteFileIfNeed(String prefix, String moduleName, File file, File srcDirFile) {
+    static def deleteEachFileIfNeed(String type, File file, File srcDirFile) {
         def baseName = file.name
         def fileName = baseName.take(baseName.lastIndexOf('.'))
 
         // Considered 9patch
-        if (prefix.startsWith("drawable")) {
+        if (type.startsWith("drawable")) {
             fileName = fileName - ".9"
         }
 
@@ -21,11 +21,11 @@ class AndroidUnusedResourcesRemoverPlugin implements Plugin<Project> {
                 dir.eachFileMatch(~/(.*\.xml)|(.*\.kt)|(.*\.java)/) { f ->
                     def fileText = f.text.replaceAll('\n', '').replaceAll(' ', '')
 
-                    def pattern = /(.*${prefix}\/${fileName})|(.*R.${prefix}.${fileName})/
+                    def pattern = /(.*${type}\/${fileName})|(.*R.${type}.${fileName})/
 
                     // Considered data binding
-                    if (prefix.startsWith("layout")) {
-                        pattern = /(.*${prefix}\/${fileName})|(.*R.${prefix}.${fileName})|(.*${toCamelCase(fileName, true) Binding})/
+                    if (type.startsWith("layout")) {
+                        pattern = /(.*${type}\/${fileName})|(.*R.${type}.${fileName})|(.*${toCamelCase(fileName, true)}Binding)/
                     }
 
                     if (fileText =~ pattern) {
@@ -36,9 +36,8 @@ class AndroidUnusedResourcesRemoverPlugin implements Plugin<Project> {
             }
         }
 
-
         if (!isMatched) {
-            println("Delete ${baseName} / ${prefix} on ${moduleName}")
+            println("[${type}] Delete ${baseName}")
             file.delete()
             return true
         } else {
@@ -46,31 +45,37 @@ class AndroidUnusedResourcesRemoverPlugin implements Plugin<Project> {
         }
     }
 
+    static def deleteFile(String type, File resDirFile, File srcDirFile) {
+        if (resDirFile.exists()) {
+            def checkResult = false
+            resDirFile.eachDirRecurse { dir ->
+                if (dir =~ /.*\/${type}.*/) {
+                    dir.eachFile { file ->
+                        checkResult |= deleteEachFileIfNeed(type, file, srcDirFile)
+                    }
+                }
+            }
+
+            if (checkResult) {
+                println "[${type}] Complete to delete files."
+            } else {
+                println "[${type}] No unused files."
+            }
+        }
+    }
+
     @Override
     void apply(Project project) {
-        def prefix = "drawable"
-
         project.rootProject.allprojects.each { p ->
             if (p.name != project.rootProject.name) {
+                println "==================== Checking ${p.name} ===================="
+
                 def moduleSrcDir = "${project.rootProject.projectDir.path}/${p.name}/src"
                 def srcDirFile = new File(moduleSrcDir)
                 def resDirFile = new File("${moduleSrcDir}/main/res")
 
-                if (resDirFile.exists()) {
-                    def checkResult = false
-                    resDirFile.eachDirRecurse { dir ->
-                        if (dir =~ /.*\/${prefix}.*/) {
-                            dir.eachFile { file ->
-                                checkResult |= deleteFileIfNeed(prefix, p.name, file, srcDirFile)
-                            }
-                        }
-                    }
-
-                    if (checkResult) {
-                        println "Complete to delete: ${prefix} on ${p.name}"
-                    } else {
-                        println "No unused file about ${prefix} on ${p.name}"
-                    }
+                ["layout", "drawable", "mipmap", "anim", "animator", "color", "menu"].forEach {
+                    deleteFile(it, resDirFile, srcDirFile)
                 }
             }
         }
@@ -107,7 +112,7 @@ class AndroidUnusedResourcesRemoverPlugin implements Plugin<Project> {
 //            println "node: ${node.@name}"
 //        }
 //
-//        parsed.deleteFileIfNeed { it.@name == "AppTheme" }.replaceNode {}
+//        parsed.deleteEachFileIfNeed { it.@name == "AppTheme" }.replaceNode {}
 //
 //        println parsed
 
