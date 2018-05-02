@@ -27,9 +27,11 @@ class AndroidUnusedResourcesRemoverPlugin implements Plugin<Project> {
             def isMatched = false
 
             Element element = iterator.next()
-            Attribute attrName = element.getAttribute("name")
+            Attribute attr = element.getAttribute("name")
 
-            if (srcDirFile.exists()) {
+            if (attr != null && srcDirFile.exists()) {
+                def attrName = attr.value
+
                 srcDirFile.eachDirRecurse { dir ->
                     dir.eachFileMatch(~/(.*\.xml)|(.*\.kt)|(.*\.java)/) { f ->
                         def fileText = f.text.replaceAll('\n', '').replaceAll(' ', '')
@@ -50,7 +52,7 @@ class AndroidUnusedResourcesRemoverPlugin implements Plugin<Project> {
             }
 
             if (!isMatched) {
-                println("[${type}] Delete ${attrName} in ${baseName}.")
+                println("[${type}] Delete ${attr.value} in ${baseName}.")
                 iterator.remove()
                 isChanged = true
             }
@@ -60,7 +62,7 @@ class AndroidUnusedResourcesRemoverPlugin implements Plugin<Project> {
             new XMLOutputter().with {
                 format = Format.getRawFormat()
                 format.setLineSeparator(LineSeparator.NONE)
-                output(doc, file)
+                output(doc, new FileWriter(file))
                 // output(doc, System.out)
             }
         } else {
@@ -155,11 +157,23 @@ class AndroidUnusedResourcesRemoverPlugin implements Plugin<Project> {
                 def srcDirFile = new File(moduleSrcDir)
                 def resDirFile = new File("${moduleSrcDir}/main/res")
 
-                ["layout", "drawable", "mipmap", "anim", "animator", "color", "menu"].forEach {
+                [
+                        "layout",
+                        "drawable",
+                        "mipmap",
+                        "anim",
+                        "animator",
+                        "color",
+                        "menu"
+                ].forEach {
                     deleteFile(it, resDirFile, srcDirFile)
                 }
 
-                ["style", "string", "dimen"].forEach {
+                [
+                        "style",
+                        "string",
+                        "dimen"
+                ].forEach {
                     deleteTag(it, resDirFile, srcDirFile)
                 }
 
