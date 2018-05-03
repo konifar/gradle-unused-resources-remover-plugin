@@ -1,1 +1,1 @@
-include ':example', ':example-module', ':example-module', ':example-instantapp'
+include ':plugin', ':example', ':example-module', ':example-instantapp'

@@ -1,0 +1,9 @@
+ext {
+    metadata = [
+            userOrg   : 'unused-resources-remover',
+            groupId   : 'com.github.konifar.unused-resources-remover',
+            website   : 'https://github.com/konifar/gradle-android-unused-resources-remover-plugin',
+            repository: 'https://github.com/konifar/gradle-android-unused-resources-remover-plugin.git',
+            licences  : ['Apache-2.0']
+    ]
+}
