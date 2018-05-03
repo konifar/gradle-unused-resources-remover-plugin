@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/android-unused-resources-remover.iml" filepath="$PROJECT_DIR$/android-unused-resources-remover.iml" />
       <module fileurl="file://$PROJECT_DIR$/example/example.iml" filepath="$PROJECT_DIR$/example/example.iml" />
       <module fileurl="file://$PROJECT_DIR$/example-instantapp/example-instantapp.iml" filepath="$PROJECT_DIR$/example-instantapp/example-instantapp.iml" />
       <module fileurl="file://$PROJECT_DIR$/example-module/example-module.iml" filepath="$PROJECT_DIR$/example-module/example-module.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gradle-unused-resources-remover-plugin.iml" filepath="$PROJECT_DIR$/gradle-unused-resources-remover-plugin.iml" />
       <module fileurl="file://$PROJECT_DIR$/plugin/plugin.iml" filepath="$PROJECT_DIR$/plugin/plugin.iml" />
     </modules>
   </component>
