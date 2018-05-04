@@ -25,7 +25,7 @@ abstract class FileRemover {
     }
 
     def remove(Project project) {
-        println "[${type}] Start checking =================="
+        println "[${type}] ================== Start ${type} checking =================="
 
         // Check each modules
         List<String> moduleSrcDirs = project.rootProject.allprojects
@@ -33,7 +33,8 @@ abstract class FileRemover {
                 .collect { "${project.rootProject.projectDir.path}/${it.name}/src" }
 
         moduleSrcDirs.each {
-            println "[${type}]   Checking ${it}"
+            String moduleSrcName = it - project.rootProject.projectDir.path
+            println "[${type}]   ${moduleSrcName}"
 
             File resDirFile = new File("${it}/main/res")
             if (resDirFile.exists()) {
