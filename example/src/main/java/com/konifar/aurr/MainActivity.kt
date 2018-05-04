@@ -41,6 +41,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun finish() {
         super.finish()
-        overridePendingTransition(R.anim.unused_anim, R.anim.unused_anim)
+        overridePendingTransition(R.anim.used_in_kotlin_anim, R.anim.used_in_kotlin_anim)
     }
 }
