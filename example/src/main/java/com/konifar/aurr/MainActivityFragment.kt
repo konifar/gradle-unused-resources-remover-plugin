@@ -19,6 +19,7 @@ class MainActivityFragment : Fragment() {
 
         val wrappedContext = ContextThemeWrapper(context, R.style.UsedInKotlin)
         val textView = TextView(wrappedContext, null, 0)
+        textView.setText(R.string.used_in_kotlin)
 
         return view
     }
