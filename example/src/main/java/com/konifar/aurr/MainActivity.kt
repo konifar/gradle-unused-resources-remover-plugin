@@ -12,14 +12,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.used_in_activity)
+        setContentView(R.layout.used_in_activity_layout)
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
         val fab = findViewById<FloatingActionButton>(R.id.fab)
-        fab.setImageResource(R.drawable.used_in_kotlin_ic_map_black_24dp)
+        fab.setImageResource(R.drawable.used_in_kotlin_drawable)
         fab.setImageResource(R.drawable
-                .used_in_kotlin_ic_settings_black_24dp)
+                .used_in_kotlin_with_linebreak_drawable)
 
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
+        menuInflater.inflate(R.menu.used_in_kotlin_menu, menu)
         return true
     }
 

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainFragment"
-    tools:showIn="@layout/used_in_activity">
+    tools:showIn="@layout/used_in_activity_layout">
 
     <TextView
         style="@style/UsedInLayoutAsParentStyle2.UsedStyle"
@@ -40,6 +40,6 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/used_in_layout_ic_warning_black_24dp" />
+        android:src="@drawable/used_in_layout_as_nine_patch_drawable" />
 
 </android.support.constraint.ConstraintLayout>

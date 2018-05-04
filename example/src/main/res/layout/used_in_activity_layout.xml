@@ -18,7 +18,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/used_in_layout" />
+    <include layout="@layout/used_in_layout_layout" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -26,6 +26,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@drawable/used_in_layout_ic_map_black_24dp" />
+        app:srcCompat="@drawable/used_in_layout_drawable" />
 
 </android.support.design.widget.CoordinatorLayout>
