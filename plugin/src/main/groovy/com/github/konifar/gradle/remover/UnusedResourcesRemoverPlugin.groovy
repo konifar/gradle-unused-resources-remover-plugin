@@ -138,7 +138,7 @@ class UnusedResourcesRemoverPlugin implements Plugin<Project> {
         if (resDirFile.exists()) {
             def checkResult = false
             resDirFile.eachDirRecurse { dir ->
-                if (dir =~ /.*\/${type}.*/) {
+                if (dir =~ /\/${type}.*/) {
                     dir.eachFile { file ->
                         checkResult |= deleteEachFileIfNeed(type, file, srcDirFile)
                     }
@@ -156,44 +156,46 @@ class UnusedResourcesRemoverPlugin implements Plugin<Project> {
     @Override
     void apply(Project project) {
         project.task("removeUnusedResources").doLast {
-            project.rootProject.allprojects.each { p ->
-                if (p.name != project.rootProject.name) {
-                    println "================== Checking ${p.name} =================="
+            new FileRemover().remove(project)
 
-                    def moduleSrcDir = "${project.rootProject.projectDir.path}/${p.name}/src"
-                    def srcDirFile = new File(moduleSrcDir)
-                    def resDirFile = new File("${moduleSrcDir}/main/res")
-
-                    [
-                            "layout",
-                            "menu",
-                            "mipmap",
-                            "drawable",
-                            "animator",
-                            "anim",
-                    ].forEach {
-                        deleteFile(it, resDirFile, srcDirFile)
-                    }
-
-                    [
-                            // "theme",
-                            "style",
-                            "string",
-                            "dimen",
-                    ].forEach {
-                        deleteTag(it, resDirFile, srcDirFile)
-                    }
-
-                    [
-                            "color",
-                    ].forEach {
-                        deleteFile(it, resDirFile, srcDirFile)
-                    }
-
-                    // TODO Support theme
-                    // TODO Support attr
-                }
-            }
+//            project.rootProject.allprojects.each { p ->
+//                if (p.name != project.rootProject.name) {
+//                    println "================== Checking ${p.name} =================="
+//
+//                    def moduleSrcDir = "${project.rootProject.projectDir.path}/${p.name}/src"
+//                    def srcDirFile = new File(moduleSrcDir)
+//                    def resDirFile = new File("${moduleSrcDir}/main/res")
+//
+//                    [
+//                            "layout",
+//                            "menu",
+//                            "mipmap",
+//                            "drawable",
+//                            "animator",
+//                            "anim",
+//                    ].forEach {
+//                        deleteFile(it, resDirFile, srcDirFile)
+//                    }
+//
+//                    [
+//                            // "theme",
+//                            "style",
+//                            "string",
+//                            "dimen",
+//                    ].forEach {
+//                        deleteTag(it, resDirFile, srcDirFile)
+//                    }
+//
+//                    [
+//                            "color",
+//                    ].forEach {
+//                        deleteFile(it, resDirFile, srcDirFile)
+//                    }
+//
+//                    // TODO Support theme
+//                    // TODO Support attr
+//                }
+//            }
         }
     }
 
