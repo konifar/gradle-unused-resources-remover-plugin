@@ -155,36 +155,38 @@ class UnusedResourcesRemoverPlugin implements Plugin<Project> {
 
     @Override
     void apply(Project project) {
-        project.rootProject.allprojects.each { p ->
-            if (p.name != project.rootProject.name) {
-                println "================== Checking ${p.name} =================="
+        project.task("removeUnusedResources").doLast {
+            project.rootProject.allprojects.each { p ->
+                if (p.name != project.rootProject.name) {
+                    println "================== Checking ${p.name} =================="
 
-                def moduleSrcDir = "${project.rootProject.projectDir.path}/${p.name}/src"
-                def srcDirFile = new File(moduleSrcDir)
-                def resDirFile = new File("${moduleSrcDir}/main/res")
+                    def moduleSrcDir = "${project.rootProject.projectDir.path}/${p.name}/src"
+                    def srcDirFile = new File(moduleSrcDir)
+                    def resDirFile = new File("${moduleSrcDir}/main/res")
 
-                [
-                        "layout",
-                        "drawable",
-                        "mipmap",
-                        "anim",
-                        "animator",
-                        "color",
-                        "menu"
-                ].forEach {
-                    deleteFile(it, resDirFile, srcDirFile)
+                    [
+                            "layout",
+                            "drawable",
+                            "mipmap",
+                            "anim",
+                            "animator",
+                            "color",
+                            "menu"
+                    ].forEach {
+                        deleteFile(it, resDirFile, srcDirFile)
+                    }
+
+                    [
+                            "style",
+                            "string",
+                            "dimen"
+                    ].forEach {
+                        deleteTag(it, resDirFile, srcDirFile)
+                    }
+
+                    // TODO Support theme
+                    // TODO Support attr
                 }
-
-                [
-                        "style",
-                        "string",
-                        "dimen"
-                ].forEach {
-                    deleteTag(it, resDirFile, srcDirFile)
-                }
-
-                // TODO Support theme
-                // TODO Support attr
             }
         }
     }
