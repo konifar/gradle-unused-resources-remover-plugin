@@ -1,5 +1,6 @@
 package com.github.konifar.gradle.remover.tag
 
+import com.github.konifar.gradle.remover.Logger
 import org.gradle.api.Project
 import org.jdom2.Attribute
 import org.jdom2.Document
@@ -95,7 +96,7 @@ abstract class XmlTagRemover {
             }
 
             if (!isMatched) {
-                println("[${type}]       Remove ${attr.value} in ${file.name}")
+                Logger.printlnGreen("[${type}]       Remove ${attr.value} in ${file.name}")
                 iterator.remove()
                 isFileChanged = true
             }

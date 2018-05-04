@@ -1,5 +1,6 @@
 package com.github.konifar.gradle.remover.file
 
+import com.github.konifar.gradle.remover.Logger
 import org.gradle.api.Project
 
 abstract class FileRemover {
@@ -81,7 +82,7 @@ abstract class FileRemover {
         }
 
         if (!isMatched) {
-            println("[${type}]       Remove ${file.name}")
+            Logger.printlnGreen("[${type}]       Remove ${file.name}")
             file.delete()
             return true
         } else {
