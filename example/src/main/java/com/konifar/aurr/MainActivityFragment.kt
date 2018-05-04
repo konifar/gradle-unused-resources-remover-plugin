@@ -1,5 +1,6 @@
 package com.konifar.aurr
 
+import android.animation.AnimatorInflater
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.view.ContextThemeWrapper
@@ -20,6 +21,8 @@ class MainActivityFragment : Fragment() {
         val wrappedContext = ContextThemeWrapper(context, R.style.UsedInKotlin)
         val textView = TextView(wrappedContext, null, 0)
         textView.setText(R.string.used_in_kotlin)
+
+        AnimatorInflater.loadAnimator(context, R.animator.used_in_kotlin_animator)
 
         return view
     }

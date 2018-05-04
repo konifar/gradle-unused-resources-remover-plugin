@@ -166,22 +166,28 @@ class UnusedResourcesRemoverPlugin implements Plugin<Project> {
 
                     [
                             "layout",
-                            "drawable",
+                            "menu",
                             "mipmap",
-                            "anim",
+                            "drawable",
                             "animator",
-                            "color",
-                            "menu"
+                            "anim",
                     ].forEach {
                         deleteFile(it, resDirFile, srcDirFile)
                     }
 
                     [
+                            // "theme",
                             "style",
                             "string",
-                            "dimen"
+                            "dimen",
                     ].forEach {
                         deleteTag(it, resDirFile, srcDirFile)
+                    }
+
+                    [
+                            "color",
+                    ].forEach {
+                        deleteFile(it, resDirFile, srcDirFile)
                     }
 
                     // TODO Support theme
