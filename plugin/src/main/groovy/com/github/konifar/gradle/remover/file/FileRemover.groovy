@@ -10,7 +10,7 @@ abstract class FileRemover {
     abstract String getType()
 
     /**
-     * Grep text pattern
+     * Text grep pattern
      * @param file
      * @return
      */
@@ -49,7 +49,7 @@ abstract class FileRemover {
                 }
 
                 if (checkResult) {
-                    println "[${type}]     Complete to delete files."
+                    println "[${type}]     Complete to remove files."
                 } else {
                     println "[${type}]     No unused files."
                 }
