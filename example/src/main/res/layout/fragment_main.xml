@@ -16,6 +16,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+    <TextView
+        id="@+id/used_in_kotlin_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
     <!-- 9 patch test -->
     <ImageView
         android:layout_width="wrap_content"
