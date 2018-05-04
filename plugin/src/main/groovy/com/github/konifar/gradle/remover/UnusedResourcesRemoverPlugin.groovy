@@ -1,6 +1,5 @@
 package com.github.konifar.gradle.remover
 
-import groovy.transform.CompileStatic
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.jdom2.Attribute
@@ -11,7 +10,6 @@ import org.jdom2.output.Format
 import org.jdom2.output.LineSeparator
 import org.jdom2.output.XMLOutputter
 
-@CompileStatic
 class UnusedResourcesRemoverPlugin implements Plugin<Project> {
 
     static String toCamelCase(String text, boolean capitalized = false) {
@@ -42,11 +40,11 @@ class UnusedResourcesRemoverPlugin implements Plugin<Project> {
                     dir.eachFileMatch(~/(.*\.xml)|(.*\.kt)|(.*\.java)/) { f ->
                         def fileText = f.text.replaceAll('\n', '').replaceAll(' ', '')
 
-                        def pattern = /(.*${type}\/${attrName})|(.*R.${type}.${attrName})/
+                        def pattern = /(${type}\/${attrName})|(R\.${type}.${attrName})/
 
                         // Considered style override
                         if (type.startsWith("style")) {
-                            pattern = /(.*${type}\/${attrName})|(.*R.${type}\.${attrName})|(.*${attrName}\.)|(.*parent="${attrName}")/
+                            pattern = /(${type}\/${attrName})|(R\.${type}\.${attrName})|(${attrName}\.)|(parent="${attrName}")/
                         }
 
                         if (fileText =~ pattern) {
@@ -112,11 +110,11 @@ class UnusedResourcesRemoverPlugin implements Plugin<Project> {
                 dir.eachFileMatch(~/(.*\.xml)|(.*\.kt)|(.*\.java)/) { f ->
                     def fileText = f.text.replaceAll('\n', '').replaceAll(' ', '')
 
-                    def pattern = /(.*${type}\/${fileName})|(.*R.${type}\.${fileName})/
+                    def pattern = /(${type}\/${fileName})|(R\.${type}\.${fileName})/
 
                     // Considered data binding
                     if (type.startsWith("layout")) {
-                        pattern = /(.*${type}\/${fileName})|(.*R.${type}\.${fileName})|(.*${toCamelCase(fileName, true)}Binding)/
+                        pattern = /(${type}\/${fileName})|(R\.${type}\.${fileName})|(${toCamelCase(fileName, true)}Binding)/
                     }
 
                     if (fileText =~ pattern) {
