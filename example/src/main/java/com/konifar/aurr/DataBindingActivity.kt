@@ -2,7 +2,7 @@ package com.konifar.aurr
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import com.konifar.aurr.databinding.ActivityDatabindingBinding
+import com.konifar.aurr.databinding.UsedInActivityAsDatabindingBinding
 
 class DataBindingActivity : AppCompatActivity() {
 
@@ -10,6 +10,6 @@ class DataBindingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         // Test for generated object from layout
-        val binding = ActivityDatabindingBinding.inflate(layoutInflater)
+        val binding = UsedInActivityAsDatabindingBinding.inflate(layoutInflater)
     }
 }

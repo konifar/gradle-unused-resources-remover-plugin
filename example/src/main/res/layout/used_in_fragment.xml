@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivityFragment"
-    tools:showIn="@layout/activity_main">
+    tools:context=".MainFragment"
+    tools:showIn="@layout/used_in_activity">
 
     <TextView
         style="@style/UsedInLayoutAsParentStyle2.UsedStyle"

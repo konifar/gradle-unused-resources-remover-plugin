@@ -9,14 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 
-/**
- * A placeholder fragment containing a simple view.
- */
-class MainActivityFragment : Fragment() {
+class MainFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_main, container, false)
+        val view = inflater.inflate(R.layout.used_in_fragment, container, false)
 
         val wrappedContext = ContextThemeWrapper(context, R.style.UsedInKotlin)
         val textView = TextView(wrappedContext, null, 0)
