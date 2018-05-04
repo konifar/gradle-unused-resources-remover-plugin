@@ -2,9 +2,19 @@ package com.github.konifar.gradle.remover
 
 import org.gradle.api.Project
 
-class FileRemover {
+abstract class FileRemover {
 
-    def type = "layout"
+    /**
+     * Resource file type
+     */
+    abstract String getType()
+
+    /**
+     * Grep text pattern
+     * @param file
+     * @return
+     */
+    abstract GString createPattern(File file)
 
     def remove(Project project) {
         println "[${type}] Start checking =================="
@@ -37,24 +47,6 @@ class FileRemover {
                 }
             }
         }
-    }
-
-    def createPattern(File file) {
-        String fileName = file.name.take(file.name.lastIndexOf('.'))
-
-        //        // Considered 9patch
-//        if (type.startsWith("drawable")) {
-//            fileName = fileName - ".9"
-//        }
-
-        def pattern = /(${type}\/${fileName})|(R\.${type}\.${fileName})/
-
-//        // Considered data binding
-//        if (type.startsWith("layout")) {
-//            pattern = /(${type}\/${fileName})|(R\.${type}\.${fileName})|(${toCamelCase(fileName, true)}Binding)/
-//        }
-
-        return pattern
     }
 
     def removeFileIfNeed(File file, List<String> moduleSrcDirs) {

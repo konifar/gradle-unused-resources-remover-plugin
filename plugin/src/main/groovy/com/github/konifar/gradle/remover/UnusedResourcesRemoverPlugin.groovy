@@ -156,7 +156,7 @@ class UnusedResourcesRemoverPlugin implements Plugin<Project> {
     @Override
     void apply(Project project) {
         project.task("removeUnusedResources").doLast {
-            new FileRemover().remove(project)
+            new LayoutFileRemover().remove(project)
 
 //            project.rootProject.allprojects.each { p ->
 //                if (p.name != project.rootProject.name) {
