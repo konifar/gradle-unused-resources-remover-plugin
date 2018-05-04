@@ -1,5 +1,6 @@
 package com.github.konifar.gradle.remover
 
+import com.github.konifar.gradle.remover.file.*
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.jdom2.Attribute
@@ -156,7 +157,17 @@ class UnusedResourcesRemoverPlugin implements Plugin<Project> {
     @Override
     void apply(Project project) {
         project.task("removeUnusedResources").doLast {
-            new LayoutFileRemover().remove(project)
+
+            [
+                    new LayoutFileRemover(),
+                    new MenuFileRemover(),
+                    new MipmapFileRemover(),
+                    new DrawableFileRemover(),
+                    new AnimatorFileRemover(),
+                    new AnimFileRemover(),
+            ].forEach {
+                it.remove(project)
+            }
 
 //            project.rootProject.allprojects.each { p ->
 //                if (p.name != project.rootProject.name) {

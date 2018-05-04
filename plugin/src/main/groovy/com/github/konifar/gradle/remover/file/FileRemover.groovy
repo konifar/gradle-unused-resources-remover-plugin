@@ -1,4 +1,4 @@
-package com.github.konifar.gradle.remover
+package com.github.konifar.gradle.remover.file
 
 import org.gradle.api.Project
 
@@ -14,7 +14,15 @@ abstract class FileRemover {
      * @param file
      * @return
      */
-    abstract GString createPattern(File file)
+    GString createPattern(File file) {
+        String fileName = extractFileName(file)
+        def pattern = /(${type}\/${fileName})|(R\.${type}\.${fileName})/
+        return pattern
+    }
+
+    static String extractFileName(File file) {
+        return file.name.take(file.name.lastIndexOf('.'))
+    }
 
     def remove(Project project) {
         println "[${type}] Start checking =================="
