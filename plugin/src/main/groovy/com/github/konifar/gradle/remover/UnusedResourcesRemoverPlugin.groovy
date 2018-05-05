@@ -17,6 +17,7 @@ class UnusedResourcesRemoverPlugin implements Plugin<Project> {
                     new DrawableFileRemover(),
                     new AnimatorFileRemover(),
                     new AnimFileRemover(),
+                    new ColorFileRemover(),
             ].forEach {
                 it.remove(project)
             }
@@ -25,14 +26,9 @@ class UnusedResourcesRemoverPlugin implements Plugin<Project> {
                     new ThemeXmlValueRemover(),
                     new StyleXmlValueRemover(),
                     new StringXmlValueRemover(),
-                    new StringXmlValueRemover(),
+                    new DimenXmlValueRemover(),
+                    new ColorXmlValueRemover(),
                     // new AttrXmlTagRemover(),
-            ].forEach {
-                it.remove(project)
-            }
-
-            [
-                    new ColorFileRemover(),
             ].forEach {
                 it.remove(project)
             }
