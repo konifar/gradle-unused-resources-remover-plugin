@@ -12,7 +12,7 @@ class StringXmlTagRemoverTest extends Specification {
     }
 
     def "pattern matches"() {
-        def pattern = remover.createPattern("app_name")
+        def pattern = remover.createSearchPattern("app_name")
         def isMatched = false
         if (fileText =~ pattern) {
             isMatched = true

@@ -12,7 +12,7 @@ class ThemeXmlTagRemoverTest extends Specification {
     }
 
     def "pattern matches"() {
-        def pattern = remover.createPattern("AppTheme.Translucent")
+        def pattern = remover.createSearchPattern("AppTheme.Translucent")
         def isMatched = false
         if (fileText =~ pattern) {
             isMatched = true

@@ -8,7 +8,7 @@ class LayoutFileRemover extends AbstractFileRemover {
     }
 
     @Override
-    GString createPattern(String fileName) {
+    GString createSearchPattern(String fileName) {
         // Considered data binding
         def pattern = /(@${resourceName}\/${fileName}")|(R\.${resourceName}\.${fileName})|(${toCamelCase(fileName, true)}Binding)/
         return pattern

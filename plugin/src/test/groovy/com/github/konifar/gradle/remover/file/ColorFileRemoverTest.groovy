@@ -12,7 +12,7 @@ class ColorFileRemoverTest extends Specification {
     }
 
     def "pattern matches"() {
-        def pattern = remover.createPattern("primary")
+        def pattern = remover.createSearchPattern("primary")
         def isMatched = false
         if (fileText =~ pattern) {
             isMatched = true

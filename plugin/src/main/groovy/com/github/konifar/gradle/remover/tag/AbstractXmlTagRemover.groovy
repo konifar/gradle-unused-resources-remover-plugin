@@ -40,7 +40,7 @@ abstract class AbstractXmlTagRemover extends AbstractRemover {
                 File srcDirFile = new File(it)
 
                 if (attr != null && srcDirFile.exists()) {
-                    def pattern = createPattern(attr.value)
+                    def pattern = createSearchPattern(attr.value)
 
                     srcDirFile.eachDirRecurse { dir ->
                         dir.eachFileMatch(~/(.*\.xml)|(.*\.kt)|(.*\.java)/) { f ->

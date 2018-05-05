@@ -26,7 +26,7 @@ abstract class AbstractFileRemover extends AbstractRemover {
     }
 
     private def removeFileIfNeed(File file, List<String> moduleSrcDirs) {
-        def pattern = createPattern(extractFileName(file))
+        def pattern = createSearchPattern(extractFileName(file))
 
         def isMatched = false
 

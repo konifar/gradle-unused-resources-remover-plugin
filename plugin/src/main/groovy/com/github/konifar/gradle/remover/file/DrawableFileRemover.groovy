@@ -8,9 +8,9 @@ class DrawableFileRemover extends AbstractFileRemover {
     }
 
     @Override
-    GString createPattern(String fileName) {
+    GString createSearchPattern(String fileName) {
         fileName -= ".9" // Considered 9patch
-        return super.createPattern(fileName)
+        return super.createSearchPattern(fileName)
     }
 
 }

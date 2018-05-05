@@ -12,7 +12,7 @@ class StyleXmlTagRemoverTest extends Specification {
     }
 
     def "pattern matches"() {
-        def pattern = remover.createPattern("TitleTextAppearance")
+        def pattern = remover.createSearchPattern("TitleTextAppearance")
         def isMatched = false
         if (fileText =~ pattern) {
             isMatched = true

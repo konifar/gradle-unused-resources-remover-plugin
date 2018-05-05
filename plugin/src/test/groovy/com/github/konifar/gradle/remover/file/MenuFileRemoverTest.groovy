@@ -12,7 +12,7 @@ class MenuFileRemoverTest extends Specification {
     }
 
     def "pattern matches"() {
-        def pattern = remover.createPattern("menu_main")
+        def pattern = remover.createSearchPattern("menu_main")
         def isMatched = false
         if (fileText =~ pattern) {
             isMatched = true

@@ -12,7 +12,7 @@ class DimenXmlTagRemoverTest extends Specification {
     }
 
     def "pattern matches"() {
-        def pattern = remover.createPattern("text_medium")
+        def pattern = remover.createSearchPattern("text_medium")
         def isMatched = false
         if (fileText =~ pattern) {
             isMatched = true

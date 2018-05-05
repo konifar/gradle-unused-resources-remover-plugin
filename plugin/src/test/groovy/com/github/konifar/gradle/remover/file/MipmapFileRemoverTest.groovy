@@ -12,7 +12,7 @@ class MipmapFileRemoverTest extends Specification {
     }
 
     def "pattern matches"() {
-        def pattern = remover.createPattern("ic_launcher")
+        def pattern = remover.createSearchPattern("ic_launcher")
         def isMatched = false
         if (fileText =~ pattern) {
             isMatched = true

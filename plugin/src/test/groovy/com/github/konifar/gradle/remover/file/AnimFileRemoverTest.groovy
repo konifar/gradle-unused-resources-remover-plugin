@@ -12,7 +12,7 @@ class AnimFileRemoverTest extends Specification {
     }
 
     def "pattern matches"() {
-        def pattern = remover.createPattern("fade_transition")
+        def pattern = remover.createSearchPattern("fade_transition")
         def isMatched = false
         if (fileText =~ pattern) {
             isMatched = true

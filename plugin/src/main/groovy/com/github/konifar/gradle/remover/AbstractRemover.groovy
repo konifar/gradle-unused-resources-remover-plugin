@@ -13,12 +13,11 @@ abstract class AbstractRemover {
     }
 
     /**
-     * Text grep pattern
-     * @param attrName
-     * @return
+     * @param target is file name or attribute name
+     * @return pattern string to grep src
      */
-    GString createPattern(String attrName) {
-        def pattern = /(@${resourceName}\/${attrName}")|(R\.${resourceName}.${attrName})/
+    GString createSearchPattern(String target) {
+        def pattern = /(@${resourceName}\/${target}")|(R\.${resourceName}.${target})/
         return pattern
     }
 

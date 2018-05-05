@@ -12,7 +12,7 @@ class LayoutFileRemoverTest extends Specification {
     }
 
     def "pattern matches"() {
-        def pattern = remover.createPattern("activity_main")
+        def pattern = remover.createSearchPattern("activity_main")
         def isMatched = false
         if (fileText =~ pattern) {
             isMatched = true

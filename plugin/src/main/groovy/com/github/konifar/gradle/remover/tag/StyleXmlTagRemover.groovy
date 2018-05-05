@@ -8,7 +8,7 @@ class StyleXmlTagRemover extends AbstractXmlTagRemover {
     }
 
     @Override
-    GString createPattern(String attrName) {
+    GString createSearchPattern(String attrName) {
         // Considered style override
         def pattern = /(@${resourceName}\/${attrName}")|(R\.${resourceName}\.${toCamelCaseWithUnderscore(attrName)})|(${attrName}\.)|(parent="${attrName}")/
         return pattern

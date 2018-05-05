@@ -12,7 +12,7 @@ class DrawableFileRemoverTest extends Specification {
     }
 
     def "pattern matches"() {
-        def pattern = remover.createPattern(fileName)
+        def pattern = remover.createSearchPattern(fileName)
         def isMatched = false
         if (fileText =~ pattern) {
             isMatched = true
