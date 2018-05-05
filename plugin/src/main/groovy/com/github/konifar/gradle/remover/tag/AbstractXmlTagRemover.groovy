@@ -23,7 +23,7 @@ abstract class AbstractXmlTagRemover extends AbstractRemover {
         }
     }
 
-    private def removeTagIfNeed(File file, List<String> moduleSrcDirs) {
+    def removeTagIfNeed(File file, List<String> moduleSrcDirs) {
         def isFileChanged = false
 
         Document doc = new SAXBuilder().build(file)
