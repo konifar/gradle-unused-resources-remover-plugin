@@ -72,7 +72,7 @@ abstract class XmlTagRemover {
             moduleSrcDirs.forEach {
                 File srcDirFile = new File(it)
 
-                if (attr != null && srcDirFile.exists()) {
+                if (attr?.name == tagName && srcDirFile.exists()) {
                     def pattern = createPattern(attr.value)
 
                     srcDirFile.eachDirRecurse { dir ->
