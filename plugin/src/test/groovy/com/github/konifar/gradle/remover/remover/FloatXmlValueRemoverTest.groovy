@@ -11,6 +11,16 @@ class FloatXmlValueRemoverTest extends Specification {
         remover.fileType == "float"
     }
 
+    def "resource name is item"() {
+        expect:
+        remover.resourceName == "dimen"
+    }
+
+    def "tag name is item"() {
+        expect:
+        remover.tagName == "item"
+    }
+
     def "pattern matches"() {
         def pattern = remover.createSearchPattern("size_ratio")
         def isMatched = false

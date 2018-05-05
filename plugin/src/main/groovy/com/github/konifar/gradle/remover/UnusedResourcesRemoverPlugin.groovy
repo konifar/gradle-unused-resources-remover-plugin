@@ -31,6 +31,8 @@ class UnusedResourcesRemoverPlugin implements Plugin<Project> {
                     new FloatXmlValueRemover(),
                     new ColorXmlValueRemover(),
                     new IntegerXmlValueRemover(),
+                    new BoolXmlValueRemover(),
+                    new IdXmlValueRemover(),
                     // new AttrXmlTagRemover(),
                     // new FontCertsXmlTagRemover(),
             ].forEach {

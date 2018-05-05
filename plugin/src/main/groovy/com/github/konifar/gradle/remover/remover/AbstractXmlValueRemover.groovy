@@ -12,6 +12,10 @@ import org.jdom2.output.XMLOutputter
 
 abstract class AbstractXmlValueRemover extends AbstractRemover {
 
+    String getTagName() {
+        return super.resourceName
+    }
+
     @Override
     def removeEach(File resDirFile, List<String> moduleSrcDirs) {
         resDirFile.eachDirRecurse { dir ->
@@ -27,7 +31,7 @@ abstract class AbstractXmlValueRemover extends AbstractRemover {
         def isFileChanged = false
 
         Document doc = new SAXBuilder().build(file)
-        Iterator<Element> iterator = doc.getRootElement().getChildren(resourceName).iterator()
+        Iterator<Element> iterator = doc.getRootElement().getChildren(tagName).iterator()
 
         while (iterator.hasNext()) {
             Attribute attr = iterator.next().getAttribute("name")
@@ -65,7 +69,7 @@ abstract class AbstractXmlValueRemover extends AbstractRemover {
 
     private def removeFileIfNeed(File file) {
         Document doc = new SAXBuilder().build(file)
-        if (doc.getRootElement().getChildren(resourceName).size() == 0) {
+        if (doc.getRootElement().getChildren(tagName).size() == 0) {
             ColoredLogger.log "[${fileType}]   Remove ${file.name}."
             file.delete()
         }
