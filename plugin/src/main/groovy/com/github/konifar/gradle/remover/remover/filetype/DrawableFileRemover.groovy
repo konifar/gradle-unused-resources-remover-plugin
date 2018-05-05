@@ -1,6 +1,6 @@
-package com.github.konifar.gradle.remover.remover
+package com.github.konifar.gradle.remover.remover.filetype
 
-class DrawableFileRemover extends AbstractFileRemover {
+class DrawableFileRemover extends com.github.konifar.gradle.remover.remover.filetype.AbstractFileRemover {
 
     @Override
     String getFileType() {

@@ -4,7 +4,7 @@ import spock.lang.Specification
 
 class StyleXmlValueRemoverTest extends Specification {
 
-    def remover = new StyleXmlValueRemover()
+    def remover = new com.github.konifar.gradle.remover.remover.xmlvaluetype.StyleXmlValueRemover()
 
     def "type is style"() {
         expect:

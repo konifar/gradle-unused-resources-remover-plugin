@@ -4,7 +4,7 @@ import spock.lang.Specification
 
 class MipmapFileRemoverTest extends Specification {
 
-    def remover = new com.github.konifar.gradle.remover.remover.MipmapFileRemover()
+    def remover = new com.github.konifar.gradle.remover.remover.filetype.MipmapFileRemover()
 
     def "type is mipmap"() {
         expect:

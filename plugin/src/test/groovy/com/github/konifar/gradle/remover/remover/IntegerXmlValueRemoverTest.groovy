@@ -4,7 +4,7 @@ import spock.lang.Specification
 
 class IntegerXmlValueRemoverTest extends Specification {
 
-    def remover = new IntegerXmlValueRemover()
+    def remover = new com.github.konifar.gradle.remover.remover.xmlvaluetype.IntegerXmlValueRemover()
 
     def "type is integer"() {
         expect:

@@ -1,5 +1,6 @@
-package com.github.konifar.gradle.remover.remover
+package com.github.konifar.gradle.remover.remover.filetype
 
+import com.github.konifar.gradle.remover.remover.AbstractRemover
 import com.github.konifar.gradle.remover.remover.util.ColoredLogger
 import com.github.konifar.gradle.remover.remover.util.DirectoryMatcher
 

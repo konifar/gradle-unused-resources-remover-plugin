@@ -4,7 +4,7 @@ import spock.lang.Specification
 
 class ColorXmlValueRemoverTest extends Specification {
 
-    def remover = new ColorXmlValueRemover()
+    def remover = new com.github.konifar.gradle.remover.remover.xmlvaluetype.ColorXmlValueRemover()
 
     def "type is color"() {
         expect:

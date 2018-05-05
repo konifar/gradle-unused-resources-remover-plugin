@@ -4,7 +4,7 @@ import spock.lang.Specification
 
 class BoolXmlValueRemoverTest extends Specification {
 
-    def remover = new BoolXmlValueRemover()
+    def remover = new com.github.konifar.gradle.remover.remover.xmlvaluetype.BoolXmlValueRemover()
 
     def "type is bool"() {
         expect:

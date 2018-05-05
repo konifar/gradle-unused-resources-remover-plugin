@@ -4,7 +4,7 @@ import spock.lang.Specification
 
 class StringXmlValueRemoverTest extends Specification {
 
-    def remover = new StringXmlValueRemover()
+    def remover = new com.github.konifar.gradle.remover.remover.xmlvaluetype.StringXmlValueRemover()
 
     def "type is string"() {
         expect:

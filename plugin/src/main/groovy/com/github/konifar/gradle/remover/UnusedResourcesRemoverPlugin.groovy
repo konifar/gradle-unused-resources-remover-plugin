@@ -1,6 +1,7 @@
 package com.github.konifar.gradle.remover
 
-import com.github.konifar.gradle.remover.remover.*
+import com.github.konifar.gradle.remover.remover.filetype.*
+import com.github.konifar.gradle.remover.remover.xmlvaluetype.*
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
@@ -18,7 +19,6 @@ class UnusedResourcesRemoverPlugin implements Plugin<Project> {
                     new AnimatorFileRemover(),
                     new AnimFileRemover(),
                     new ColorFileRemover(),
-                    // Support xml
             ].forEach {
                 it.remove(project)
             }
@@ -33,8 +33,8 @@ class UnusedResourcesRemoverPlugin implements Plugin<Project> {
                     new IntegerXmlValueRemover(),
                     new BoolXmlValueRemover(),
                     new IdXmlValueRemover(),
-                    // new AttrXmlTagRemover(),
-                    // new FontCertsXmlTagRemover(),
+// new AttrXmlTagRemover(),
+// new FontCertsXmlTagRemover(),
             ].forEach {
                 it.remove(project)
             }

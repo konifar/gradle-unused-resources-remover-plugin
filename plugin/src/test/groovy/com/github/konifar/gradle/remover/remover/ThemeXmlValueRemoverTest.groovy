@@ -4,7 +4,7 @@ import spock.lang.Specification
 
 class ThemeXmlValueRemoverTest extends Specification {
 
-    def remover = new ThemeXmlValueRemover()
+    def remover = new com.github.konifar.gradle.remover.remover.xmlvaluetype.ThemeXmlValueRemover()
 
     def "type is theme"() {
         expect:

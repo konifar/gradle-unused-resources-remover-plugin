@@ -4,7 +4,7 @@ import spock.lang.Specification
 
 class DimenXmlValueRemoverTest extends Specification {
 
-    def remover = new DimenXmlValueRemover()
+    def remover = new com.github.konifar.gradle.remover.remover.xmlvaluetype.DimenXmlValueRemover()
 
     def "type is dimen"() {
         expect:

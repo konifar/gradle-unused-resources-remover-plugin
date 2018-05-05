@@ -4,7 +4,7 @@ import spock.lang.Specification
 
 class FloatXmlValueRemoverTest extends Specification {
 
-    def remover = new FloatXmlValueRemover()
+    def remover = new com.github.konifar.gradle.remover.remover.xmlvaluetype.FloatXmlValueRemover()
 
     def "type is float"() {
         expect:

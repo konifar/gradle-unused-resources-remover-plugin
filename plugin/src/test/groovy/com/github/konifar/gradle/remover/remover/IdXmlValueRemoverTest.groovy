@@ -4,7 +4,7 @@ import spock.lang.Specification
 
 class IdXmlValueRemoverTest extends Specification {
 
-    def remover = new IdXmlValueRemover()
+    def remover = new com.github.konifar.gradle.remover.remover.xmlvaluetype.IdXmlValueRemover()
 
     def "type is id"() {
         expect:
