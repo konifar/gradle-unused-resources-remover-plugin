@@ -15,7 +15,7 @@ abstract class AbstractXmlValueRemover extends AbstractRemover {
     @Override
     def removeEach(File resDirFile, List<String> moduleSrcDirs) {
         resDirFile.eachDirRecurse { dir ->
-            if (DirectoryMatcher.match(dir.path, "values")) {
+            if (DirectoryMatcher.matchLast(dir.path, "values")) {
                 dir.eachFileMatch(~/${fileType}.*/) { f ->
                     removeTagIfNeed(f, moduleSrcDirs)
                 }

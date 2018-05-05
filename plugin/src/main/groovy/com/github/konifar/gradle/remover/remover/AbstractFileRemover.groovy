@@ -9,7 +9,7 @@ abstract class AbstractFileRemover extends AbstractRemover {
     def removeEach(File resDirFile, List<String> moduleSrcDirs) {
         def checkResult = false
         resDirFile.eachDirRecurse { dir ->
-            if (DirectoryMatcher.match(dir.path, fileType)) {
+            if (DirectoryMatcher.matchLast(dir.path, fileType)) {
                 dir.eachFile { f ->
                     checkResult |= removeFileIfNeed(f, moduleSrcDirs)
                 }
