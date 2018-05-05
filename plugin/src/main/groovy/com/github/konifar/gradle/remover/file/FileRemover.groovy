@@ -29,7 +29,7 @@ abstract class FileRemover {
                 .collect { "${project.rootProject.projectDir.path}/${it.name}/src" }
 
         moduleSrcDirs.each {
-            String moduleSrcName = it - project.rootProject.projectDir.path
+            String moduleSrcName = it - "${project.rootProject.projectDir.path}/"
             println "[${type}]   ${moduleSrcName}"
 
             File resDirFile = new File("${it}/main/res")

@@ -40,7 +40,7 @@ abstract class XmlTagRemover {
                 .collect { "${project.rootProject.projectDir.path}/${it.name}/src" }
 
         moduleSrcDirs.each {
-            String moduleSrcName = it - project.rootProject.projectDir.path
+            String moduleSrcName = it - "${project.rootProject.projectDir.path}/"
             println "[${type}]   ${moduleSrcName}"
 
             File resDirFile = new File("${it}/main/res")
@@ -72,7 +72,7 @@ abstract class XmlTagRemover {
             moduleSrcDirs.forEach {
                 File srcDirFile = new File(it)
 
-                if (attr?.name == tagName && srcDirFile.exists()) {
+                if (attr != null && srcDirFile.exists()) {
                     def pattern = createPattern(attr.value)
 
                     srcDirFile.eachDirRecurse { dir ->
