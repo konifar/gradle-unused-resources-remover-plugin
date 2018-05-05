@@ -22,14 +22,15 @@ class AnimFileRemoverTest extends Specification {
         isMatched == expected
 
         where:
-        fileText                    | expected
-        "R.anim.fade_transition"    | true
-        "R.anim.fade_transition)"   | true
-        "R.anim.fade_transition\""  | true
-        "@anim/fade_transition\""   | true
-        "@anim/fade_transition2"    | false
-        "R.anim.scale_transition"   | false
-        "@animator/fade_transition" | false
+        fileText                       | expected
+        "R.anim.fade_transition"       | true
+        "R.anim.fade_transition)"      | true
+        "R.anim.fade_transition\""     | true
+        "@anim/fade_transition\""      | true
+        "R.animator.fade_transition\"" | false
+        "@anim/fade_transition2"       | false
+        "R.anim.scale_transition"      | false
+        "@animator/fade_transition"    | false
         // "R.anim.test2"   | false
         // "@anim/test2"    | false
     }
