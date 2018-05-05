@@ -8,10 +8,9 @@ class DrawableFileRemover extends FileRemover {
     }
 
     @Override
-    GString createPattern(File file) {
-        String fileName = extractFileName(file) - ".9" // Considered 9patch
-        def pattern = /(${type}\/${fileName})|(R\.${type}\.${fileName})/
-        return pattern
+    GString createPattern(String fileName) {
+        fileName -= ".9" // Considered 9patch
+        return super.createPattern(fileName)
     }
 
 }

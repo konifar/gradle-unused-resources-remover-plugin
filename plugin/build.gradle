@@ -5,15 +5,23 @@ plugins {
 apply plugin: 'groovy'
 apply plugin: 'maven'
 
-archivesBaseName = 'unused-resources-remover'
-group = 'com.github.konifar.gradle'
-version = '0.1.0'
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
 
 dependencies {
     implementation gradleApi()
     implementation localGroovy()
     implementation 'org.jdom:jdom2:2.0.6'
+
+    testImplementation('org.spockframework:spock-core:1.1-groovy-2.4') {
+        exclude group: 'org.codehaus.groovy'
+    }
+    testImplementation "org.hamcrest:hamcrest-core:1.3"
 }
+
+archivesBaseName = 'unused-resources-remover'
+group = 'com.github.konifar.gradle'
+version = '0.1.0'
 
 pluginBundle {
     website = 'https://github.com/konifar/gradle-unused-resources-remover-plugin'

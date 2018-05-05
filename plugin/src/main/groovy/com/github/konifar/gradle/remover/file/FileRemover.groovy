@@ -15,14 +15,9 @@ abstract class FileRemover {
      * @param file
      * @return
      */
-    GString createPattern(File file) {
-        String fileName = extractFileName(file)
+    GString createPattern(String fileName) {
         def pattern = /(${type}\/${fileName})|(R\.${type}\.${fileName})/
         return pattern
-    }
-
-    static String extractFileName(File file) {
-        return file.name.take(file.name.lastIndexOf('.'))
     }
 
     def remove(Project project) {
@@ -60,7 +55,7 @@ abstract class FileRemover {
     }
 
     def removeFileIfNeed(File file, List<String> moduleSrcDirs) {
-        def pattern = createPattern(file)
+        def pattern = createPattern(extractFileName(file))
 
         def isMatched = false
 
@@ -88,6 +83,10 @@ abstract class FileRemover {
         } else {
             return false
         }
+    }
+
+    private static String extractFileName(File file) {
+        return file.name.take(file.name.lastIndexOf('.'))
     }
 
 }

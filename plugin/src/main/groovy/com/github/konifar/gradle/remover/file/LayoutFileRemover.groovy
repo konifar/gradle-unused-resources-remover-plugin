@@ -8,8 +8,7 @@ class LayoutFileRemover extends FileRemover {
     }
 
     @Override
-    GString createPattern(File file) {
-        String fileName = extractFileName(file)
+    GString createPattern(String fileName) {
         // Considered data binding
         def pattern = /(${type}\/${fileName})|(R\.${type}\.${fileName})|(${toCamelCase(fileName, true)}Binding)/
         return pattern
