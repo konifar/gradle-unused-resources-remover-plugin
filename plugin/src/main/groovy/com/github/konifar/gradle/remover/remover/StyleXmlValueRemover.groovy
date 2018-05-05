@@ -10,7 +10,7 @@ class StyleXmlValueRemover extends AbstractXmlValueRemover {
     @Override
     GString createSearchPattern(String attrName) {
         // Considered style override
-        def pattern = /(@${resourceName}\/${attrName}")|(R\.${resourceName}\.${toCamelCaseWithUnderscore(attrName)})|(${attrName}\.)|(parent="${attrName}")/
+        def pattern = /(@${resourceName}\/${attrName}")|(@${resourceName}\/${attrName}<)|(R\.${resourceName}\.${toCamelCaseWithUnderscore(attrName)})|(${attrName}\.)|(parent="${attrName}")/
         return pattern
     }
 
