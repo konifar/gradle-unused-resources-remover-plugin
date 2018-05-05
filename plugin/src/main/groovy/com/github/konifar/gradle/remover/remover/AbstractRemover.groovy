@@ -1,5 +1,6 @@
 package com.github.konifar.gradle.remover.remover
 
+import com.github.konifar.gradle.remover.remover.util.ColoredLogger
 import org.gradle.api.Project
 
 abstract class AbstractRemover {
@@ -22,7 +23,7 @@ abstract class AbstractRemover {
     }
 
     def remove(Project project) {
-        println "[${fileType}] ================== Start ${fileType} checking =================="
+        ColoredLogger.log "[${fileType}] ======== Start ${fileType} checking ========"
 
         // Check each modules
         List<String> moduleSrcDirs = project.rootProject.allprojects
@@ -30,8 +31,8 @@ abstract class AbstractRemover {
                 .collect { "${it.projectDir.path}/src" }
 
         moduleSrcDirs.each {
-            String moduleSrcName = it - "${project.rootProject.projectDir.path}/"
-            println "[${fileType}]   ${moduleSrcName}"
+            String moduleSrcName = it - "${project.rootProject.projectDir.path}/" - "/src"
+            ColoredLogger.log "[${fileType}] ${moduleSrcName}"
 
             File resDirFile = new File("${it}/main/res")
             if (resDirFile.exists()) {
@@ -46,7 +47,7 @@ abstract class AbstractRemover {
 
         moduleSrcDirs.forEach {
             File srcDirFile = new File(it)
-            
+
             if (srcDirFile.exists()) {
                 srcDirFile.eachDirRecurse { dir ->
                     dir.eachFileMatch(~/(.*\.xml)|(.*\.kt)|(.*\.java)/) { f ->

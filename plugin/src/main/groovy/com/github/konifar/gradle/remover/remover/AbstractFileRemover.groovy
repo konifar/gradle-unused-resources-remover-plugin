@@ -17,9 +17,9 @@ abstract class AbstractFileRemover extends AbstractRemover {
         }
 
         if (checkResult) {
-            println "[${fileType}]     Complete to remove files."
+            ColoredLogger.log "[${fileType}]   Complete to remove files."
         } else {
-            println "[${fileType}]     No unused files."
+            ColoredLogger.log "[${fileType}]   No unused ${fileType} files."
         }
     }
 
@@ -27,7 +27,7 @@ abstract class AbstractFileRemover extends AbstractRemover {
         boolean isMatched = checkTargetTextMatches(extractFileName(file), moduleSrcDirs)
 
         if (!isMatched) {
-            ColoredLogger.printlnGreen("[${fileType}]       Remove ${file.name}")
+            ColoredLogger.logGreen("[${fileType}]   Remove ${file.name}")
             file.delete()
             return true
         } else {

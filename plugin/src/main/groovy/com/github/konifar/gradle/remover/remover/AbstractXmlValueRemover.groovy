@@ -36,7 +36,7 @@ abstract class AbstractXmlValueRemover extends AbstractRemover {
                 def isMatched = checkTargetTextMatches(attr.value, moduleSrcDirs)
 
                 if (!isMatched) {
-                    ColoredLogger.printlnGreen("[${fileType}]       Remove ${attr.value} in ${file.name}")
+                    ColoredLogger.logGreen("[${fileType}]   Remove ${attr.value} in ${file.name}")
                     iterator.remove()
                     isFileChanged = true
                 }
@@ -46,7 +46,7 @@ abstract class AbstractXmlValueRemover extends AbstractRemover {
         if (isFileChanged) {
             saveFile(doc, file)
         } else {
-            println "[${fileType}]     No unused tags in ${file.name}"
+            ColoredLogger.log "[${fileType}]   No unused tags in ${file.name}"
         }
 
         removeFileIfNeed(file)
@@ -66,7 +66,7 @@ abstract class AbstractXmlValueRemover extends AbstractRemover {
     private def removeFileIfNeed(File file) {
         Document doc = new SAXBuilder().build(file)
         if (doc.getRootElement().getChildren(resourceName).size() == 0) {
-            println "[${fileType}]   remove ${file.name}."
+            ColoredLogger.log "[${fileType}]   Remove ${file.name}."
             file.delete()
         }
     }
