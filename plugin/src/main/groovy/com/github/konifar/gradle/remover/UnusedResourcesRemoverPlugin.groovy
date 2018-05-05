@@ -3,6 +3,7 @@ package com.github.konifar.gradle.remover
 import com.github.konifar.gradle.remover.file.*
 import com.github.konifar.gradle.remover.tag.StringXmlTagRemover
 import com.github.konifar.gradle.remover.tag.StyleXmlTagRemover
+import com.github.konifar.gradle.remover.tag.ThemeXmlTagRemover
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
@@ -25,7 +26,7 @@ class UnusedResourcesRemoverPlugin implements Plugin<Project> {
 
             [
                     // new AttrXmlTagRemover(),
-                    // new ThemeXmlTagRemover(),
+                    new ThemeXmlTagRemover(),
                     new StyleXmlTagRemover(),
                     new StringXmlTagRemover(),
                     new StringXmlTagRemover(),

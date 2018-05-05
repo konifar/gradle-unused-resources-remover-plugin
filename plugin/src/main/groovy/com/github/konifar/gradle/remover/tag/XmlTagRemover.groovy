@@ -27,7 +27,7 @@ abstract class XmlTagRemover {
      * @return
      */
     GString createPattern(String attrName) {
-        def pattern = /(@${type}\/${attrName}")|(R\.${type}.${attrName})/
+        def pattern = /(@${tagName}\/${attrName}")|(R\.${tagName}.${attrName})/
         return pattern
     }
 
