@@ -44,8 +44,6 @@ abstract class AbstractXmlTagRemover extends AbstractRemover {
 
                     srcDirFile.eachDirRecurse { dir ->
                         dir.eachFileMatch(~/(.*\.xml)|(.*\.kt)|(.*\.java)/) { f ->
-                            println "[${fileType}]         ${dir.name}/${f.name}"
-
                             def fileText = f.text.replaceAll('\n', '').replaceAll(' ', '')
                             if (fileText =~ pattern) {
                                 isMatched = true
