@@ -40,4 +40,27 @@ abstract class AbstractRemover {
         }
     }
 
+    boolean checkTargetTextMatches(String targetText, List<String> moduleSrcDirs) {
+        def pattern = createSearchPattern(targetText)
+        def isMatched = false
+
+        moduleSrcDirs.forEach {
+            File srcDirFile = new File(it)
+            
+            if (srcDirFile.exists()) {
+                srcDirFile.eachDirRecurse { dir ->
+                    dir.eachFileMatch(~/(.*\.xml)|(.*\.kt)|(.*\.java)/) { f ->
+                        def fileText = f.text.replaceAll('\n', '').replaceAll(' ', '')
+                        if (fileText =~ pattern) {
+                            isMatched = true
+                            return true
+                        }
+                    }
+                }
+            }
+        }
+
+        return isMatched
+    }
+
 }

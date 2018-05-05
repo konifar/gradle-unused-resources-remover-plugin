@@ -9,11 +9,9 @@ abstract class AbstractFileRemover extends AbstractRemover {
     def removeEach(File resDirFile, List<String> moduleSrcDirs) {
         def checkResult = false
         resDirFile.eachDirRecurse { dir ->
-            if (DirectoryMatcher(dir.path, fileType)) {
-                if (dir.isDirectory()) {
-                    dir.eachFile { f ->
-                        checkResult |= removeFileIfNeed(f, moduleSrcDirs)
-                    }
+            if (DirectoryMatcher.match(dir.path, fileType)) {
+                dir.eachFile { f ->
+                    checkResult |= removeFileIfNeed(f, moduleSrcDirs)
                 }
             }
         }
@@ -26,24 +24,7 @@ abstract class AbstractFileRemover extends AbstractRemover {
     }
 
     def removeFileIfNeed(File file, List<String> moduleSrcDirs) {
-        def pattern = createSearchPattern(extractFileName(file))
-
-        def isMatched = false
-
-        moduleSrcDirs.forEach {
-            File srcDirFile = new File(it)
-            if (srcDirFile.exists()) {
-                srcDirFile.eachDirRecurse { dir ->
-                    dir.eachFileMatch(~/(.*\.xml)|(.*\.kt)|(.*\.java)/) { f ->
-                        def fileText = f.text.replaceAll('\n', '').replaceAll(' ', '')
-                        if (fileText =~ pattern) {
-                            isMatched = true
-                            return true
-                        }
-                    }
-                }
-            }
-        }
+        boolean isMatched = checkTargetTextMatches(extractFileName(file), moduleSrcDirs)
 
         if (!isMatched) {
             ColoredLogger.printlnGreen("[${fileType}]       Remove ${file.name}")

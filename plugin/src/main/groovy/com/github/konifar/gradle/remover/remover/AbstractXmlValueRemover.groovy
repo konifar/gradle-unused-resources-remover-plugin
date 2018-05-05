@@ -27,37 +27,19 @@ abstract class AbstractXmlValueRemover extends AbstractRemover {
         def isFileChanged = false
 
         Document doc = new SAXBuilder().build(file)
-        Element root = doc.getRootElement()
-        Iterator<Element> iterator = root.getChildren(resourceName).iterator()
+        Iterator<Element> iterator = doc.getRootElement().getChildren(resourceName).iterator()
 
         while (iterator.hasNext()) {
-            def isMatched = false
+            Attribute attr = iterator.next().getAttribute("name")
 
-            Element element = iterator.next()
-            Attribute attr = element.getAttribute("name")
+            if (attr != null) {
+                def isMatched = checkTargetTextMatches(attr.value, moduleSrcDirs)
 
-            moduleSrcDirs.forEach {
-                File srcDirFile = new File(it)
-
-                if (attr != null && srcDirFile.exists()) {
-                    def pattern = createSearchPattern(attr.value)
-
-                    srcDirFile.eachDirRecurse { dir ->
-                        dir.eachFileMatch(~/(.*\.xml)|(.*\.kt)|(.*\.java)/) { f ->
-                            def fileText = f.text.replaceAll('\n', '').replaceAll(' ', '')
-                            if (fileText =~ pattern) {
-                                isMatched = true
-                                return true
-                            }
-                        }
-                    }
+                if (!isMatched) {
+                    ColoredLogger.printlnGreen("[${fileType}]       Remove ${attr.value} in ${file.name}")
+                    iterator.remove()
+                    isFileChanged = true
                 }
-            }
-
-            if (!isMatched) {
-                ColoredLogger.printlnGreen("[${fileType}]       Remove ${attr.value} in ${file.name}")
-                iterator.remove()
-                isFileChanged = true
             }
         }
 
