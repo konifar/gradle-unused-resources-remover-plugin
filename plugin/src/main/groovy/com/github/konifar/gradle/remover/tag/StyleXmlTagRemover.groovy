@@ -1,16 +1,16 @@
 package com.github.konifar.gradle.remover.tag
 
-class StyleXmlTagRemover extends XmlTagRemover {
+class StyleXmlTagRemover extends AbstractXmlTagRemover {
 
     @Override
-    String getType() {
+    String getFileType() {
         return "style"
     }
 
     @Override
     GString createPattern(String attrName) {
         // Considered style override
-        def pattern = /(@${tagName}\/${attrName}")|(R\.${tagName}\.${toCamelCaseWithUnderscore(attrName)})|(${attrName}\.)|(parent="${attrName}")/
+        def pattern = /(@${resourceName}\/${attrName}")|(R\.${resourceName}\.${toCamelCaseWithUnderscore(attrName)})|(${attrName}\.)|(parent="${attrName}")/
         return pattern
     }
 

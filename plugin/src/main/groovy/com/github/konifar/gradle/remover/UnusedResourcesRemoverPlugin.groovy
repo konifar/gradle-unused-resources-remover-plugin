@@ -25,11 +25,11 @@ class UnusedResourcesRemoverPlugin implements Plugin<Project> {
             }
 
             [
-                    // new AttrXmlTagRemover(),
                     new ThemeXmlTagRemover(),
                     new StyleXmlTagRemover(),
                     new StringXmlTagRemover(),
                     new StringXmlTagRemover(),
+                    // new AttrXmlTagRemover(),
             ].forEach {
                 it.remove(project)
             }

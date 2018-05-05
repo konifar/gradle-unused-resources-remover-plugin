@@ -1,16 +1,16 @@
 package com.github.konifar.gradle.remover.file
 
-class LayoutFileRemover extends FileRemover {
+class LayoutFileRemover extends AbstractFileRemover {
 
     @Override
-    String getType() {
+    String getFileType() {
         return "layout"
     }
 
     @Override
     GString createPattern(String fileName) {
         // Considered data binding
-        def pattern = /(@${type}\/${fileName}")|(R\.${type}\.${fileName})|(${toCamelCase(fileName, true)}Binding)/
+        def pattern = /(@${resourceName}\/${fileName}")|(R\.${resourceName}\.${fileName})|(${toCamelCase(fileName, true)}Binding)/
         return pattern
     }
 

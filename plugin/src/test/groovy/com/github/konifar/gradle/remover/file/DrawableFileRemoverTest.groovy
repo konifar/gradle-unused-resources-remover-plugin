@@ -8,7 +8,7 @@ class DrawableFileRemoverTest extends Specification {
 
     def "type is drawable"() {
         expect:
-        remover.type == "drawable"
+        remover.fileType == "drawable"
     }
 
     def "pattern matches"() {

@@ -8,7 +8,7 @@ class LayoutFileRemoverTest extends Specification {
 
     def "type is layout"() {
         expect:
-        remover.type == "layout"
+        remover.fileType == "layout"
     }
 
     def "pattern matches"() {

@@ -32,7 +32,7 @@ pluginBundle {
     plugins {
         locateApkPlugin {
             id = 'com.github.konifar.gradle.unused-resources-remover'
-            displayName = 'Android Unused Resources Remover Plugin'
+            displayName = 'Android Unused Resources AbstractRemover Plugin'
         }
     }
 }

@@ -8,7 +8,7 @@ class MenuFileRemoverTest extends Specification {
 
     def "type is menu"() {
         expect:
-        remover.type == "menu"
+        remover.fileType == "menu"
     }
 
     def "pattern matches"() {

@@ -8,7 +8,7 @@ class MipmapFileRemoverTest extends Specification {
 
     def "type is mipmap"() {
         expect:
-        remover.type == "mipmap"
+        remover.fileType == "mipmap"
     }
 
     def "pattern matches"() {

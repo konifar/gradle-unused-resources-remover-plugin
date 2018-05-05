@@ -8,7 +8,7 @@ class ColorFileRemoverTest extends Specification {
 
     def "type is color"() {
         expect:
-        remover.type == "color"
+        remover.fileType == "color"
     }
 
     def "pattern matches"() {

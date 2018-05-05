@@ -8,7 +8,7 @@ class StyleXmlTagRemoverTest extends Specification {
 
     def "type is style"() {
         expect:
-        remover.type == "style"
+        remover.fileType == "style"
     }
 
     def "pattern matches"() {

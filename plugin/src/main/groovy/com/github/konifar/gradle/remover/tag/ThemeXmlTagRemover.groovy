@@ -3,12 +3,13 @@ package com.github.konifar.gradle.remover.tag
 class ThemeXmlTagRemover extends StyleXmlTagRemover {
 
     @Override
-    String getType() {
+    String getFileType() {
         return "theme"
     }
 
     @Override
-    String getTagName() {
+    String getResourceName() {
+        // theme is actually style
         return "style"
     }
 

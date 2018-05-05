@@ -1,9 +1,9 @@
 package com.github.konifar.gradle.remover.tag
 
-class DimenXmlTagRemover extends XmlTagRemover {
+class DimenXmlTagRemover extends AbstractXmlTagRemover {
 
     @Override
-    String getType() {
+    String getFileType() {
         return "dimen"
     }
 

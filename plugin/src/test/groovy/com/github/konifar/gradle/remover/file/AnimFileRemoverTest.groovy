@@ -8,7 +8,7 @@ class AnimFileRemoverTest extends Specification {
 
     def "type is anim"() {
         expect:
-        remover.type == "anim"
+        remover.fileType == "anim"
     }
 
     def "pattern matches"() {

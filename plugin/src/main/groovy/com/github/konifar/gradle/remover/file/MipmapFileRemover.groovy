@@ -1,9 +1,9 @@
 package com.github.konifar.gradle.remover.file
 
-class MipmapFileRemover extends FileRemover {
+class MipmapFileRemover extends AbstractFileRemover {
 
     @Override
-    String getType() {
+    String getFileType() {
         return "mipmap"
     }
 

@@ -8,7 +8,7 @@ class ThemeXmlTagRemoverTest extends Specification {
 
     def "type is theme"() {
         expect:
-        remover.type == "theme"
+        remover.fileType == "theme"
     }
 
     def "pattern matches"() {

@@ -8,7 +8,7 @@ class StringXmlTagRemoverTest extends Specification {
 
     def "type is string"() {
         expect:
-        remover.type == "string"
+        remover.fileType == "string"
     }
 
     def "pattern matches"() {

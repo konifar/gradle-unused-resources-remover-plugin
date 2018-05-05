@@ -1,9 +1,9 @@
 package com.github.konifar.gradle.remover.tag
 
-class StringXmlTagRemover extends XmlTagRemover {
+class StringXmlTagRemover extends AbstractXmlTagRemover {
 
     @Override
-    String getType() {
+    String getFileType() {
         return "string"
     }
 

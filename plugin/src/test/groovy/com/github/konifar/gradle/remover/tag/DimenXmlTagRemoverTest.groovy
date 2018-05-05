@@ -8,7 +8,7 @@ class DimenXmlTagRemoverTest extends Specification {
 
     def "type is dimen"() {
         expect:
-        remover.type == "dimen"
+        remover.fileType == "dimen"
     }
 
     def "pattern matches"() {
