@@ -27,7 +27,7 @@ abstract class AbstractRemover {
         // Check each modules
         List<String> moduleSrcDirs = project.rootProject.allprojects
                 .findAll { it.name != project.rootProject.name }
-                .collect { "${project.rootProject.projectDir.path}/${it.name}/src" }
+                .collect { "${it.projectDir.path}/src" }
 
         moduleSrcDirs.each {
             String moduleSrcName = it - "${project.rootProject.projectDir.path}/"
