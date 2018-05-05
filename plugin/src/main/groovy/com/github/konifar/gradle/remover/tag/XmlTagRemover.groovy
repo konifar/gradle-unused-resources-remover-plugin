@@ -83,7 +83,7 @@ abstract class XmlTagRemover {
 
                     srcDirFile.eachDirRecurse { dir ->
                         dir.eachFileMatch(~/(.*\.xml)|(.*\.kt)|(.*\.java)/) { f ->
-                            // println "[${type}]         ${dir.name}/${f.name}"
+                            println "[${type}]         ${dir.name}/${f.name}"
 
                             def fileText = f.text.replaceAll('\n', '').replaceAll(' ', '')
                             if (fileText =~ pattern) {

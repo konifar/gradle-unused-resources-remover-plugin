@@ -10,7 +10,7 @@ class StyleXmlTagRemover extends XmlTagRemover {
     @Override
     GString createPattern(String attrName) {
         // Considered style override
-        def pattern = /(${type}\/${attrName})|(R\.${type}\.${attrName})|(${attrName}\.)|(parent="${attrName}")/
+        def pattern = /(${type}\/${attrName}")|(R\.${type}\.${attrName})|(${attrName}\.)|(parent="${attrName}")/
         return pattern
     }
 
