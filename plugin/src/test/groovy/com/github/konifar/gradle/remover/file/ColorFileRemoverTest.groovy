@@ -25,9 +25,10 @@ class ColorFileRemoverTest extends Specification {
         fileText            | expected
         "R.color.primary"   | true
         "R.color.primary)"  | true
-        "@color/primary"    | true
+        "@color/primary\""  | true
+        "@color/primary2"   | false
         "R.color.secondary" | false
-        "@style/primary"    | false
+        "@style/primary\""  | false
         // "R.color.primary2"   | false
     }
 }

@@ -16,7 +16,7 @@ abstract class FileRemover {
      * @return
      */
     GString createPattern(String fileName) {
-        def pattern = /(${type}\/${fileName})|(R\.${type}\.${fileName})/
+        def pattern = /(@${type}\/${fileName}")|(R\.${type}\.${fileName})/
         return pattern
     }
 

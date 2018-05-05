@@ -22,12 +22,13 @@ class LayoutFileRemoverTest extends Specification {
         isMatched == expected
 
         where:
-        fileText                 | expected
-        "R.layout.activity_main" | true
-        "@layout/activity_main"  | true
-        "ActivityMainBinding"    | true
-        "R.layout.fragment_main" | false
-        "@menu/activity_main"    | false
+        fileText                   | expected
+        "R.layout.activity_main"   | true
+        "@layout/activity_main\""  | true
+        "ActivityMainBinding"      | true
+        "R.layout.fragment_main"   | false
+        "@layout/activity_main2\"" | false
+        "@menu/activity_main"      | false
         // "ActivityMainBinding2"   | false
         // "R.layout.activity_main2"   | false
     }

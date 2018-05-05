@@ -27,13 +27,7 @@ abstract class XmlTagRemover {
      * @return
      */
     GString createPattern(String attrName) {
-        def pattern = /(${type}\/${attrName})|(R\.${type}.${attrName})/
-
-        // Considered style override
-        if (type.startsWith("style")) {
-            pattern = /(${type}\/${attrName})|(R\.${type}\.${attrName})|(${attrName}\.)|(parent="${attrName}")/
-        }
-
+        def pattern = /(@${type}\/${attrName}")|(R\.${type}.${attrName})/
         return pattern
     }
 

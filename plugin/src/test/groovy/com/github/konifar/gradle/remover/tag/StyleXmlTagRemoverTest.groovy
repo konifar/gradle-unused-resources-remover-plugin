@@ -28,8 +28,8 @@ class StyleXmlTagRemoverTest extends Specification {
         "parent=\"TitleTextAppearance\"" | true
         "@style/TitleTextAppearance."    | true
         "R.style.TitleTextAppear"        | false
-        "@style/TitleTextAppearance2"    | false
+        "@style/TitleTextAppearance2\""  | false
         "@theme/TitleTextAppearance"     | false
-        // "R.style.TitleTextAppearance2"   | fals
+        // "R.style.TitleTextAppearance2"   | false
     }
 }

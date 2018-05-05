@@ -22,12 +22,13 @@ class DrawableFileRemoverTest extends Specification {
         isMatched == expected
 
         where:
-        fileName        | fileText                 | expected
-        "ic_settings"   | "R.drawable.ic_settings" | true
-        "ic_settings"   | "@drawable/ic_settings"  | true
-        "img_balloon.9" | "@drawable/img_balloon"  | true
-        "ic_settings"   | "R.drawable.ic_setting"  | false
-        "ic_settings"   | "@mipmap/ic_settings"    | false
+        fileName        | fileText                   | expected
+        "ic_settings"   | "R.drawable.ic_settings"   | true
+        "ic_settings"   | "@drawable/ic_settings\""  | true
+        "img_balloon.9" | "@drawable/img_balloon\""  | true
+        "img_balloon.9" | "@drawable/img_balloon2\"" | false
+        "ic_settings"   | "R.drawable.ic_setting"    | false
+        "ic_settings"   | "@mipmap/ic_settings"      | false
         // "ic_settings" | "R.drawable.ic_settings2"   | false
     }
 }
