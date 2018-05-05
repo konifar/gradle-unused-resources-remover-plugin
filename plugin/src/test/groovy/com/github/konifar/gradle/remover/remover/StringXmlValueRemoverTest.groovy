@@ -1,7 +1,6 @@
 package com.github.konifar.gradle.remover.remover
 
-import com.github.konifar.gradle.remover.remover.StringXmlValueRemover;
-import spock.lang.Specification;
+import spock.lang.Specification
 
 class StringXmlValueRemoverTest extends Specification {
 
@@ -29,6 +28,5 @@ class StringXmlValueRemoverTest extends Specification {
         "R.string.app"        | false
         "@string/app_name2\"" | false
         "@style/app_name"     | false
-        // "R.string.app_name2"   | false
     }
 }

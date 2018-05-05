@@ -1,7 +1,6 @@
 package com.github.konifar.gradle.remover.remover
 
-import com.github.konifar.gradle.remover.remover.ThemeXmlValueRemover;
-import spock.lang.Specification;
+import spock.lang.Specification
 
 class ThemeXmlValueRemoverTest extends Specification {
 
@@ -30,7 +29,6 @@ class ThemeXmlValueRemoverTest extends Specification {
         "@style/AppTheme.Translucent."    | true
         "R.style.AppTheme.Trans"          | false
         "@style/AppTheme.Translucent2\""  | false
-        // "R.style.AppTheme.Translucent2"   | false
     }
 
 }

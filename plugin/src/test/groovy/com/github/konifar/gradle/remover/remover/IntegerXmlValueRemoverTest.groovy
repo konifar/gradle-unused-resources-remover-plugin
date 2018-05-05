@@ -28,6 +28,5 @@ class IntegerXmlValueRemoverTest extends Specification {
         "R.integer.max"          | false
         "@integer/max_length2\"" | false
         "@integer/max_length"    | false
-        // "R.integer.max_length2"   | false
     }
 }

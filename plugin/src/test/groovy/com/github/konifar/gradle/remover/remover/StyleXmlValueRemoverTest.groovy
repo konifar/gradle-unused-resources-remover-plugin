@@ -1,7 +1,6 @@
 package com.github.konifar.gradle.remover.remover
 
-import com.github.konifar.gradle.remover.remover.StyleXmlValueRemover;
-import spock.lang.Specification;
+import spock.lang.Specification
 
 class StyleXmlValueRemoverTest extends Specification {
 
@@ -31,7 +30,6 @@ class StyleXmlValueRemoverTest extends Specification {
         "R.style.TitleTextAppear"        | false
         "@style/TitleTextAppearance2\""  | false
         "@theme/TitleTextAppearance"     | false
-        // "R.style.TitleTextAppearance2"   | false
     }
 
     def "convert name to camel case with underscore"() {

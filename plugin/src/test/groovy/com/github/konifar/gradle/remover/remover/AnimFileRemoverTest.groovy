@@ -31,7 +31,5 @@ class AnimFileRemoverTest extends Specification {
         "@anim/fade_transition2"       | false
         "R.anim.scale_transition"      | false
         "@animator/fade_transition"    | false
-        // "R.anim.test2"   | false
-        // "@anim/test2"    | false
     }
 }

@@ -29,6 +29,5 @@ class ColorFileRemoverTest extends Specification {
         "@color/primary2"   | false
         "R.color.secondary" | false
         "@style/primary\""  | false
-        // "R.color.primary2"   | false
     }
 }

@@ -28,6 +28,5 @@ class MenuFileRemoverTest extends Specification {
         "R.menu.menu_detail" | false
         "@menu/menu_main2\"" | false
         "@layout/menu_main"  | false
-        // "R.menu.menu_main2"   | false
     }
 }

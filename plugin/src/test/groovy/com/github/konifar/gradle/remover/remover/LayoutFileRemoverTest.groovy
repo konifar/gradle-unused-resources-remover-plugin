@@ -29,7 +29,5 @@ class LayoutFileRemoverTest extends Specification {
         "R.layout.fragment_main"   | false
         "@layout/activity_main2\"" | false
         "@menu/activity_main"      | false
-        // "ActivityMainBinding2"   | false
-        // "R.layout.activity_main2"   | false
     }
 }

@@ -29,6 +29,5 @@ class DrawableFileRemoverTest extends Specification {
         "img_balloon.9" | "@drawable/img_balloon2\"" | false
         "ic_settings"   | "R.drawable.ic_setting"    | false
         "ic_settings"   | "@mipmap/ic_settings"      | false
-        // "ic_settings" | "R.drawable.ic_settings2"   | false
     }
 }

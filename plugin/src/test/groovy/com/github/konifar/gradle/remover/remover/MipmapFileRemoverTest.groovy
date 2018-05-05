@@ -27,6 +27,5 @@ class MipmapFileRemoverTest extends Specification {
         "@mipmap/ic_launcher\""       | true
         "R.drawable.ic_launch"        | false
         "@mipmap/ic_launcher_round\"" | false
-        // "R.mipmap.ic_launcher_round"   | false
     }
 }

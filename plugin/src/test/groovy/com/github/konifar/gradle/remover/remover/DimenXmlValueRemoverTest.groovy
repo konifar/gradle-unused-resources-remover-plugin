@@ -1,7 +1,6 @@
 package com.github.konifar.gradle.remover.remover
 
-import com.github.konifar.gradle.remover.remover.DimenXmlValueRemover;
-import spock.lang.Specification;
+import spock.lang.Specification
 
 class DimenXmlValueRemoverTest extends Specification {
 
@@ -29,6 +28,5 @@ class DimenXmlValueRemoverTest extends Specification {
         "R.dimen.text"          | false
         "@dimen/text_medium2\"" | false
         "@style/text_medium"    | false
-        // "R.string.app_name2"   | false
     }
 }
