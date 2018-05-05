@@ -50,11 +50,10 @@ abstract class AbstractXmlValueRemover extends AbstractRemover {
 
         if (isFileChanged) {
             saveFile(doc, file)
+            removeFileIfNeed(file)
         } else {
             ColoredLogger.log "[${fileType}]   No unused tags in ${file.name}"
         }
-
-        removeFileIfNeed(file)
     }
 
     private static def saveFile(Document doc, File file) {
@@ -71,7 +70,7 @@ abstract class AbstractXmlValueRemover extends AbstractRemover {
     private def removeFileIfNeed(File file) {
         Document doc = new SAXBuilder().build(file)
         if (doc.getRootElement().getChildren(tagName).size() == 0) {
-            ColoredLogger.log "[${fileType}]   Remove ${file.name}."
+            ColoredLogger.logGreen "[${fileType}]   Remove ${file.name}."
             file.delete()
         }
     }
