@@ -1,10 +1,10 @@
-package com.github.konifar.gradle.remover.remover
+package com.github.konifar.gradle.remover.remover.valuetype
 
 import spock.lang.Specification
 
 class ColorXmlValueRemoverTest extends Specification {
 
-    def remover = new com.github.konifar.gradle.remover.remover.xmlvaluetype.ColorXmlValueRemover()
+    def remover = new ColorXmlValueRemover()
 
     def "type is color"() {
         expect:
@@ -25,6 +25,7 @@ class ColorXmlValueRemoverTest extends Specification {
         fileText            | expected
         "R.color.primary"   | true
         "@color/primary\""  | true
+        "@color/primary<"   | true
         "R.color.secondary" | false
         "@color/primary2\"" | false
         "@style/primary"    | false

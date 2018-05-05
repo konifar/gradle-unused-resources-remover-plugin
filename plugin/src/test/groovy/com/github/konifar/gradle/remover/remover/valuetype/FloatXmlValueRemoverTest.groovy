@@ -1,10 +1,10 @@
-package com.github.konifar.gradle.remover.remover
+package com.github.konifar.gradle.remover.remover.valuetype
 
 import spock.lang.Specification
 
 class FloatXmlValueRemoverTest extends Specification {
 
-    def remover = new com.github.konifar.gradle.remover.remover.xmlvaluetype.FloatXmlValueRemover()
+    def remover = new FloatXmlValueRemover()
 
     def "type is float"() {
         expect:
@@ -35,6 +35,7 @@ class FloatXmlValueRemoverTest extends Specification {
         fileText               | expected
         "R.dimen.size_ratio"   | true
         "@dimen/size_ratio\""  | true
+        "@dimen/size_ratio<"   | true
         "R.dimen.size"         | false
         "@dimen/size_ratio2\"" | false
         "@style/size_ratio"    | false

@@ -1,10 +1,10 @@
-package com.github.konifar.gradle.remover.remover
+package com.github.konifar.gradle.remover.remover.valuetype
 
 import spock.lang.Specification
 
 class DimenXmlValueRemoverTest extends Specification {
 
-    def remover = new com.github.konifar.gradle.remover.remover.xmlvaluetype.DimenXmlValueRemover()
+    def remover = new DimenXmlValueRemover()
 
     def "type is dimen"() {
         expect:
@@ -25,6 +25,7 @@ class DimenXmlValueRemoverTest extends Specification {
         fileText                | expected
         "R.dimen.text_medium"   | true
         "@dimen/text_medium\""  | true
+        "@dimen/text_medium<"   | true
         "R.dimen.text"          | false
         "@dimen/text_medium2\"" | false
         "@style/text_medium"    | false

@@ -1,4 +1,4 @@
-package com.github.konifar.gradle.remover.remover
+package com.github.konifar.gradle.remover.remover.filetype
 
 import spock.lang.Specification
 
@@ -26,6 +26,7 @@ class ColorFileRemoverTest extends Specification {
         "R.color.primary"   | true
         "R.color.primary)"  | true
         "@color/primary\""  | true
+        "@color/primary<"   | true
         "@color/primary2"   | false
         "R.color.secondary" | false
         "@style/primary\""  | false

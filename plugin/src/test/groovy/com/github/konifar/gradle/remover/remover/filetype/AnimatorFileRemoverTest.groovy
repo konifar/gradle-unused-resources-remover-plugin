@@ -1,4 +1,4 @@
-package com.github.konifar.gradle.remover.remover
+package com.github.konifar.gradle.remover.remover.filetype
 
 import spock.lang.Specification
 
@@ -27,6 +27,7 @@ class AnimatorFileRemoverTest extends Specification {
         "R.animator.fade_animation)"  | true
         "R.animator.fade_animation\"" | true
         "@animator/fade_animation\""  | true
+        "@animator/fade_animation<"   | true
         "@animator/fade_animation2"   | false
         "R.animator.scale_animation"  | false
         "@anim/fade_animation"        | false

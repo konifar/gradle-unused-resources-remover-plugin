@@ -1,4 +1,4 @@
-package com.github.konifar.gradle.remover.remover
+package com.github.konifar.gradle.remover.remover.filetype
 
 import spock.lang.Specification
 
@@ -25,6 +25,7 @@ class MipmapFileRemoverTest extends Specification {
         fileText                      | expected
         "R.mipmap.ic_launcher"        | true
         "@mipmap/ic_launcher\""       | true
+        "@mipmap/ic_launcher<"        | true
         "R.drawable.ic_launch"        | false
         "@mipmap/ic_launcher_round\"" | false
     }

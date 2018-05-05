@@ -1,10 +1,10 @@
-package com.github.konifar.gradle.remover.remover
+package com.github.konifar.gradle.remover.remover.valuetype
 
 import spock.lang.Specification
 
 class StyleXmlValueRemoverTest extends Specification {
 
-    def remover = new com.github.konifar.gradle.remover.remover.xmlvaluetype.StyleXmlValueRemover()
+    def remover = new StyleXmlValueRemover()
 
     def "type is style"() {
         expect:
@@ -25,6 +25,7 @@ class StyleXmlValueRemoverTest extends Specification {
         fileText                         | expected
         "R.style.TitleTextAppearance"    | true
         "@style/TitleTextAppearance\""   | true
+        "@style/TitleTextAppearance<"    | true
         "parent=\"TitleTextAppearance\"" | true
         "@style/TitleTextAppearance."    | true
         "R.style.TitleTextAppear"        | false

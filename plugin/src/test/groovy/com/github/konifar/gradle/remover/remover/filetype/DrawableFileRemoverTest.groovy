@@ -1,4 +1,4 @@
-package com.github.konifar.gradle.remover.remover
+package com.github.konifar.gradle.remover.remover.filetype
 
 import spock.lang.Specification
 
@@ -25,6 +25,7 @@ class DrawableFileRemoverTest extends Specification {
         fileName        | fileText                   | expected
         "ic_settings"   | "R.drawable.ic_settings"   | true
         "ic_settings"   | "@drawable/ic_settings\""  | true
+        "ic_settings"   | "@drawable/ic_settings<"   | true
         "img_balloon.9" | "@drawable/img_balloon\""  | true
         "img_balloon.9" | "@drawable/img_balloon2\"" | false
         "ic_settings"   | "R.drawable.ic_setting"    | false

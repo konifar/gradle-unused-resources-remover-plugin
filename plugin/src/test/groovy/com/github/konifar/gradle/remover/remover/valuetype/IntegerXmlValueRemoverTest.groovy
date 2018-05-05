@@ -1,10 +1,10 @@
-package com.github.konifar.gradle.remover.remover
+package com.github.konifar.gradle.remover.remover.valuetype
 
 import spock.lang.Specification
 
 class IntegerXmlValueRemoverTest extends Specification {
 
-    def remover = new com.github.konifar.gradle.remover.remover.xmlvaluetype.IntegerXmlValueRemover()
+    def remover = new IntegerXmlValueRemover()
 
     def "type is integer"() {
         expect:
@@ -25,6 +25,7 @@ class IntegerXmlValueRemoverTest extends Specification {
         fileText                 | expected
         "R.integer.max_length"   | true
         "@integer/max_length\""  | true
+        "@integer/max_length<"   | true
         "R.integer.max"          | false
         "@integer/max_length2\"" | false
         "@integer/max_length"    | false

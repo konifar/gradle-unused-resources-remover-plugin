@@ -1,10 +1,10 @@
-package com.github.konifar.gradle.remover.remover
+package com.github.konifar.gradle.remover.remover.valuetype
 
 import spock.lang.Specification
 
 class StringXmlValueRemoverTest extends Specification {
 
-    def remover = new com.github.konifar.gradle.remover.remover.xmlvaluetype.StringXmlValueRemover()
+    def remover = new StringXmlValueRemover()
 
     def "type is string"() {
         expect:
@@ -25,6 +25,7 @@ class StringXmlValueRemoverTest extends Specification {
         fileText              | expected
         "R.string.app_name"   | true
         "@string/app_name\""  | true
+        "@string/app_name<"   | true
         "R.string.app"        | false
         "@string/app_name2\"" | false
         "@style/app_name"     | false

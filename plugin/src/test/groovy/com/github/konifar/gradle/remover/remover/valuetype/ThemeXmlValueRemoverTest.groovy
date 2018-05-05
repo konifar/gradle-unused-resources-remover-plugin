@@ -1,10 +1,10 @@
-package com.github.konifar.gradle.remover.remover
+package com.github.konifar.gradle.remover.remover.valuetype
 
 import spock.lang.Specification
 
 class ThemeXmlValueRemoverTest extends Specification {
 
-    def remover = new com.github.konifar.gradle.remover.remover.xmlvaluetype.ThemeXmlValueRemover()
+    def remover = new ThemeXmlValueRemover()
 
     def "type is theme"() {
         expect:
@@ -25,6 +25,7 @@ class ThemeXmlValueRemoverTest extends Specification {
         fileText                          | expected
         "R.style.AppTheme_Translucent"    | true
         "@style/AppTheme.Translucent\""   | true
+        "@style/AppTheme.Translucent<"    | true
         "parent=\"AppTheme.Translucent\"" | true
         "@style/AppTheme.Translucent."    | true
         "R.style.AppTheme.Trans"          | false

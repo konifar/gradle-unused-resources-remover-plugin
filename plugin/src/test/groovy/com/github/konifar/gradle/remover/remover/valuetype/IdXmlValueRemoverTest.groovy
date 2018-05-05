@@ -1,10 +1,10 @@
-package com.github.konifar.gradle.remover.remover
+package com.github.konifar.gradle.remover.remover.valuetype
 
 import spock.lang.Specification
 
 class IdXmlValueRemoverTest extends Specification {
 
-    def remover = new com.github.konifar.gradle.remover.remover.xmlvaluetype.IdXmlValueRemover()
+    def remover = new IdXmlValueRemover()
 
     def "type is id"() {
         expect:
@@ -30,6 +30,7 @@ class IdXmlValueRemoverTest extends Specification {
         fileText         | expected
         "R.id.view_id"   | true
         "@id/view_id\""  | true
+        "@id/view_id<"   | true
         "R.id.view"      | false
         "@id/view_id2\"" | false
     }

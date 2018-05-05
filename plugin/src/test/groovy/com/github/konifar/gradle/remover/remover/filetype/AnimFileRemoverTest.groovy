@@ -1,4 +1,4 @@
-package com.github.konifar.gradle.remover.remover
+package com.github.konifar.gradle.remover.remover.filetype
 
 import spock.lang.Specification
 
@@ -27,6 +27,7 @@ class AnimFileRemoverTest extends Specification {
         "R.anim.fade_transition)"      | true
         "R.anim.fade_transition\""     | true
         "@anim/fade_transition\""      | true
+        "@anim/fade_transition<"       | true
         "R.animator.fade_transition\"" | false
         "@anim/fade_transition2"       | false
         "R.anim.scale_transition"      | false

@@ -1,4 +1,4 @@
-package com.github.konifar.gradle.remover.remover
+package com.github.konifar.gradle.remover.remover.filetype
 
 import spock.lang.Specification
 
@@ -25,6 +25,7 @@ class LayoutFileRemoverTest extends Specification {
         fileText                   | expected
         "R.layout.activity_main"   | true
         "@layout/activity_main\""  | true
+        "@layout/activity_main<"   | true
         "ActivityMainBinding"      | true
         "R.layout.fragment_main"   | false
         "@layout/activity_main2\"" | false

@@ -1,10 +1,10 @@
-package com.github.konifar.gradle.remover.remover
+package com.github.konifar.gradle.remover.remover.valuetype
 
 import spock.lang.Specification
 
 class BoolXmlValueRemoverTest extends Specification {
 
-    def remover = new com.github.konifar.gradle.remover.remover.xmlvaluetype.BoolXmlValueRemover()
+    def remover = new BoolXmlValueRemover()
 
     def "type is bool"() {
         expect:
@@ -25,6 +25,7 @@ class BoolXmlValueRemoverTest extends Specification {
         fileText              | expected
         "R.bool.pref_value"   | true
         "@bool/pref_value\""  | true
+        "@bool/pref_value<"   | true
         "R.bool.pref"         | false
         "@bool/pref_value2\"" | false
         "@bool/pref_value"    | false

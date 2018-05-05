@@ -1,4 +1,4 @@
-package com.github.konifar.gradle.remover.remover
+package com.github.konifar.gradle.remover.remover.filetype
 
 import spock.lang.Specification
 
@@ -25,6 +25,7 @@ class MenuFileRemoverTest extends Specification {
         fileText             | expected
         "R.menu.menu_main"   | true
         "@menu/menu_main\""  | true
+        "@menu/menu_main<"   | true
         "R.menu.menu_detail" | false
         "@menu/menu_main2\"" | false
         "@layout/menu_main"  | false
