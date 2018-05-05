@@ -1,4 +1,4 @@
-package com.github.konifar.gradle.remover.file
+package com.github.konifar.gradle.remover.remover
 
 class AnimatorFileRemover extends AbstractFileRemover {
 

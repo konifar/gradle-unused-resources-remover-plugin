@@ -1,6 +1,6 @@
-package com.github.konifar.gradle.remover.tag
+package com.github.konifar.gradle.remover.remover
 
-class ThemeXmlTagRemover extends StyleXmlTagRemover {
+class ThemeXmlValueRemover extends StyleXmlValueRemover {
 
     @Override
     String getFileType() {

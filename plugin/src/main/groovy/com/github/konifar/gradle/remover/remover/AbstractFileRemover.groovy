@@ -1,7 +1,7 @@
-package com.github.konifar.gradle.remover.file
+package com.github.konifar.gradle.remover.remover
 
-import com.github.konifar.gradle.remover.AbstractRemover
-import com.github.konifar.gradle.remover.Logger
+import com.github.konifar.gradle.remover.remover.util.ColoredLogger
+import com.github.konifar.gradle.remover.remover.util.DirectoryMatcher
 
 abstract class AbstractFileRemover extends AbstractRemover {
 
@@ -9,7 +9,7 @@ abstract class AbstractFileRemover extends AbstractRemover {
     def removeEach(File resDirFile, List<String> moduleSrcDirs) {
         def checkResult = false
         resDirFile.eachDirRecurse { dir ->
-            if (dir =~ /\/${fileType}.*/) {
+            if (DirectoryMatcher(dir.path, fileType)) {
                 if (dir.isDirectory()) {
                     dir.eachFile { f ->
                         checkResult |= removeFileIfNeed(f, moduleSrcDirs)
@@ -35,8 +35,6 @@ abstract class AbstractFileRemover extends AbstractRemover {
             if (srcDirFile.exists()) {
                 srcDirFile.eachDirRecurse { dir ->
                     dir.eachFileMatch(~/(.*\.xml)|(.*\.kt)|(.*\.java)/) { f ->
-                        // println "[${type}]         ${dir.name}/${f.name}"
-
                         def fileText = f.text.replaceAll('\n', '').replaceAll(' ', '')
                         if (fileText =~ pattern) {
                             isMatched = true
@@ -48,7 +46,7 @@ abstract class AbstractFileRemover extends AbstractRemover {
         }
 
         if (!isMatched) {
-            Logger.printlnGreen("[${fileType}]       Remove ${file.name}")
+            ColoredLogger.printlnGreen("[${fileType}]       Remove ${file.name}")
             file.delete()
             return true
         } else {

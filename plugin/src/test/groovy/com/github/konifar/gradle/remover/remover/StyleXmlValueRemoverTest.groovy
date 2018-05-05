@@ -1,10 +1,11 @@
-package com.github.konifar.gradle.remover.tag;
+package com.github.konifar.gradle.remover.remover
 
+import com.github.konifar.gradle.remover.remover.StyleXmlValueRemover;
 import spock.lang.Specification;
 
-class StyleXmlTagRemoverTest extends Specification {
+class StyleXmlValueRemoverTest extends Specification {
 
-    def remover = new StyleXmlTagRemover()
+    def remover = new StyleXmlValueRemover()
 
     def "type is style"() {
         expect:

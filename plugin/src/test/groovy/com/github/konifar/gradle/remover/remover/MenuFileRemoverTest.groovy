@@ -1,10 +1,10 @@
-package com.github.konifar.gradle.remover.file
+package com.github.konifar.gradle.remover.remover
 
 import spock.lang.Specification
 
 class MenuFileRemoverTest extends Specification {
 
-    def remover = new MenuFileRemover()
+    def remover = new com.github.konifar.gradle.remover.remover.MenuFileRemover()
 
     def "type is menu"() {
         expect:

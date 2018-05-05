@@ -1,10 +1,10 @@
-package com.github.konifar.gradle.remover.file
+package com.github.konifar.gradle.remover.remover
 
 import spock.lang.Specification
 
 class DrawableFileRemoverTest extends Specification {
 
-    def remover = new DrawableFileRemover()
+    def remover = new com.github.konifar.gradle.remover.remover.DrawableFileRemover()
 
     def "type is drawable"() {
         expect:

@@ -1,7 +1,7 @@
-package com.github.konifar.gradle.remover.tag
+package com.github.konifar.gradle.remover.remover
 
-import com.github.konifar.gradle.remover.AbstractRemover
-import com.github.konifar.gradle.remover.Logger
+import com.github.konifar.gradle.remover.remover.util.ColoredLogger
+import com.github.konifar.gradle.remover.remover.util.DirectoryMatcher
 import org.jdom2.Attribute
 import org.jdom2.Document
 import org.jdom2.Element
@@ -10,12 +10,12 @@ import org.jdom2.output.Format
 import org.jdom2.output.LineSeparator
 import org.jdom2.output.XMLOutputter
 
-abstract class AbstractXmlTagRemover extends AbstractRemover {
+abstract class AbstractXmlValueRemover extends AbstractRemover {
 
     @Override
     def removeEach(File resDirFile, List<String> moduleSrcDirs) {
         resDirFile.eachDirRecurse { dir ->
-            if (dir =~ /\/values.*/) {
+            if (DirectoryMatcher.match(dir.path, "values")) {
                 dir.eachFileMatch(~/${fileType}.*/) { f ->
                     removeTagIfNeed(f, moduleSrcDirs)
                 }
@@ -55,7 +55,7 @@ abstract class AbstractXmlTagRemover extends AbstractRemover {
             }
 
             if (!isMatched) {
-                Logger.printlnGreen("[${fileType}]       Remove ${attr.value} in ${file.name}")
+                ColoredLogger.printlnGreen("[${fileType}]       Remove ${attr.value} in ${file.name}")
                 iterator.remove()
                 isFileChanged = true
             }

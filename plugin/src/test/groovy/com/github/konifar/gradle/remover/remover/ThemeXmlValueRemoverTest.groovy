@@ -1,10 +1,11 @@
-package com.github.konifar.gradle.remover.tag;
+package com.github.konifar.gradle.remover.remover
 
+import com.github.konifar.gradle.remover.remover.ThemeXmlValueRemover;
 import spock.lang.Specification;
 
-class ThemeXmlTagRemoverTest extends Specification {
+class ThemeXmlValueRemoverTest extends Specification {
 
-    def remover = new ThemeXmlTagRemover()
+    def remover = new ThemeXmlValueRemover()
 
     def "type is theme"() {
         expect:

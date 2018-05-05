@@ -1,6 +1,6 @@
-package com.github.konifar.gradle.remover.tag
+package com.github.konifar.gradle.remover.remover
 
-class StyleXmlTagRemover extends AbstractXmlTagRemover {
+class StyleXmlValueRemover extends AbstractXmlValueRemover {
 
     @Override
     String getFileType() {

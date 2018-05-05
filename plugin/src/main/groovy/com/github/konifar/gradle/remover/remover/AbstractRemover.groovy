@@ -1,4 +1,4 @@
-package com.github.konifar.gradle.remover
+package com.github.konifar.gradle.remover.remover
 
 import org.gradle.api.Project
 

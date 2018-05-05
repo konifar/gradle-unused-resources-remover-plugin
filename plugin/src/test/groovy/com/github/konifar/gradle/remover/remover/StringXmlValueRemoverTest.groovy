@@ -1,10 +1,11 @@
-package com.github.konifar.gradle.remover.tag;
+package com.github.konifar.gradle.remover.remover
 
+import com.github.konifar.gradle.remover.remover.StringXmlValueRemover;
 import spock.lang.Specification;
 
-class StringXmlTagRemoverTest extends Specification {
+class StringXmlValueRemoverTest extends Specification {
 
-    def remover = new StringXmlTagRemover()
+    def remover = new StringXmlValueRemover()
 
     def "type is string"() {
         expect:

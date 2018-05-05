@@ -1,10 +1,11 @@
-package com.github.konifar.gradle.remover.tag;
+package com.github.konifar.gradle.remover.remover
 
+import com.github.konifar.gradle.remover.remover.DimenXmlValueRemover;
 import spock.lang.Specification;
 
-class DimenXmlTagRemoverTest extends Specification {
+class DimenXmlValueRemoverTest extends Specification {
 
-    def remover = new DimenXmlTagRemover()
+    def remover = new DimenXmlValueRemover()
 
     def "type is dimen"() {
         expect:

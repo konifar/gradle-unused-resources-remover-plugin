@@ -1,10 +1,10 @@
-package com.github.konifar.gradle.remover.file
+package com.github.konifar.gradle.remover.remover
 
 import spock.lang.Specification
 
 class ColorFileRemoverTest extends Specification {
 
-    def remover = new ColorFileRemover()
+    def remover = new com.github.konifar.gradle.remover.remover.ColorFileRemover()
 
     def "type is color"() {
         expect:

@@ -1,10 +1,10 @@
-package com.github.konifar.gradle.remover.file
+package com.github.konifar.gradle.remover.remover
 
 import spock.lang.Specification
 
 class AnimatorFileRemoverTest extends Specification {
 
-    def remover = new AnimatorFileRemover()
+    def remover = new com.github.konifar.gradle.remover.remover.AnimatorFileRemover()
 
     def "type is animator"() {
         expect:

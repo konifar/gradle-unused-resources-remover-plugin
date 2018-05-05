@@ -1,10 +1,10 @@
-package com.github.konifar.gradle.remover.file
+package com.github.konifar.gradle.remover.remover
 
 import spock.lang.Specification
 
 class LayoutFileRemoverTest extends Specification {
 
-    def remover = new LayoutFileRemover()
+    def remover = new com.github.konifar.gradle.remover.remover.LayoutFileRemover()
 
     def "type is layout"() {
         expect:
