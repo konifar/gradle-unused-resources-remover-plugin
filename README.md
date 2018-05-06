@@ -4,6 +4,14 @@
 
 Gradle Plugin that removes unused resources in Android projects.
 
+![](art/shell.png)
+
+# Features
+- Easy to remove unused resources by simple gradle command
+- Customize extra/exclude files configuration
+- DataBinding support
+- Multi module support 
+
 # Simple usage
 
 ### build.gradle
