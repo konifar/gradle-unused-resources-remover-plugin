@@ -14,16 +14,16 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "build.gradle" }}
-          - v1-dependencies-
+          keys: jars-{{ checksum "build.gradle" }}
 
-      - run: gradle dependencies
+      - run:
+          name: Download Dependencies
+          command: ./gradlew androidDependencies
 
       - save_cache:
           paths:
             - ~/.gradle
-          key: v1-dependencies-{{ checksum "build.gradle" }}
+          key: jars-{{ checksum "build.gradle" }}
 
       - run:
           name: Run plugin test
