@@ -9,6 +9,7 @@ import org.jdom2.Document
 import org.jdom2.Element
 import org.jdom2.input.SAXBuilder
 import org.jdom2.output.Format
+import org.jdom2.output.LineSeparator
 import org.jdom2.output.XMLOutputter
 
 class XmlValueRemover extends AbstractRemover {
@@ -74,6 +75,7 @@ class XmlValueRemover extends AbstractRemover {
     private static void saveFile(Document doc, File file) {
         new XMLOutputter().with {
             format = Format.getRawFormat()
+            format.setLineSeparator(LineSeparator.NONE)
             format.setOmitEncoding(true)
             format.setOmitDeclaration(true)
             output(doc, new FileWriter(file))
