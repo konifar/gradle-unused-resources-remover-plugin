@@ -12,19 +12,19 @@ class SearchPattern {
         switch (type) {
             case Type.STYLE:
                 // Considered style override
-                def pattern = /(@${resourceName}\/${target}("|<|\(|}))|(R\.${resourceName}\.${toCamelCaseWithUnderscore(target)})|(${target}\.)|(parent="${target}")/
+                def pattern = /(@${resourceName}\/${target}("|<|\(|\)|}))|(R\.${resourceName}\.${toCamelCaseWithUnderscore(target)})|(${target}\.)|(parent="${target}")/
                 return pattern
             case Type.DRAWABLE:
                 // Considered 9patch
                 target -= ".9"
-                def pattern = /(@${resourceName}\/${target}("|<|\(|}))|(R\.${resourceName}\.${target})/
+                def pattern = /(@${resourceName}\/${target}("|<|\(|\)|}))|(R\.${resourceName}\.${target})/
                 return pattern
             case Type.LAYOUT:
                 // Considered data binding
-                def pattern = /(@${resourceName}\/${target}("|<|\(|}))|(R\.${resourceName}\.${target})|(${toCamelCase(target)}Binding)/
+                def pattern = /(@${resourceName}\/${target}("|<|\(|\)|}))|(R\.${resourceName}\.${target})|(${toCamelCase(target)}Binding)/
                 return pattern
             default:
-                def pattern = /(@${resourceName}\/${target}("|<|\(|}))|(R\.${resourceName}\.${target})/
+                def pattern = /(@${resourceName}\/${target}("|<|\(|\)|}))|(R\.${resourceName}\.${target})/
                 return pattern
         }
     }
