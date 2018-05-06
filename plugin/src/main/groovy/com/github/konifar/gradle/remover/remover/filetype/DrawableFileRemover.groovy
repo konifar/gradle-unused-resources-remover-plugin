@@ -1,5 +1,7 @@
 package com.github.konifar.gradle.remover.remover.filetype
 
+import com.github.konifar.gradle.remover.remover.SearchPattern
+
 class DrawableFileRemover extends FileRemover {
 
     DrawableFileRemover() {
@@ -8,8 +10,7 @@ class DrawableFileRemover extends FileRemover {
 
     @Override
     GString createSearchPattern(String fileName) {
-        fileName -= ".9" // Considered 9patch
-        return super.createSearchPattern(fileName)
+        return SearchPattern.create(resourceName, fileName, SearchPattern.Type.DRAWABLE)
     }
 
 }

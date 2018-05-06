@@ -27,8 +27,7 @@ abstract class AbstractRemover {
      * @return pattern string to grep src
      */
     GString createSearchPattern(String target) {
-        def pattern = /(@${resourceName}\/${target}")|(@${resourceName}\/${target}<)|(R\.${resourceName}\.${target})/
-        return pattern
+        return SearchPattern.create(resourceName, target)
     }
 
     def remove(Project project) {

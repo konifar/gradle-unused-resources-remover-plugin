@@ -1,5 +1,7 @@
 package com.github.konifar.gradle.remover.remover.valuetype
 
+import com.github.konifar.gradle.remover.remover.SearchPattern
+
 class ThemeXmlValueRemover extends XmlValueRemover {
 
     ThemeXmlValueRemover() {
@@ -9,14 +11,7 @@ class ThemeXmlValueRemover extends XmlValueRemover {
 
     @Override
     GString createSearchPattern(String attrName) {
-        // Considered style override
-        def pattern = /(@${resourceName}\/${attrName}")|(@${resourceName}\/${attrName}<)|(R\.${resourceName}\.${toCamelCaseWithUnderscore(attrName)})|(${attrName}\.)|(parent="${attrName}")/
-        println pattern
-        return pattern
-    }
-
-    static String toCamelCaseWithUnderscore(String name) {
-        return name.replaceAll("(\\.)([A-Za-z0-9])", { Object[] it -> "_${it[2].toUpperCase()}" })
+        return SearchPattern.create(resourceName, attrName, SearchPattern.Type.STYLE)
     }
 
 }
