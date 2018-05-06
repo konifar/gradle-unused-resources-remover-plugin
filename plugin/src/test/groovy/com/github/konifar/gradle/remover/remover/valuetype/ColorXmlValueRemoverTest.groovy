@@ -26,6 +26,8 @@ class ColorXmlValueRemoverTest extends Specification {
         "R.color.primary"   | true
         "@color/primary\""  | true
         "@color/primary<"   | true
+        "@color/primary:"   | true
+        "@color/primary"    | false
         "R.color.secondary" | false
         "@color/primary2\"" | false
         "@style/primary"    | false
