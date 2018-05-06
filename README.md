@@ -23,7 +23,7 @@ buildscript {
   }
   
   dependencies {
-    classpath "gradle.plugin.com.github.konifar.gradle:plugin:0.1.3"
+    classpath "gradle.plugin.com.github.konifar.gradle:plugin:0.1.4"
   }
 }
 ```
