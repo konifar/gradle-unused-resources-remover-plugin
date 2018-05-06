@@ -1,0 +1,39 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/android:api-26-alpha
+
+    working_directory: ~/repo
+
+    environment:
+      JVM_OPTS: -Xmx3200m
+      GRADLE_OPTS: '-Dorg.gradle.parallel=false -Dorg.gradle.daemon=false'
+      TERM: dumb
+
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "build.gradle" }}
+          - v1-dependencies-
+
+      - run: gradle dependencies
+
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: v1-dependencies-{{ checksum "build.gradle" }}
+
+      - run:
+          name: Run plugin test
+          command: |
+            cd plugin
+            ./../gradlew test
+            cd ../
+
+      - run:
+          name: Run example build
+            cd example
+            ./../gradlew assemble
+            cd ../
