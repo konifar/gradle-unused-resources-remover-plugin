@@ -19,38 +19,47 @@ class UnusedResourcesRemoverPlugin implements Plugin<Project> {
 
             logExtensionInfo(extension)
 
-            // Remove unused files
-            [
-                    new LayoutFileRemover(),
-                    new MenuFileRemover(),
-                    new MipmapFileRemover(),
-                    new DrawableFileRemover(),
-                    new AnimatorFileRemover(),
-                    new AnimFileRemover(),
-                    new ColorFileRemover(),
-            ].forEach {
-                it.remove(project, extension)
-            }
+            try {
 
-            // Remove unused xml values
-            [
-                    new ThemeXmlValueRemover(),
-                    new StyleXmlValueRemover(),
-                    new StringXmlValueRemover(),
-                    new DimenXmlValueRemover(),
-                    new FloatXmlValueRemover(),
-                    new ColorXmlValueRemover(),
-                    new IntegerXmlValueRemover(),
-                    new BoolXmlValueRemover(),
-                    new IdXmlValueRemover(),
-                    // new AttrXmlTagRemover(),
-            ].forEach {
-                it.remove(project, extension)
-            }
+                // Remove unused files
+                [
+                        new LayoutFileRemover(),
+                        new MenuFileRemover(),
+                        new MipmapFileRemover(),
+                        new DrawableFileRemover(),
+                        new AnimatorFileRemover(),
+                        new AnimFileRemover(),
+                        new ColorFileRemover(),
+                ].forEach {
+                    it.remove(project, extension)
+                }
 
-            // Remove files or xml values in extra setting
-            extension.extraRemovers.forEach {
-                it.remove(project, extension)
+                // Remove unused xml values
+                [
+                        new ThemeXmlValueRemover(),
+                        new StyleXmlValueRemover(),
+                        new StringXmlValueRemover(),
+                        new DimenXmlValueRemover(),
+                        new FloatXmlValueRemover(),
+                        new ColorXmlValueRemover(),
+                        new IntegerXmlValueRemover(),
+                        new BoolXmlValueRemover(),
+                        new IdXmlValueRemover(),
+                        // new AttrXmlTagRemover(),
+                ].forEach {
+                    it.remove(project, extension)
+                }
+
+                // Remove files or xml values in extra setting
+                extension.extraRemovers.forEach {
+                    it.remove(project, extension)
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace()
+            } finally {
+                ColoredLogger.println "\nIf you have any problems, please create an issue on GitHub."
+                ColoredLogger.println "https://github.com/konifar/gradle-unused-resources-remover-plugin/issues/new"
             }
 
         }
