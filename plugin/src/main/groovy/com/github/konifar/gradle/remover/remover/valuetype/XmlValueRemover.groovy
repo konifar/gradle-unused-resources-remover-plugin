@@ -1,6 +1,7 @@
 package com.github.konifar.gradle.remover.remover.valuetype
 
 import com.github.konifar.gradle.remover.remover.AbstractRemover
+import com.github.konifar.gradle.remover.remover.SearchPattern
 import com.github.konifar.gradle.remover.remover.util.ColoredLogger
 import com.github.konifar.gradle.remover.remover.util.DirectoryMatcher
 import org.jdom2.Attribute
@@ -18,8 +19,8 @@ class XmlValueRemover extends AbstractRemover {
      */
     final String tagName
 
-    XmlValueRemover(String fileType, String resourceName, String tagName) {
-        super(fileType, resourceName)
+    XmlValueRemover(String fileType, String resourceName, String tagName, SearchPattern.Type type = SearchPattern.Type.DEFAULT) {
+        super(fileType, resourceName, type)
         this.tagName = tagName
     }
 

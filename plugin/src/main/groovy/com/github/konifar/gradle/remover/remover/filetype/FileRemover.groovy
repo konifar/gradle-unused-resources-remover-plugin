@@ -1,13 +1,14 @@
 package com.github.konifar.gradle.remover.remover.filetype
 
 import com.github.konifar.gradle.remover.remover.AbstractRemover
+import com.github.konifar.gradle.remover.remover.SearchPattern
 import com.github.konifar.gradle.remover.remover.util.ColoredLogger
 import com.github.konifar.gradle.remover.remover.util.DirectoryMatcher
 
 class FileRemover extends AbstractRemover {
 
-    FileRemover(String fileType, String resourceName) {
-        super(fileType, resourceName)
+    FileRemover(String fileType, String resourceName, SearchPattern.Type type = SearchPattern.Type.DEFAULT) {
+        super(fileType, resourceName, type)
     }
 
     @Override

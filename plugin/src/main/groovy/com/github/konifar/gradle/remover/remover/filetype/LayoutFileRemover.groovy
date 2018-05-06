@@ -1,21 +1,11 @@
 package com.github.konifar.gradle.remover.remover.filetype
 
+import com.github.konifar.gradle.remover.remover.SearchPattern
+
 class LayoutFileRemover extends FileRemover {
 
     LayoutFileRemover() {
-        super("layout", "layout")
-    }
-
-    @Override
-    GString createSearchPattern(String fileName) {
-        // Considered data binding
-        def pattern = /(@${resourceName}\/${fileName}")|(@${resourceName}\/${fileName}<)|(R\.${resourceName}\.${fileName})|(${toCamelCase(fileName, true)}Binding)/
-        return pattern
-    }
-
-    private static String toCamelCase(String text, boolean capitalized = false) {
-        text = text.replaceAll("(_)([A-Za-z0-9])", { Object[] it -> it[2].toUpperCase() })
-        return capitalized ? text.capitalize() : text
+        super("layout", "layout", SearchPattern.Type.LAYOUT)
     }
 
 }

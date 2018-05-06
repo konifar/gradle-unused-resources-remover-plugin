@@ -15,9 +15,16 @@ abstract class AbstractRemover {
      */
     final String resourceName
 
-    AbstractRemover(String fileType, String resourceName) {
+    /**
+     * Search pattern
+     * ex) theme should specified to Type.STYLE
+     */
+    final SearchPattern.Type type
+
+    AbstractRemover(String fileType, String resourceName, SearchPattern.Type type) {
         this.fileType = fileType
         this.resourceName = resourceName
+        this.type = type
     }
 
     abstract def removeEach(File resDirFile, List<String> moduleSrcDirs)
@@ -27,7 +34,7 @@ abstract class AbstractRemover {
      * @return pattern string to grep src
      */
     GString createSearchPattern(String target) {
-        return SearchPattern.create(resourceName, target)
+        return SearchPattern.create(resourceName, target, type)
     }
 
     def remove(Project project) {

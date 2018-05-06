@@ -5,12 +5,7 @@ import com.github.konifar.gradle.remover.remover.SearchPattern
 class DrawableFileRemover extends FileRemover {
 
     DrawableFileRemover() {
-        super("drawable", "drawable")
-    }
-
-    @Override
-    GString createSearchPattern(String fileName) {
-        return SearchPattern.create(resourceName, fileName, SearchPattern.Type.DRAWABLE)
+        super("drawable", "drawable", SearchPattern.Type.DRAWABLE)
     }
 
 }
