@@ -5,9 +5,6 @@ plugins {
 apply plugin: 'groovy'
 apply plugin: 'maven'
 
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
-
 dependencies {
     implementation gradleApi()
     implementation localGroovy()
@@ -21,7 +18,7 @@ dependencies {
 
 archivesBaseName = 'unused-resources-remover'
 group = 'com.github.konifar.gradle'
-version = '0.1.0'
+version = '0.1.1'
 
 pluginBundle {
     website = 'https://github.com/konifar/gradle-unused-resources-remover-plugin'
