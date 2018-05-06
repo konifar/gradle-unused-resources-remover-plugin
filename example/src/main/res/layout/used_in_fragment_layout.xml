@@ -34,7 +34,8 @@
     <TextView
         theme="@style/UsedThemeInLayout"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:enabled="@bool/used_in_layout_bool" />
 
     <!-- 9 patch test -->
     <ImageView

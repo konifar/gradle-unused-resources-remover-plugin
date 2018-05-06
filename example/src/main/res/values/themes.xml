@@ -1,23 +1,27 @@
 <resources>
 
     <style name="UsedThemeInManifest" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/used_in_style_color</item>
+        <item name="colorPrimaryDark">@color/used_in_style_color</item>
+        <item name="colorAccent">@color/used_in_style_color</item>
     </style>
 
 
     <style name="UsedThemeInLayout">
-        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimary">@color/used_in_style_color</item>
     </style>
 
 
     <style name="UsedThemeInManifestAsParent" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimary">@color/used_in_style_color</item>
     </style>
 
     <style name="UsedThemeInManifestAsParentChild" parent="@style/UsedThemeInManifestAsParent">
-        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimary">@color/used_in_style_color</item>
+    </style>
+
+    <style name="unUsedTheme">
+        <item name="colorPrimary">@color/used_in_style_color</item>
     </style>
 
 </resources>

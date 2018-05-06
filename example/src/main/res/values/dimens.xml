@@ -1,3 +1,9 @@
 <resources>
-    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="used_in_layout_dimen">16dp</dimen>
+
+    <dimen name="used_in_kotlin_dimen">16dp</dimen>
+
+    <dimen name="used_in_style_dimen">16dp</dimen>
+
+    <dimen name="unused_dimen">16dp</dimen>
 </resources>

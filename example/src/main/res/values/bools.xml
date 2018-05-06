@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <bool name="unused_bool">false</bool>
+
+    <bool name="used_in_layout_bool">false</bool>
+
+    <bool name="used_in_kotlin_bool">false</bool>
+
+</resources>
