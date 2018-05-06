@@ -2,6 +2,7 @@ package com.github.konifar.gradle.remover.remover
 
 import com.github.konifar.gradle.remover.remover.util.ColoredLogger
 import org.gradle.api.Project
+import org.gradle.internal.impldep.com.google.common.annotations.VisibleForTesting
 
 abstract class AbstractRemover {
 
@@ -27,17 +28,18 @@ abstract class AbstractRemover {
         this.type = type
     }
 
-    abstract def removeEach(File resDirFile, List<String> moduleSrcDirs)
+    abstract void removeEach(File resDirFile, List<String> moduleSrcDirs)
 
     /**
      * @param target is file name or attribute name
      * @return pattern string to grep src
      */
+    @VisibleForTesting
     GString createSearchPattern(String target) {
         return SearchPattern.create(resourceName, target, type)
     }
 
-    def remove(Project project) {
+    void remove(Project project) {
         ColoredLogger.log "[${fileType}] ======== Start ${fileType} checking ========"
 
         // Check each modules
@@ -56,6 +58,11 @@ abstract class AbstractRemover {
         }
     }
 
+    @VisibleForTesting
+    static boolean isPatternMatched(String fileText, GString pattern) {
+        return fileText =~ pattern
+    }
+
     boolean checkTargetTextMatches(String targetText, List<String> moduleSrcDirs) {
         def pattern = createSearchPattern(targetText)
         def isMatched = false
@@ -67,7 +74,7 @@ abstract class AbstractRemover {
                 srcDirFile.eachDirRecurse { dir ->
                     dir.eachFileMatch(~/(.*\.xml)|(.*\.kt)|(.*\.java)/) { f ->
                         def fileText = f.text.replaceAll('\n', '').replaceAll(' ', '')
-                        if (fileText =~ pattern) {
+                        if (isPatternMatched(fileText, pattern)) {
                             isMatched = true
                             return true
                         }

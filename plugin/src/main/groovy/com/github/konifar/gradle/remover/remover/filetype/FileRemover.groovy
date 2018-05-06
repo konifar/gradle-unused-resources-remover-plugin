@@ -12,7 +12,7 @@ class FileRemover extends AbstractRemover {
     }
 
     @Override
-    def removeEach(File resDirFile, List<String> moduleSrcDirs) {
+    void removeEach(File resDirFile, List<String> moduleSrcDirs) {
         def checkResult = false
         resDirFile.eachDirRecurse { dir ->
             if (DirectoryMatcher.matchLast(dir.path, fileType)) {
@@ -29,7 +29,7 @@ class FileRemover extends AbstractRemover {
         }
     }
 
-    def removeFileIfNeed(File file, List<String> moduleSrcDirs) {
+    boolean removeFileIfNeed(File file, List<String> moduleSrcDirs) {
         boolean isMatched = checkTargetTextMatches(extractFileName(file), moduleSrcDirs)
 
         if (!isMatched) {

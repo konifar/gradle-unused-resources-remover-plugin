@@ -25,7 +25,7 @@ class XmlValueRemover extends AbstractRemover {
     }
 
     @Override
-    def removeEach(File resDirFile, List<String> moduleSrcDirs) {
+    void removeEach(File resDirFile, List<String> moduleSrcDirs) {
         resDirFile.eachDirRecurse { dir ->
             if (DirectoryMatcher.matchLast(dir.path, "values")) {
                 dir.eachFileMatch(~/${fileType}.*/) { f ->
@@ -35,7 +35,7 @@ class XmlValueRemover extends AbstractRemover {
         }
     }
 
-    def removeTagIfNeed(File file, List<String> moduleSrcDirs) {
+    void removeTagIfNeed(File file, List<String> moduleSrcDirs) {
         def isFileChanged = false
 
         Document doc = new SAXBuilder().build(file)
@@ -63,7 +63,7 @@ class XmlValueRemover extends AbstractRemover {
         }
     }
 
-    private static def saveFile(Document doc, File file) {
+    private static void saveFile(Document doc, File file) {
         new XMLOutputter().with {
             format = Format.getRawFormat()
             format.setLineSeparator(LineSeparator.NONE)
@@ -74,7 +74,7 @@ class XmlValueRemover extends AbstractRemover {
         }
     }
 
-    private def removeFileIfNeed(File file) {
+    private void removeFileIfNeed(File file) {
         Document doc = new SAXBuilder().build(file)
         if (doc.getRootElement().getChildren(tagName).size() == 0) {
             ColoredLogger.logGreen "[${fileType}]   Remove ${file.name}."
