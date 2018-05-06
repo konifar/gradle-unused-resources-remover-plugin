@@ -33,10 +33,11 @@
         android:text="@string/used_untranslatable_in_layout" />
 
     <TextView
-        theme="@style/UsedThemeInLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:enabled="@bool/used_in_layout_bool" />
+        android:enabled="@bool/used_in_layout_bool"
+        android:fontFamily="@string/used_in_layout_font"
+        android:theme="@style/UsedThemeInLayout" />
 
     <!-- 9 patch test -->
     <ImageView

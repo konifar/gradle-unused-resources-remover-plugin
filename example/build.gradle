@@ -27,11 +27,11 @@ android {
 
 unusedResourcesRemover {
     extraRemovers = [
-            createFileRemover("font", "string"),
+            createXmlValueRemover("font", "string", "string"),
             createXmlValueRemover("text_appearance", "style", "style", "style")
     ]
     excludeNames = [
-            "strings.xml"
+            "fonts.xml"
     ]
     dryRun = true
 }
