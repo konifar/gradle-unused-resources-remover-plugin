@@ -32,9 +32,9 @@ jobs:
             ./../gradlew test
             cd ../
 
-      - run:
-          name: Run example build
-          command: |
-            cd example
-            ./../gradlew assemble
-            cd ../
+#      - run:
+#          name: Run example build
+#          command: |
+#            cd example
+#            ./../gradlew assemble
+#            cd ../
