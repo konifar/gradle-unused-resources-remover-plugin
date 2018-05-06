@@ -26,13 +26,13 @@ version = '0.1.0'
 pluginBundle {
     website = 'https://github.com/konifar/gradle-unused-resources-remover-plugin'
     vcsUrl = 'https://github.com/konifar/gradle-unused-resources-remover-plugin'
-    description = 'Gradle plugin to remove Android unused resources'
+    description = 'Gradle Plugin that removes unused resources in Android project'
     tags = ['android']
 
     plugins {
         locateApkPlugin {
             id = 'com.github.konifar.gradle.unused-resources-remover'
-            displayName = 'Android Unused Resources AbstractRemover Plugin'
+            displayName = 'Android Unused Resources Remover Plugin'
         }
     }
 }

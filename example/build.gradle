@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-//apply plugin: 'com.github.konifar.gradle.unused-resources-remover'
+apply plugin: 'com.github.konifar.gradle.unused-resources-remover'
 
 android {
     compileSdkVersion 27
@@ -25,15 +25,16 @@ android {
     }
 }
 
-//unusedResourcesRemover {
-//    extraRemovers = [
-//            createXmlValueRemover("font", "string", "string"),
-//            createXmlValueRemover("text_appearance", "style", "style", "style")
-//    ]
-//    excludeNames = [
-//            "fonts.xml"
-//    ]
-//}
+unusedResourcesRemover {
+    extraRemovers = [
+            createXmlValueRemover("font", "string", "string"),
+            createXmlValueRemover("text_appearance", "style", "style", "style")
+    ]
+    excludeNames = [
+            "fonts.xml"
+    ]
+    // dryRun = true
+}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])

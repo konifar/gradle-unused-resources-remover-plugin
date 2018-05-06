@@ -1,14 +1,15 @@
 buildscript {
-    ext.kotlin_version = '1.2.40'
+    ext.kotlin_version = '1.2.41'
     repositories {
         google()
         jcenter()
         mavenLocal()
+        maven { url "https://plugins.gradle.org/m2/" }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.1.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        // classpath 'com.github.konifar.gradle:unused-resources-remover:0.1.0'
+        classpath 'com.github.konifar.gradle:unused-resources-remover:0.1.0'
     }
 }
 
@@ -17,6 +18,7 @@ allprojects {
         google()
         jcenter()
         mavenLocal()
+        maven { url "https://plugins.gradle.org/m2/" }
     }
 }
 
