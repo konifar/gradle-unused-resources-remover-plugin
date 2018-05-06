@@ -11,13 +11,16 @@ import org.jdom2.output.Format
 import org.jdom2.output.LineSeparator
 import org.jdom2.output.XMLOutputter
 
-abstract class AbstractXmlValueRemover extends AbstractRemover {
+class XmlValueRemover extends AbstractRemover {
 
     /**
      * Tag name to extract value from xml like <`dimen` name="width">, <`string` name="app_name">
      */
-    String getTagName() {
-        return super.resourceName
+    final String tagName
+
+    XmlValueRemover(String fileType, String resourceName, String tagName) {
+        super(fileType, resourceName)
+        this.tagName = tagName
     }
 
     @Override

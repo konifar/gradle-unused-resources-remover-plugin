@@ -1,10 +1,9 @@
 package com.github.konifar.gradle.remover.remover.valuetype
 
-class IntegerXmlValueRemover extends AbstractXmlValueRemover {
+class IntegerXmlValueRemover extends XmlValueRemover {
 
-    @Override
-    String getFileType() {
-        return "integer"
+    IntegerXmlValueRemover() {
+        super("integer", "integer", "integer")
     }
 
 }

@@ -1,10 +1,9 @@
 package com.github.konifar.gradle.remover.remover.valuetype
 
-class DimenXmlValueRemover extends AbstractXmlValueRemover {
+class DimenXmlValueRemover extends XmlValueRemover {
 
-    @Override
-    String getFileType() {
-        return "dimen"
+    DimenXmlValueRemover() {
+        super("dimen", "dimen", "dimen")
     }
 
 }

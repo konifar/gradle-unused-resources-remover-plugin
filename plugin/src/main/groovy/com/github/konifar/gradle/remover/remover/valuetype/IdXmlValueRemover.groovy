@@ -1,14 +1,9 @@
 package com.github.konifar.gradle.remover.remover.valuetype
 
-class IdXmlValueRemover extends AbstractXmlValueRemover {
+class IdXmlValueRemover extends XmlValueRemover {
 
-    @Override
-    String getFileType() {
-        return "id"
+    IdXmlValueRemover() {
+        super("id", "id", "item")
     }
 
-    @Override
-    String getTagName() {
-        return "item"
-    }
 }

@@ -1,10 +1,9 @@
 package com.github.konifar.gradle.remover.remover.filetype
 
-class LayoutFileRemover extends AbstractFileRemover {
+class LayoutFileRemover extends FileRemover {
 
-    @Override
-    String getFileType() {
-        return "layout"
+    LayoutFileRemover() {
+        super("layout", "layout")
     }
 
     @Override

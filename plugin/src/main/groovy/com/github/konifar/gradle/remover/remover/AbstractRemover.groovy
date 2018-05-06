@@ -8,13 +8,16 @@ abstract class AbstractRemover {
     /**
      * directory/file name to find files like drawable, dimen, string
      */
-    abstract String getFileType()
+    final String fileType
 
     /**
      * Resource name to check its existence like @`string`/app_name, $.`string`/app_name
      */
-    String getResourceName() {
-        return fileType
+    final String resourceName
+
+    AbstractRemover(String fileType, String resourceName) {
+        this.fileType = fileType
+        this.resourceName = resourceName
     }
 
     abstract def removeEach(File resDirFile, List<String> moduleSrcDirs)

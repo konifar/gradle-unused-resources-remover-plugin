@@ -1,19 +1,9 @@
 package com.github.konifar.gradle.remover.remover.valuetype
 
-class FloatXmlValueRemover extends AbstractXmlValueRemover {
+class FloatXmlValueRemover extends XmlValueRemover {
 
-    @Override
-    String getFileType() {
-        return "float"
+    FloatXmlValueRemover() {
+        super("float", "dimen", "item")
     }
 
-    @Override
-    String getResourceName() {
-        return "dimen"
-    }
-
-    @Override
-    String getTagName() {
-        return "item"
-    }
 }

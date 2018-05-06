@@ -1,10 +1,9 @@
 package com.github.konifar.gradle.remover.remover.valuetype
 
-class StringXmlValueRemover extends AbstractXmlValueRemover {
+class StringXmlValueRemover extends XmlValueRemover {
 
-    @Override
-    String getFileType() {
-        return "string"
+    StringXmlValueRemover() {
+        super("string", "string", "string")
     }
 
 }

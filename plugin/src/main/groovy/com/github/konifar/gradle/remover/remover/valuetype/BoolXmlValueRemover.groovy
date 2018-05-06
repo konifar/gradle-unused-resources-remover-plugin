@@ -1,10 +1,9 @@
 package com.github.konifar.gradle.remover.remover.valuetype
 
-class BoolXmlValueRemover extends AbstractXmlValueRemover {
+class BoolXmlValueRemover extends XmlValueRemover {
 
-    @Override
-    String getFileType() {
-        return "bool"
+    BoolXmlValueRemover() {
+        super("bool", "bool", "bool")
     }
 
 }

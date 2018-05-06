@@ -1,16 +1,16 @@
 package com.github.konifar.gradle.remover.remover.valuetype
 
-class StyleXmlValueRemover extends AbstractXmlValueRemover {
+class StyleXmlValueRemover extends XmlValueRemover {
 
-    @Override
-    String getFileType() {
-        return "style"
+    StyleXmlValueRemover() {
+        super("style", "style", "style")
     }
 
     @Override
     GString createSearchPattern(String attrName) {
         // Considered style override
         def pattern = /(@${resourceName}\/${attrName}")|(@${resourceName}\/${attrName}<)|(R\.${resourceName}\.${toCamelCaseWithUnderscore(attrName)})|(${attrName}\.)|(parent="${attrName}")/
+        println pattern
         return pattern
     }
 

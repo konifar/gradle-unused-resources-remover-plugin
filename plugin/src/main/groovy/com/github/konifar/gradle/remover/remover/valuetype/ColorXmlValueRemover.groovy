@@ -1,10 +1,9 @@
 package com.github.konifar.gradle.remover.remover.valuetype
 
-class ColorXmlValueRemover extends AbstractXmlValueRemover {
+class ColorXmlValueRemover extends XmlValueRemover {
 
-    @Override
-    String getFileType() {
-        return "color"
+    ColorXmlValueRemover() {
+        super("color", "color", "color")
     }
 
 }

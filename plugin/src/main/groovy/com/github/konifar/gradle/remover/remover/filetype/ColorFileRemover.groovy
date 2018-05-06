@@ -1,10 +1,9 @@
 package com.github.konifar.gradle.remover.remover.filetype
 
-class ColorFileRemover extends AbstractFileRemover {
+class ColorFileRemover extends FileRemover {
 
-    @Override
-    String getFileType() {
-        return "color"
+    ColorFileRemover() {
+        super("color", "color")
     }
 
 }

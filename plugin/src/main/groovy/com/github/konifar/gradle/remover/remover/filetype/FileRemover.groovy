@@ -4,7 +4,11 @@ import com.github.konifar.gradle.remover.remover.AbstractRemover
 import com.github.konifar.gradle.remover.remover.util.ColoredLogger
 import com.github.konifar.gradle.remover.remover.util.DirectoryMatcher
 
-abstract class AbstractFileRemover extends AbstractRemover {
+class FileRemover extends AbstractRemover {
+
+    FileRemover(String fileType, String resourceName) {
+        super(fileType, resourceName)
+    }
 
     @Override
     def removeEach(File resDirFile, List<String> moduleSrcDirs) {
