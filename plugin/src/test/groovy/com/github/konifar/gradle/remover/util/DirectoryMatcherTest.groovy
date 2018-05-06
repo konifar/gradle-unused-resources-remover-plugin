@@ -1,4 +1,4 @@
-package com.github.konifar.gradle.remover.remover.util
+package com.github.konifar.gradle.remover.util
 
 import spock.lang.Specification
 
@@ -6,7 +6,7 @@ class DirectoryMatcherTest extends Specification {
 
     def "match type with the last part of dir name"() {
         expect:
-        com.github.konifar.gradle.remover.util.DirectoryMatcher.matchLast(dirName, type) == expected
+        DirectoryMatcher.matchLast(dirName, type) == expected
 
         where:
         type       | dirName               | expected
