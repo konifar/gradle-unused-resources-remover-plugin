@@ -1,6 +1,6 @@
 package com.github.konifar.gradle.remover.remover.filetype
 
-class MenuFileRemover extends com.github.konifar.gradle.remover.remover.filetype.AbstractFileRemover {
+class MenuFileRemover extends AbstractFileRemover {
 
     @Override
     String getFileType() {

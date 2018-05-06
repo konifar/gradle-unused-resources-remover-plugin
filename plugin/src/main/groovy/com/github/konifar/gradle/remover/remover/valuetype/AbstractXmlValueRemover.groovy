@@ -13,6 +13,9 @@ import org.jdom2.output.XMLOutputter
 
 abstract class AbstractXmlValueRemover extends AbstractRemover {
 
+    /**
+     * Tag name to extract value from xml like <`dimen` name="width">, <`string` name="app_name">
+     */
     String getTagName() {
         return super.resourceName
     }

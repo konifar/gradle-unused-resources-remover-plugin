@@ -5,13 +5,19 @@ import org.gradle.api.Project
 
 abstract class AbstractRemover {
 
+    /**
+     * directory/file name to find files like drawable, dimen, string
+     */
     abstract String getFileType()
 
-    abstract def removeEach(File resDirFile, List<String> moduleSrcDirs)
-
+    /**
+     * Resource name to check its existence like @`string`/app_name, $.`string`/app_name
+     */
     String getResourceName() {
-        return getFileType()
+        return fileType
     }
+
+    abstract def removeEach(File resDirFile, List<String> moduleSrcDirs)
 
     /**
      * @param target is file name or attribute name

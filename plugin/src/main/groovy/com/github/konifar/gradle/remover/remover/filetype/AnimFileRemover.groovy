@@ -1,6 +1,6 @@
 package com.github.konifar.gradle.remover.remover.filetype
 
-class AnimFileRemover extends com.github.konifar.gradle.remover.remover.filetype.AbstractFileRemover {
+class AnimFileRemover extends AbstractFileRemover {
 
     @Override
     String getFileType() {
