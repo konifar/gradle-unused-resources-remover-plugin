@@ -29,6 +29,7 @@ class StringXmlValueRemoverTest extends Specification {
         "@string/app_name("   | true
         "@string/app_name)"   | true
         "@string/app_name}"   | true
+        "@string/app_name:"   | true
         "@string/app_name "   | true
         "@string/app_name\n"  | true
         "@string/app_name"    | false
