@@ -1,5 +1,3 @@
-import com.github.konifar.gradle.remover.remover.SearchPattern
-
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
@@ -30,7 +28,7 @@ android {
 unusedResourcesRemover {
     extraRemovers = [
             createFileRemover("font", "string"),
-            createXmlValueRemover("text_appearance", "style", "style", SearchPattern.Type.STYLE)
+            createXmlValueRemover("text_appearance", "style", "style", "style")
     ]
     excludeNames = [
             "strings.xml"

@@ -13,12 +13,12 @@ class UnusedResourcesRemoverExtension {
 
     boolean dryRun = false
 
-    AbstractRemover createFileRemover(String fileType, String resourceName, SearchPattern.Type type = SearchPattern.Type.DEFAULT) {
-        return new FileRemover(fileType, resourceName, type)
+    AbstractRemover createFileRemover(String fileType, String resourceName, String type = null) {
+        return new FileRemover(fileType, resourceName, SearchPattern.Type.from(type))
     }
 
-    AbstractRemover createXmlValueRemover(String fileType, String resourceName, String tagName, SearchPattern.Type type = SearchPattern.Type.DEFAULT) {
-        return new XmlValueRemover(fileType, resourceName, tagName, type)
+    AbstractRemover createXmlValueRemover(String fileType, String resourceName, String tagName, String type = null) {
+        return new XmlValueRemover(fileType, resourceName, tagName, SearchPattern.Type.from(type))
     }
 
 }

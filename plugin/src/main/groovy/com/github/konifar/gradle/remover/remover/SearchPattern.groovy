@@ -43,6 +43,19 @@ class SearchPattern {
         DRAWABLE,
         LAYOUT,
         DEFAULT
+
+        static Type from(String type) {
+            switch (type) {
+                case "style":
+                    return STYLE
+                case "drawable":
+                    return DRAWABLE
+                case "layout":
+                    return LAYOUT
+                default:
+                    return DEFAULT
+            }
+        }
     }
 
 }
