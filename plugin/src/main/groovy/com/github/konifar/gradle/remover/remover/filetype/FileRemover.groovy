@@ -2,8 +2,8 @@ package com.github.konifar.gradle.remover.remover.filetype
 
 import com.github.konifar.gradle.remover.remover.AbstractRemover
 import com.github.konifar.gradle.remover.remover.SearchPattern
-import com.github.konifar.gradle.remover.remover.util.ColoredLogger
-import com.github.konifar.gradle.remover.remover.util.DirectoryMatcher
+import com.github.konifar.gradle.remover.util.ColoredLogger
+import com.github.konifar.gradle.remover.util.DirectoryMatcher
 
 class FileRemover extends AbstractRemover {
 
@@ -12,12 +12,12 @@ class FileRemover extends AbstractRemover {
     }
 
     @Override
-    void removeEach(File resDirFile, List<String> moduleSrcDirs) {
+    void removeEach(File resDirFile) {
         def checkResult = false
         resDirFile.eachDirRecurse { dir ->
             if (DirectoryMatcher.matchLast(dir.path, fileType)) {
                 dir.eachFile { f ->
-                    checkResult |= removeFileIfNeed(f, moduleSrcDirs)
+                    checkResult |= removeFileIfNeed(f)
                 }
             }
         }
@@ -29,12 +29,14 @@ class FileRemover extends AbstractRemover {
         }
     }
 
-    boolean removeFileIfNeed(File file, List<String> moduleSrcDirs) {
-        boolean isMatched = checkTargetTextMatches(extractFileName(file), moduleSrcDirs)
+    boolean removeFileIfNeed(File file) {
+        boolean isMatched = checkTargetTextMatches(extractFileName(file))
 
         if (!isMatched) {
             ColoredLogger.logGreen("[${fileType}]   Remove ${file.name}")
-            file.delete()
+            if (!dryRun) {
+                file.delete()
+            }
             return true
         } else {
             return false

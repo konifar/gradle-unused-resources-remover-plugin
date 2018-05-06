@@ -9,7 +9,9 @@ class UnusedResourcesRemoverExtension {
 
     List<AbstractRemover> extraRemovers = []
 
-    List<String> excludeFileNames = []
+    List<String> excludeNames = []
+
+    boolean dryRun = false
 
     AbstractRemover createFileRemover(String fileType, String resourceName, SearchPattern.Type type = SearchPattern.Type.DEFAULT) {
         return new FileRemover(fileType, resourceName, type)

@@ -1,4 +1,4 @@
-package com.github.konifar.gradle.remover.remover.util
+package com.github.konifar.gradle.remover.util
 
 class DirectoryMatcher {
 

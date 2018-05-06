@@ -6,7 +6,7 @@ class DirectoryMatcherTest extends Specification {
 
     def "match type with the last part of dir name"() {
         expect:
-        DirectoryMatcher.matchLast(dirName, type) == expected
+        com.github.konifar.gradle.remover.util.DirectoryMatcher.matchLast(dirName, type) == expected
 
         where:
         type       | dirName               | expected

@@ -2,8 +2,8 @@ package com.github.konifar.gradle.remover.remover.valuetype
 
 import com.github.konifar.gradle.remover.remover.AbstractRemover
 import com.github.konifar.gradle.remover.remover.SearchPattern
-import com.github.konifar.gradle.remover.remover.util.ColoredLogger
-import com.github.konifar.gradle.remover.remover.util.DirectoryMatcher
+import com.github.konifar.gradle.remover.util.ColoredLogger
+import com.github.konifar.gradle.remover.util.DirectoryMatcher
 import org.jdom2.Attribute
 import org.jdom2.Document
 import org.jdom2.Element
@@ -25,17 +25,17 @@ class XmlValueRemover extends AbstractRemover {
     }
 
     @Override
-    void removeEach(File resDirFile, List<String> moduleSrcDirs) {
+    void removeEach(File resDirFile) {
         resDirFile.eachDirRecurse { dir ->
             if (DirectoryMatcher.matchLast(dir.path, "values")) {
                 dir.eachFileMatch(~/${fileType}.*/) { f ->
-                    removeTagIfNeed(f, moduleSrcDirs)
+                    removeTagIfNeed(f)
                 }
             }
         }
     }
 
-    void removeTagIfNeed(File file, List<String> moduleSrcDirs) {
+    void removeTagIfNeed(File file) {
         def isFileChanged = false
 
         Document doc = new SAXBuilder().build(file)
@@ -45,11 +45,13 @@ class XmlValueRemover extends AbstractRemover {
             Attribute attr = iterator.next().getAttribute("name")
 
             if (attr != null) {
-                def isMatched = checkTargetTextMatches(attr.value, moduleSrcDirs)
+                def isMatched = checkTargetTextMatches(attr.value)
 
                 if (!isMatched) {
                     ColoredLogger.logGreen("[${fileType}]   Remove ${attr.value} in ${file.name}")
-                    iterator.remove()
+                    if (!dryRun) {
+                        iterator.remove()
+                    }
                     isFileChanged = true
                 }
             }
@@ -57,7 +59,9 @@ class XmlValueRemover extends AbstractRemover {
 
         if (isFileChanged) {
             saveFile(doc, file)
-            removeFileIfNeed(file)
+            if (!dryRun) {
+                removeFileIfNeed(file)
+            }
         } else {
             ColoredLogger.log "[${fileType}]   No unused tags in ${file.name}"
         }
