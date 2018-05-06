@@ -22,14 +22,15 @@ class ColorXmlValueRemoverTest extends Specification {
         XmlValueRemover.isPatternMatched(fileText, pattern) == expected
 
         where:
-        fileText            | expected
-        "R.color.primary"   | true
-        "@color/primary\""  | true
-        "@color/primary<"   | true
-        "@color/primary:"   | true
-        "@color/primary"    | false
-        "R.color.secondary" | false
-        "@color/primary2\"" | false
-        "@style/primary"    | false
+        fileText                    | expected
+        "R.color.primary"           | true
+        "@color/primary\""          | true
+        "@color/primary<"           | true
+        "@color/primary:"           | true
+        "@color/primary"            | false
+        "@colorStateList/primary\"" | true
+        "R.color.secondary"         | false
+        "@color/primary2\""         | false
+        "@style/primary"            | false
     }
 }
