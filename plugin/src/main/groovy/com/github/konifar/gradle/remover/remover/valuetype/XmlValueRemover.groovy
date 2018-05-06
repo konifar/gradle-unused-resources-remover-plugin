@@ -58,8 +58,13 @@ class XmlValueRemover extends AbstractRemover {
         }
 
         if (isFileChanged) {
-            saveFile(doc, file)
+            if (isMatchedExcludeNames(file.path)) {
+                ColoredLogger.logYellow "[${fileType}]   Ignore to remove values in ${file.name}"
+                return
+            }
+
             if (!dryRun) {
+                saveFile(doc, file)
                 removeFileIfNeed(file)
             }
         } else {

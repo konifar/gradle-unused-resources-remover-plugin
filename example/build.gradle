@@ -1,3 +1,5 @@
+import com.github.konifar.gradle.remover.remover.SearchPattern
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
@@ -23,6 +25,17 @@ android {
     dataBinding {
         enabled true
     }
+}
+
+unusedResourcesRemover {
+    extraRemovers = [
+            createFileRemover("font", "string"),
+            createXmlValueRemover("text_appearance", "style", "style", SearchPattern.Type.STYLE)
+    ]
+    excludeNames = [
+            "strings.xml"
+    ]
+    dryRun = true
 }
 
 dependencies {

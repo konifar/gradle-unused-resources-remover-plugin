@@ -84,10 +84,6 @@ abstract class AbstractRemover {
             if (srcDirFile.exists()) {
                 srcDirFile.eachDirRecurse { dir ->
                     dir.eachFileMatch(~/(.*\.xml)|(.*\.kt)|(.*\.java)/) { f ->
-                        if (isMatchedExcludeNames(f.path)) {
-                            ColoredLogger.logYellow "[${fileType}]   Ignore checking ${f.name}"
-                            return true
-                        }
                         def fileText = f.text.replaceAll('\n', '').replaceAll(' ', '')
                         if (isPatternMatched(fileText, pattern)) {
                             isMatched = true
