@@ -1,6 +1,0 @@
-apply plugin: 'com.android.instantapp'
-
-dependencies {
-    implementation project(':example-module')
-    implementation project(':example-module')
-}
