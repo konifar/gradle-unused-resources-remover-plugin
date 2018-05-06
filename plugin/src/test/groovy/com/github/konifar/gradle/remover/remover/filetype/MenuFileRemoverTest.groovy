@@ -5,7 +5,7 @@ import spock.lang.Specification
 
 class MenuFileRemoverTest extends Specification {
 
-    FileRemover remover = new MenuFileRemover()
+    private FileRemover remover = new MenuFileRemover()
 
     def "type is valid"() {
         expect:
@@ -14,7 +14,7 @@ class MenuFileRemoverTest extends Specification {
         remover.type == SearchPattern.Type.DEFAULT
     }
 
-    def "matches pattern"() {
+    def "pattern matches"() {
         GString pattern = remover.createSearchPattern("menu_main")
 
         expect:

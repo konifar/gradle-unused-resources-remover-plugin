@@ -1,25 +1,25 @@
 package com.github.konifar.gradle.remover.remover.valuetype
 
+import com.github.konifar.gradle.remover.remover.SearchPattern
 import spock.lang.Specification
 
 class DimenXmlValueRemoverTest extends Specification {
 
-    def remover = new DimenXmlValueRemover()
+    private XmlValueRemover remover = new DimenXmlValueRemover()
 
-    def "type is dimen"() {
+    def "type is valid"() {
         expect:
         remover.fileType == "dimen"
+        remover.resourceName == "dimen"
+        remover.tagName == "dimen"
+        remover.type == SearchPattern.Type.DEFAULT
     }
 
     def "pattern matches"() {
-        def pattern = remover.createSearchPattern("text_medium")
-        def isMatched = false
-        if (fileText =~ pattern) {
-            isMatched = true
-        }
+        GString pattern = remover.createSearchPattern("text_medium")
 
         expect:
-        isMatched == expected
+        XmlValueRemover.isPatternMatched(fileText, pattern) == expected
 
         where:
         fileText                | expected

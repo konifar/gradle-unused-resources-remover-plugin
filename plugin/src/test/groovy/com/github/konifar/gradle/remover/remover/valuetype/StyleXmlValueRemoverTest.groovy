@@ -1,25 +1,25 @@
 package com.github.konifar.gradle.remover.remover.valuetype
 
+import com.github.konifar.gradle.remover.remover.SearchPattern
 import spock.lang.Specification
 
 class StyleXmlValueRemoverTest extends Specification {
 
-    def remover = new StyleXmlValueRemover()
+    private XmlValueRemover remover = new StyleXmlValueRemover()
 
-    def "type is style"() {
+    def "type is valid"() {
         expect:
         remover.fileType == "style"
+        remover.resourceName == "style"
+        remover.tagName == "style"
+        remover.type == SearchPattern.Type.STYLE
     }
 
     def "pattern matches"() {
-        def pattern = remover.createSearchPattern("TitleTextAppearance")
-        def isMatched = false
-        if (fileText =~ pattern) {
-            isMatched = true
-        }
+        GString pattern = remover.createSearchPattern("TitleTextAppearance")
 
         expect:
-        isMatched == expected
+        XmlValueRemover.isPatternMatched(fileText, pattern) == expected
 
         where:
         fileText                         | expected

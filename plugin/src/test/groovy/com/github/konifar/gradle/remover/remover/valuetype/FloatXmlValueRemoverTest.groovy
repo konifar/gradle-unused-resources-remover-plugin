@@ -1,35 +1,25 @@
 package com.github.konifar.gradle.remover.remover.valuetype
 
+import com.github.konifar.gradle.remover.remover.SearchPattern
 import spock.lang.Specification
 
 class FloatXmlValueRemoverTest extends Specification {
 
-    def remover = new FloatXmlValueRemover()
+    private XmlValueRemover remover = new FloatXmlValueRemover()
 
-    def "type is float"() {
+    def "type is valid"() {
         expect:
         remover.fileType == "float"
-    }
-
-    def "resource name is item"() {
-        expect:
         remover.resourceName == "dimen"
-    }
-
-    def "tag name is item"() {
-        expect:
         remover.tagName == "item"
+        remover.type == SearchPattern.Type.DEFAULT
     }
 
     def "pattern matches"() {
-        def pattern = remover.createSearchPattern("size_ratio")
-        def isMatched = false
-        if (fileText =~ pattern) {
-            isMatched = true
-        }
+        GString pattern = remover.createSearchPattern("size_ratio")
 
         expect:
-        isMatched == expected
+        XmlValueRemover.isPatternMatched(fileText, pattern) == expected
 
         where:
         fileText               | expected

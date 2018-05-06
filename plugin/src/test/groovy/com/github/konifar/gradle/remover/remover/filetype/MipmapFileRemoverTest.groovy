@@ -5,7 +5,7 @@ import spock.lang.Specification
 
 class MipmapFileRemoverTest extends Specification {
 
-    FileRemover remover = new MipmapFileRemover()
+    private FileRemover remover = new MipmapFileRemover()
 
     def "type is valid"() {
         expect:
@@ -14,7 +14,7 @@ class MipmapFileRemoverTest extends Specification {
         remover.type == SearchPattern.Type.DRAWABLE
     }
 
-    def "matches pattern"() {
+    def "pattern matches"() {
         GString pattern = remover.createSearchPattern("ic_launcher")
 
         expect:

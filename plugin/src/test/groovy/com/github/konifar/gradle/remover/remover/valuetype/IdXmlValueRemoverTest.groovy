@@ -1,30 +1,25 @@
 package com.github.konifar.gradle.remover.remover.valuetype
 
+import com.github.konifar.gradle.remover.remover.SearchPattern
 import spock.lang.Specification
 
 class IdXmlValueRemoverTest extends Specification {
 
-    def remover = new IdXmlValueRemover()
+    private XmlValueRemover remover = new IdXmlValueRemover()
 
-    def "type is id"() {
+    def "type is valid"() {
         expect:
         remover.fileType == "id"
-    }
-
-    def "tag name is item"() {
-        expect:
+        remover.resourceName == "id"
         remover.tagName == "item"
+        remover.type == SearchPattern.Type.DEFAULT
     }
 
     def "pattern matches"() {
-        def pattern = remover.createSearchPattern("view_id")
-        def isMatched = false
-        if (fileText =~ pattern) {
-            isMatched = true
-        }
+        GString pattern = remover.createSearchPattern("view_id")
 
         expect:
-        isMatched == expected
+        XmlValueRemover.isPatternMatched(fileText, pattern) == expected
 
         where:
         fileText         | expected

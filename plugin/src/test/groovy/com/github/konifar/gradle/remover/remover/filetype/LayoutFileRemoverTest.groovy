@@ -5,7 +5,7 @@ import spock.lang.Specification
 
 class LayoutFileRemoverTest extends Specification {
 
-    FileRemover remover = new LayoutFileRemover()
+    private FileRemover remover = new LayoutFileRemover()
 
     def "type is valid"() {
         expect:
@@ -14,7 +14,7 @@ class LayoutFileRemoverTest extends Specification {
         remover.type == SearchPattern.Type.LAYOUT
     }
 
-    def "matches pattern"() {
+    def "pattern matches"() {
         GString pattern = remover.createSearchPattern("activity_main")
 
         expect:

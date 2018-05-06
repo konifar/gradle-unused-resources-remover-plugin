@@ -5,7 +5,7 @@ import spock.lang.Specification
 
 class ColorFileRemoverTest extends Specification {
 
-    FileRemover remover = new ColorFileRemover()
+    private FileRemover remover = new ColorFileRemover()
 
     def "type is valid"() {
         expect:
@@ -14,7 +14,7 @@ class ColorFileRemoverTest extends Specification {
         remover.type == SearchPattern.Type.DEFAULT
     }
 
-    def "matches pattern"() {
+    def "pattern matches"() {
         GString pattern = remover.createSearchPattern("primary")
 
         expect:

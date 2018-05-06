@@ -1,25 +1,25 @@
 package com.github.konifar.gradle.remover.remover.valuetype
 
+import com.github.konifar.gradle.remover.remover.SearchPattern
 import spock.lang.Specification
 
 class IntegerXmlValueRemoverTest extends Specification {
 
-    def remover = new IntegerXmlValueRemover()
+    private XmlValueRemover remover = new IntegerXmlValueRemover()
 
-    def "type is integer"() {
+    def "type is valid"() {
         expect:
         remover.fileType == "integer"
+        remover.resourceName == "integer"
+        remover.tagName == "integer"
+        remover.type == SearchPattern.Type.DEFAULT
     }
 
     def "pattern matches"() {
-        def pattern = remover.createSearchPattern("max_length")
-        def isMatched = false
-        if (fileText =~ pattern) {
-            isMatched = true
-        }
+        GString pattern = remover.createSearchPattern("max_length")
 
         expect:
-        isMatched == expected
+        XmlValueRemover.isPatternMatched(fileText, pattern) == expected
 
         where:
         fileText                 | expected

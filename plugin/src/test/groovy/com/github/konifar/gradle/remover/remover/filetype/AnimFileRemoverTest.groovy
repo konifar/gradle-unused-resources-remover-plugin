@@ -5,7 +5,7 @@ import spock.lang.Specification
 
 class AnimFileRemoverTest extends Specification {
 
-    FileRemover remover = new AnimFileRemover()
+    private FileRemover remover = new AnimFileRemover()
 
     def "type is valid"() {
         expect:
@@ -14,7 +14,7 @@ class AnimFileRemoverTest extends Specification {
         remover.type == SearchPattern.Type.DEFAULT
     }
 
-    def "matches pattern"() {
+    def "pattern matches"() {
         GString pattern = remover.createSearchPattern("fade_transition")
 
         expect:

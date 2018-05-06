@@ -5,7 +5,7 @@ import spock.lang.Specification
 
 class DrawableFileRemoverTest extends Specification {
 
-    FileRemover remover = new DrawableFileRemover()
+    private FileRemover remover = new DrawableFileRemover()
 
     def "type is valid"() {
         expect:
@@ -14,7 +14,7 @@ class DrawableFileRemoverTest extends Specification {
         remover.type == SearchPattern.Type.DRAWABLE
     }
 
-    def "matches pattern"() {
+    def "pattern matches"() {
         GString pattern = remover.createSearchPattern(fileName)
 
         expect:
