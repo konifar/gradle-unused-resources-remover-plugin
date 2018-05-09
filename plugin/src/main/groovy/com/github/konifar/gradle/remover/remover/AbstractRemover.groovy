@@ -57,18 +57,20 @@ abstract class AbstractRemover {
                         .findAll { it.name != project.rootProject.name }
                         .collect { "${it.projectDir.path}/src" }
         )
-        scanTargetFileTexts = ""
+
+        StringBuilder stringBuilder = new StringBuilder()
         moduleSrcDirs.
                 collect { new File(it) }.
                 findAll { it.exists() }.
                 each { srcDirFile ->
                     srcDirFile.eachDirRecurse { dir ->
                         dir.eachFileMatch(~/(.*\.xml)|(.*\.kt)|(.*\.java)/) { f ->
-                            scanTargetFileTexts += f.text.replaceAll('\n', '').replaceAll(' ', '')
+                            stringBuilder.append(f.text.replaceAll('\n', '').replaceAll(' ', ''))
                         }
                     }
                 }
-
+        scanTargetFileTexts = stringBuilder.toString()
+        
         ColoredLogger.log "[${fileType}] ======== Start ${fileType} checking ========"
 
         moduleSrcDirs.each {
