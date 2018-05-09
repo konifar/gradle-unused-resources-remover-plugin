@@ -24,6 +24,8 @@ abstract class AbstractRemover {
 
     final List<String> moduleSrcDirs = []
 
+    String scanTargetFileTexts = ""
+
     // Extension settings
     List<String> excludeNames = []
     boolean dryRun = false
@@ -55,6 +57,17 @@ abstract class AbstractRemover {
                         .findAll { it.name != project.rootProject.name }
                         .collect { "${it.projectDir.path}/src" }
         )
+        scanTargetFileTexts = ""
+        moduleSrcDirs.
+                collect { new File(it) }.
+                findAll { it.exists() }.
+                each { srcDirFile ->
+                    srcDirFile.eachDirRecurse { dir ->
+                        dir.eachFileMatch(~/(.*\.xml)|(.*\.kt)|(.*\.java)/) { f ->
+                            scanTargetFileTexts += f.text.replaceAll('\n', '').replaceAll(' ', '')
+                        }
+                    }
+                }
 
         ColoredLogger.log "[${fileType}] ======== Start ${fileType} checking ========"
 
@@ -76,25 +89,7 @@ abstract class AbstractRemover {
 
     boolean checkTargetTextMatches(String targetText) {
         def pattern = createSearchPattern(targetText)
-        def isMatched = false
-
-        moduleSrcDirs.forEach {
-            File srcDirFile = new File(it)
-
-            if (srcDirFile.exists()) {
-                srcDirFile.eachDirRecurse { dir ->
-                    dir.eachFileMatch(~/(.*\.xml)|(.*\.kt)|(.*\.java)/) { f ->
-                        def fileText = f.text.replaceAll('\n', '').replaceAll(' ', '')
-                        if (isPatternMatched(fileText, pattern)) {
-                            isMatched = true
-                            return true
-                        }
-                    }
-                }
-            }
-        }
-
-        return isMatched
+        return isPatternMatched(scanTargetFileTexts, pattern)
     }
 
     boolean isMatchedExcludeNames(String filePath) {
