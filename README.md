@@ -131,15 +131,15 @@ $ cd gradle-unused-resources-remover-plugin
 
 ### Edit build.gradle
 ```diff
-    dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.2'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+dependencies {
+    classpath 'com.android.tools.build:gradle:3.1.2'
+    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
-+ //        classpath "gradle.plugin.com.github.konifar.gradle:plugin:0.3.0"
--        classpath "gradle.plugin.com.github.konifar.gradle:plugin:0.3.0"
-        // For mavenLocal
-+        classpath 'com.github.konifar.gradle:unused-resources-remover:0.3.0'
-- //        classpath 'com.github.konifar.gradle:unused-resources-remover:0.3.0'
++//    classpath "gradle.plugin.com.github.konifar.gradle:plugin:0.3.0"
+-    classpath "gradle.plugin.com.github.konifar.gradle:plugin:0.3.0"
+    // For mavenLocal
++    classpath 'com.github.konifar.gradle:unused-resources-remover:0.3.0'
+-//    classpath 'com.github.konifar.gradle:unused-resources-remover:0.3.0'
     }
 ```
 
