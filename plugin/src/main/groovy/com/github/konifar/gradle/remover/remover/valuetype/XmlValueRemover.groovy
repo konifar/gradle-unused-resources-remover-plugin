@@ -7,6 +7,7 @@ import com.github.konifar.gradle.remover.util.DirectoryMatcher
 import org.jdom2.*
 import org.jdom2.input.SAXBuilder
 import org.jdom2.output.Format
+import org.jdom2.output.LineSeparator
 import org.jdom2.output.XMLOutputter
 
 class XmlValueRemover extends AbstractRemover {
@@ -92,6 +93,7 @@ class XmlValueRemover extends AbstractRemover {
     private static void saveFile(Document doc, File file) {
         new XMLOutputter().with {
             format = Format.getPrettyFormat()
+            format.setLineSeparator(LineSeparator.SYSTEM)
             format.setTextMode(Format.TextMode.PRESERVE)
             output(doc, new FileWriter(file))
 //            output(doc, System.out)
