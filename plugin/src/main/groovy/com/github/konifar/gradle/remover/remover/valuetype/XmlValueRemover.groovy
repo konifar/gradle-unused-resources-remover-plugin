@@ -97,6 +97,7 @@ class XmlValueRemover extends AbstractRemover {
             format = Format.getRawFormat()
             format.setLineSeparator(LineSeparator.SYSTEM)
             format.setTextMode(Format.TextMode.PRESERVE)
+            format.setEncoding("utf-8")
             output(doc, stringWriter)
 //            output(doc, new FileWriter(file))
 //            output(doc, System.out)
