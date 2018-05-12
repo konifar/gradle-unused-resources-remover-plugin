@@ -45,7 +45,7 @@ class UnusedResourcesRemoverPlugin implements Plugin<Project> {
                         new IntegerXmlValueRemover(),
                         new BoolXmlValueRemover(),
                         new IdXmlValueRemover(),
-                        // new AttrXmlTagRemover(),
+                        new AttrXmlValueRemover(),
                 ].forEach {
                     it.remove(project, extension)
                 }
