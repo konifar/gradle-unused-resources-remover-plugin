@@ -4,12 +4,9 @@ import com.github.konifar.gradle.remover.remover.AbstractRemover
 import com.github.konifar.gradle.remover.remover.SearchPattern
 import com.github.konifar.gradle.remover.util.ColoredLogger
 import com.github.konifar.gradle.remover.util.DirectoryMatcher
-import org.jdom2.Attribute
-import org.jdom2.Document
-import org.jdom2.Element
+import org.jdom2.*
 import org.jdom2.input.SAXBuilder
 import org.jdom2.output.Format
-import org.jdom2.output.LineSeparator
 import org.jdom2.output.XMLOutputter
 
 class XmlValueRemover extends AbstractRemover {
@@ -44,20 +41,40 @@ class XmlValueRemover extends AbstractRemover {
         def isFileChanged = false
 
         Document doc = new SAXBuilder().build(file)
-        Iterator<Element> iterator = doc.getRootElement().getChildren(tagName).iterator()
+        Iterator<Content> iterator = doc.getRootElement().content.iterator()
+
+        def isAfterRemoved = false
 
         while (iterator.hasNext()) {
-            Attribute attr = iterator.next().getAttribute("name")
+            Content content = iterator.next()
 
-            if (attr != null) {
-                def isMatched = checkTargetTextMatches(attr.value)
-
-                if (!isMatched) {
-                    ColoredLogger.logGreen("[${fileType}]   Remove ${attr.value} in ${file.name}")
+            // Remove line break after element is removed
+            if (isAfterRemoved && content?.getCType() == Content.CType.Text) {
+                Text text = content as Text
+                if (text.text.contains("\n")) {
                     if (!dryRun) {
                         iterator.remove()
                     }
-                    isFileChanged = true
+                }
+                isAfterRemoved = false
+
+            } else if (content?.getCType() == Content.CType.Element) {
+                Element element = content as Element
+                if (element.name == tagName) {
+                    Attribute attr = element.getAttribute("name")
+
+                    if (attr != null) {
+                        def isMatched = checkTargetTextMatches(attr.value)
+
+                        if (!isMatched) {
+                            ColoredLogger.logGreen("[${fileType}]   Remove ${attr.value} in ${file.name}")
+                            if (!dryRun) {
+                                iterator.remove()
+                            }
+                            isAfterRemoved = true
+                            isFileChanged = true
+                        }
+                    }
                 }
             }
         }
@@ -74,12 +91,10 @@ class XmlValueRemover extends AbstractRemover {
 
     private static void saveFile(Document doc, File file) {
         new XMLOutputter().with {
-            format = Format.getRawFormat()
-            format.setLineSeparator(LineSeparator.NONE)
-            format.setOmitEncoding(true)
-            format.setOmitDeclaration(true)
+            format = Format.getPrettyFormat()
+            format.setTextMode(Format.TextMode.PRESERVE)
             output(doc, new FileWriter(file))
-            // output(doc, System.out)
+//            output(doc, System.out)
         }
     }
 

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="un_used_color">#303F9F</color>
+
     <color name="used_in_style_color">#3F51B5</color>
 
     <color name="used_in_kotlin_color">#FF4081</color>
-
-    <color name="un_used_color">#303F9F</color>
 </resources>
