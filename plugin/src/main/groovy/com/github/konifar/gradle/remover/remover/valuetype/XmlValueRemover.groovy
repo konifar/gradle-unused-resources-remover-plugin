@@ -36,6 +36,11 @@ class XmlValueRemover extends AbstractRemover {
     }
 
     void removeTagIfNeed(File file) {
+        if (isMatchedExcludeNames(file.path)) {
+            ColoredLogger.logYellow "[${fileType}]   Ignore to check ${file.name}"
+            return
+        }
+
         def isFileChanged = false
 
         Document doc = new SAXBuilder().build(file)
@@ -58,11 +63,6 @@ class XmlValueRemover extends AbstractRemover {
         }
 
         if (isFileChanged) {
-            if (isMatchedExcludeNames(file.path)) {
-                ColoredLogger.logYellow "[${fileType}]   Ignore to remove values in ${file.name}"
-                return
-            }
-
             if (!dryRun) {
                 saveFile(doc, file)
                 removeFileIfNeed(file)
