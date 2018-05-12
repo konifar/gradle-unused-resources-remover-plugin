@@ -98,6 +98,9 @@ class XmlValueRemover extends AbstractRemover {
             output(doc, new FileWriter(file))
 //            output(doc, System.out)
         }
+
+
+        file.getText('UTF-8')?.replaceAll(/^ *<\/resources>/, "</resources>")
     }
 
     private void removeFileIfNeed(File file) {
