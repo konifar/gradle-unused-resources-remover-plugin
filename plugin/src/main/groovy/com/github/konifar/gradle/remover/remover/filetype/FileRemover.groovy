@@ -30,14 +30,14 @@ class FileRemover extends AbstractRemover {
     }
 
     boolean removeFileIfNeed(File file) {
+        if (isMatchedExcludeNames(file.path)) {
+            ColoredLogger.logYellow "[${fileType}]   Ignore to check ${file.name}"
+            return false
+        }
+
         boolean isMatched = checkTargetTextMatches(extractFileName(file))
 
         if (!isMatched) {
-            if (isMatchedExcludeNames(file.path)) {
-                ColoredLogger.logYellow "[${fileType}]   Ignore to remove ${file.name}"
-                return false
-            }
-
             ColoredLogger.logGreen("[${fileType}]   Remove ${file.name}")
             if (!dryRun) {
                 file.delete()
