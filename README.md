@@ -9,8 +9,7 @@ Gradle Plugin that removes unused resources in Android projects.
 # Features
 - Easy to remove unused resources by simple gradle command
 - Customize extra/exclude files configuration
-- DataBinding support
-- Multi module support 
+- Support DataBinding & Multi module project
 
 # Simple usage
 
@@ -23,7 +22,7 @@ buildscript {
   }
   
   dependencies {
-    classpath "gradle.plugin.com.github.konifar.gradle:plugin:0.2.0"
+    classpath "gradle.plugin.com.github.konifar.gradle:plugin:0.3.0"
   }
 }
 ```
@@ -128,6 +127,20 @@ example-module/ - An example module that are used in example
 ```shell
 $ git clone git@github.com:konifar/gradle-unused-resources-remover-plugin.git
 $ cd gradle-unused-resources-remover-plugin
+```
+
+### Modified build.gradle
+```
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.1.2'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+
++ //        classpath "gradle.plugin.com.github.konifar.gradle:plugin:0.3.0"
+-        classpath "gradle.plugin.com.github.konifar.gradle:plugin:0.3.0"
+        // For mavenLocal
++        classpath 'com.github.konifar.gradle:unused-resources-remover:0.3.0'
+- //        classpath 'com.github.konifar.gradle:unused-resources-remover:0.3.0'
+    }
 ```
 
 ### Install to local maven
