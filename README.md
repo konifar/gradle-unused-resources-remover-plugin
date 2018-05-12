@@ -129,8 +129,8 @@ $ git clone git@github.com:konifar/gradle-unused-resources-remover-plugin.git
 $ cd gradle-unused-resources-remover-plugin
 ```
 
-### Modified build.gradle
-```
+### Edit build.gradle
+```diff
     dependencies {
         classpath 'com.android.tools.build:gradle:3.1.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
