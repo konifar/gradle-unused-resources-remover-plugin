@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="UnUsedStyleable">
+        <attr name="unusedString" format="string" />
+        <attr name="unusedReference" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="UsedStyleable">
+        <attr name="usedString" format="string" />
+        <attr name="unusedReference2" format="reference" />
+    </declare-styleable>
+
+</resources>
