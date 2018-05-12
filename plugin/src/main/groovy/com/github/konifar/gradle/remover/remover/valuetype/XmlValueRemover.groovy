@@ -91,16 +91,18 @@ class XmlValueRemover extends AbstractRemover {
     }
 
     private static void saveFile(Document doc, File file) {
+        def stringWriter = new StringWriter()
+
         new XMLOutputter().with {
             format = Format.getPrettyFormat()
             format.setLineSeparator(LineSeparator.SYSTEM)
             format.setTextMode(Format.TextMode.PRESERVE)
-            output(doc, new FileWriter(file))
+            output(doc, stringWriter)
+//            output(doc, new FileWriter(file))
 //            output(doc, System.out)
         }
 
-
-        file.getText('UTF-8')?.replaceAll(/^ *<\/resources>/, "</resources>")
+        file.write(stringWriter.toString()?.replaceFirst(/\n\s+<\/resources>/, "\n</resources>"))
     }
 
     private void removeFileIfNeed(File file) {
