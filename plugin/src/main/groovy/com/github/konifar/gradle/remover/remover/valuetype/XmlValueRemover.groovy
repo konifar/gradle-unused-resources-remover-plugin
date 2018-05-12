@@ -94,7 +94,7 @@ class XmlValueRemover extends AbstractRemover {
         def stringWriter = new StringWriter()
 
         new XMLOutputter().with {
-            format = Format.getPrettyFormat()
+            format = Format.getRawFormat()
             format.setLineSeparator(LineSeparator.SYSTEM)
             format.setTextMode(Format.TextMode.PRESERVE)
             output(doc, stringWriter)
@@ -102,6 +102,7 @@ class XmlValueRemover extends AbstractRemover {
 //            output(doc, System.out)
         }
 
+        // TODO This is a temporary fix to remove extra spaces in last </resources>.
         file.write(stringWriter.toString()?.replaceFirst(/\n\s+<\/resources>/, "\n</resources>"))
     }
 
