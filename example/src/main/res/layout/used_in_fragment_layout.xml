@@ -19,7 +19,8 @@
     <TextView
         style="@style/UsedInLayoutAsCustomStyle"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="@string/used_font_japanese" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -30,14 +31,15 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/used_untranslatable_in_layout" />
+        android:text="@string/used_untranslatable_in_layout"
+        android:textSize="@string/used_font_awesome2" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:enabled="@bool/used_in_layout_bool"
         android:fontFamily="@string/used_in_layout_font"
-        android:text="@string/used_font_awesome"
+        android:text="@string/used_font_awesome1"
         android:theme="@style/UsedThemeInLayout" />
 
     <!-- 9 patch test -->
