@@ -3,5 +3,8 @@
     <string name="used_in_menu">Used in menu</string>
     <string name="used_in_layout">Used in layout</string>
     <string name="used_in_kotlin">Used in kotlin</string>
+    <string name="used_font_awesome1">&#xf122;</string>
+    <string name="used_font_awesome2">&#xf12a;</string>
+    <string name="used_font_japanese">使っている文字</string>
     <string name="unused">Unused</string>
 </resources>

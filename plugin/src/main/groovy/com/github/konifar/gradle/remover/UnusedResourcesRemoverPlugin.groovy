@@ -1,6 +1,5 @@
 package com.github.konifar.gradle.remover
 
-import com.github.konifar.gradle.remover.remover.UnusedResourcesRemoverExtension
 import com.github.konifar.gradle.remover.remover.filetype.*
 import com.github.konifar.gradle.remover.remover.valuetype.*
 import com.github.konifar.gradle.remover.util.ColoredLogger
