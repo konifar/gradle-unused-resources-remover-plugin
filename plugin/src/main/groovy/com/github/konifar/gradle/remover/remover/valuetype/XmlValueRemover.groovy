@@ -6,6 +6,7 @@ import com.github.konifar.gradle.remover.util.ColoredLogger
 import com.github.konifar.gradle.remover.util.DirectoryMatcher
 import org.jdom2.*
 import org.jdom2.input.SAXBuilder
+import org.jdom2.output.EscapeStrategy
 import org.jdom2.output.Format
 import org.jdom2.output.LineSeparator
 import org.jdom2.output.XMLOutputter
@@ -16,6 +17,14 @@ class XmlValueRemover extends AbstractRemover {
      * Tag name to extract value from xml like <`dimen` name="width">, <`string` name="app_name">
      */
     final String tagName
+
+    private static final EscapeStrategy ESCAPE_STRATEGY = new EscapeStrategy() {
+        @Override
+        boolean shouldEscape(char ch) {
+            // To support
+            return Verifier.isHighSurrogate(ch) || 60 == ch >>> 10
+        }
+    }
 
     XmlValueRemover(String fileType, String resourceName, String tagName, SearchPattern.Type type = SearchPattern.Type.DEFAULT) {
         super(fileType, resourceName, type)
@@ -98,6 +107,7 @@ class XmlValueRemover extends AbstractRemover {
             format.setLineSeparator(LineSeparator.SYSTEM)
             format.setTextMode(Format.TextMode.PRESERVE)
             format.setEncoding("utf-8")
+            format.setEscapeStrategy(ESCAPE_STRATEGY)
             output(doc, stringWriter)
 //            output(doc, new FileWriter(file))
 //            output(doc, System.out)
