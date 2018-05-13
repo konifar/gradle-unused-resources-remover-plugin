@@ -1,5 +1,7 @@
-package com.github.konifar.gradle.remover.remover
+package com.github.konifar.gradle.remover
 
+import com.github.konifar.gradle.remover.remover.AbstractRemover
+import com.github.konifar.gradle.remover.remover.SearchPattern
 import com.github.konifar.gradle.remover.remover.filetype.FileRemover
 import com.github.konifar.gradle.remover.remover.valuetype.XmlValueRemover
 
