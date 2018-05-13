@@ -64,7 +64,8 @@ This plugin checks some basic resource files below.
    |--mipmap*
    |  |--*.xml
    |  |--*.png
-   |--values
+   |--values*
+      |--attrs*.xml
       |--bools*.xml
       |--colors*.xml
       |--dimens*.xml
