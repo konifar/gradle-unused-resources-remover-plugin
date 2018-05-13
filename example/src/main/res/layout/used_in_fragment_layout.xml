@@ -37,6 +37,7 @@
         android:layout_height="wrap_content"
         android:enabled="@bool/used_in_layout_bool"
         android:fontFamily="@string/used_in_layout_font"
+        android:text="@string/used_font_awesome"
         android:theme="@style/UsedThemeInLayout" />
 
     <!-- 9 patch test -->

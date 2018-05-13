@@ -3,5 +3,6 @@
     <string name="used_in_menu">Used in menu</string>
     <string name="used_in_layout">Used in layout</string>
     <string name="used_in_kotlin">Used in kotlin</string>
+    <string name="used_font_awesome">&#xf122;</string>
     <string name="unused">Unused</string>
 </resources>
