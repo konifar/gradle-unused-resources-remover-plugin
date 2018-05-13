@@ -22,7 +22,7 @@ buildscript {
   }
   
   dependencies {
-    classpath "gradle.plugin.com.github.konifar.gradle:plugin:0.3.0"
+    classpath "gradle.plugin.com.github.konifar.gradle:plugin:0.3.1"
   }
 }
 ```
@@ -135,11 +135,11 @@ dependencies {
     classpath 'com.android.tools.build:gradle:3.1.2'
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
-+//    classpath "gradle.plugin.com.github.konifar.gradle:plugin:0.3.0"
--    classpath "gradle.plugin.com.github.konifar.gradle:plugin:0.3.0"
++//    classpath "gradle.plugin.com.github.konifar.gradle:plugin:0.3.1"
+-    classpath "gradle.plugin.com.github.konifar.gradle:plugin:0.3.1"
     // For mavenLocal
-+    classpath 'com.github.konifar.gradle:unused-resources-remover:0.3.0'
--//    classpath 'com.github.konifar.gradle:unused-resources-remover:0.3.0'
++    classpath 'com.github.konifar.gradle:unused-resources-remover:0.3.1'
+-//    classpath 'com.github.konifar.gradle:unused-resources-remover:0.3.1'
     }
 ```
 
