@@ -26,6 +26,8 @@ class XmlValueRemover extends AbstractRemover {
         }
     }
 
+    private static final Namespace TOOLS_NAMESPACE = Namespace.getNamespace("tools", "http://schemas.android.com/tools")
+
     XmlValueRemover(String fileType, String resourceName, String tagName, SearchPattern.Type type = SearchPattern.Type.DEFAULT) {
         super(fileType, resourceName, type)
         this.tagName = tagName
@@ -44,7 +46,7 @@ class XmlValueRemover extends AbstractRemover {
 
     void removeTagIfNeed(File file) {
         if (isMatchedExcludeNames(file.path)) {
-            ColoredLogger.logYellow "[${fileType}]   Ignore to check ${file.name}"
+            ColoredLogger.logYellow "[${fileType}]   Ignore checking ${file.name}"
             return
         }
 
@@ -74,6 +76,12 @@ class XmlValueRemover extends AbstractRemover {
                     Attribute attr = element.getAttribute("name")
 
                     if (attr != null) {
+                        // Check the element has tools:override attribute
+                        if (element.getAttribute("override", TOOLS_NAMESPACE)?.value == "true") {
+                            ColoredLogger.logYellow("[${fileType}]   Skip checking ${attr.value} which has tools:override in ${file.name}")
+                            continue
+                        }
+
                         def isMatched = checkTargetTextMatches(attr.value)
 
                         if (!isMatched) {

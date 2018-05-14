@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <dimen name="used_in_layout_dimen">16dp</dimen>
 
     <dimen name="used_in_kotlin_dimen">16dp</dimen>
 
     <dimen name="used_in_style_dimen">16dp</dimen>
+
+    <dimen name="used_for_override" tools:override="true">30sp</dimen>
 
     <dimen name="unused_dimen">16dp</dimen>
 </resources>
