@@ -26,6 +26,8 @@ class XmlValueRemover extends AbstractRemover {
         }
     }
 
+    private static final Namespace TOOLS_NAMESPACE = Namespace.getNamespace("tools", "http://schemas.android.com/tools")
+
     XmlValueRemover(String fileType, String resourceName, String tagName, SearchPattern.Type type = SearchPattern.Type.DEFAULT) {
         super(fileType, resourceName, type)
         this.tagName = tagName
@@ -74,22 +76,21 @@ class XmlValueRemover extends AbstractRemover {
                     Attribute attr = element.getAttribute("name")
 
                     if (attr != null) {
-                        Attribute overrideAttr = element.getAttribute("override", Namespace.getNamespace("tools", "http://schemas.android.com/tools"))
+                        // Check the element has tools:override attribute
+                        if (element.getAttribute("override", TOOLS_NAMESPACE)?.value == "true") {
+                            ColoredLogger.logYellow("[${fileType}]   Skip checking ${attr.value} which has tools:override in ${file.name}")
+                            continue
+                        }
 
-                        if (overrideAttr?.value != "true") {
-                            def isMatched = checkTargetTextMatches(attr.value)
+                        def isMatched = checkTargetTextMatches(attr.value)
 
-                            if (!isMatched) {
-                                ColoredLogger.logGreen("[${fileType}]   Remove ${attr.value} in ${file.name}")
-                                if (!dryRun) {
-                                    iterator.remove()
-                                }
-                                isAfterRemoved = true
-                                isFileChanged = true
+                        if (!isMatched) {
+                            ColoredLogger.logGreen("[${fileType}]   Remove ${attr.value} in ${file.name}")
+                            if (!dryRun) {
+                                iterator.remove()
                             }
-
-                        } else {
-                            ColoredLogger.logYellow("[${fileType}]   Skip checking ${attr.value} in ${file.name}")
+                            isAfterRemoved = true
+                            isFileChanged = true
                         }
                     }
                 }
