@@ -44,7 +44,7 @@ class XmlValueRemover extends AbstractRemover {
 
     void removeTagIfNeed(File file) {
         if (isMatchedExcludeNames(file.path)) {
-            ColoredLogger.logYellow "[${fileType}]   Ignore to check ${file.name}"
+            ColoredLogger.logYellow "[${fileType}]   Ignore checking ${file.name}"
             return
         }
 
@@ -74,15 +74,22 @@ class XmlValueRemover extends AbstractRemover {
                     Attribute attr = element.getAttribute("name")
 
                     if (attr != null) {
-                        def isMatched = checkTargetTextMatches(attr.value)
+                        Attribute overrideAttr = element.getAttribute("override", Namespace.getNamespace("tools", "http://schemas.android.com/tools"))
 
-                        if (!isMatched) {
-                            ColoredLogger.logGreen("[${fileType}]   Remove ${attr.value} in ${file.name}")
-                            if (!dryRun) {
-                                iterator.remove()
+                        if (overrideAttr?.value != "true") {
+                            def isMatched = checkTargetTextMatches(attr.value)
+
+                            if (!isMatched) {
+                                ColoredLogger.logGreen("[${fileType}]   Remove ${attr.value} in ${file.name}")
+                                if (!dryRun) {
+                                    iterator.remove()
+                                }
+                                isAfterRemoved = true
+                                isFileChanged = true
                             }
-                            isAfterRemoved = true
-                            isFileChanged = true
+
+                        } else {
+                            ColoredLogger.logYellow("[${fileType}]   Skip checking ${attr.value} in ${file.name}")
                         }
                     }
                 }
