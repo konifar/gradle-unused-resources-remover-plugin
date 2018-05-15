@@ -65,13 +65,13 @@ abstract class AbstractRemover {
                 findAll { it.exists() }.
                 each { srcDirFile ->
                     srcDirFile.eachDirRecurse { dir ->
-                        dir.eachFileMatch(~/(.*\.xml)|(.*\.kt)|(.*\.java)/) { f ->
+                        dir.eachFileMatch(~/(.*\.xml)|(.*\.kt)|(.*\.java)|(.*\.gradle)/) { f ->
                             stringBuilder.append(f.text.replaceAll('\n', '').replaceAll(' ', ''))
                         }
                     }
                 }
         scanTargetFileTexts = stringBuilder.toString()
-        
+
         ColoredLogger.log "[${fileType}] ======== Start ${fileType} checking ========"
 
         moduleSrcDirs.each {
