@@ -172,6 +172,13 @@ $ [layout] plugin
 ...
 ```
 
+# Donation
+If this plugin helps you, I would be so happy.
+
+I'm welcome your tip by [Kyash](https://kyash.co/)! 
+
+<img src="art/kyash_qr.png" width="200" />
+
 # License
 ```
 Copyright 2018 Yusuke Konishi
