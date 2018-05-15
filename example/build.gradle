@@ -23,6 +23,13 @@ android {
     dataBinding {
         enabled true
     }
+    productFlavors {
+        dev {
+            manifestPlaceholders = [
+                    app_icon: "@mipmap/used_in_gradle",
+            ]
+        }
+    }
 }
 
 unusedResourcesRemover {
