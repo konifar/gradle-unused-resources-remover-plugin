@@ -87,7 +87,7 @@ Here is two example.
 ```gradle
 unusedResourcesRemover { 
   extraRemovers = [
-    createXmlValueRemover("font", "string", "string"), // fonts.xml
+    createXmlValueRemover("fonts", "string", "string"), // fonts.xml
     createXmlValueRemover("text_appearance", "style", "style", "style") // text_appearance.xml
   ]
   ...
@@ -110,7 +110,7 @@ unusedResourcesRemover {
 }
 ```
 
-To know more, See [UnusedResourcesRemoverExtension](https://github.com/konifar/gradle-unused-resources-remover-plugin/blob/master/plugin/src/main/groovy/com/github/konifar/gradle/remover/remover/UnusedResourcesRemoverExtension.groovy)
+To know more, See [UnusedResourcesRemoverExtension](https://github.com/konifar/gradle-unused-resources-remover-plugin/blob/master/plugin/src/main/groovy/com/github/konifar/gradle/remover/UnusedResourcesRemoverExtension.groovy)
 
 # Contributing
 This project is under development.
