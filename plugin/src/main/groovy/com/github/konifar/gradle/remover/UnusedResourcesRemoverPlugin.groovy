@@ -39,7 +39,6 @@ class UnusedResourcesRemoverPlugin implements Plugin<Project> {
                         new StyleXmlValueRemover(),
                         new StringXmlValueRemover(),
                         new DimenXmlValueRemover(),
-                        new FloatXmlValueRemover(),
                         new ColorXmlValueRemover(),
                         new IntegerXmlValueRemover(),
                         new BoolXmlValueRemover(),
