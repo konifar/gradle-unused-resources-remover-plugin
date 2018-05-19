@@ -18,7 +18,7 @@ dependencies {
 
 archivesBaseName = 'unused-resources-remover'
 group = 'com.github.konifar.gradle'
-version = '0.3.2'
+version = '0.3.3'
 
 pluginBundle {
     website = 'https://github.com/konifar/gradle-unused-resources-remover-plugin'
