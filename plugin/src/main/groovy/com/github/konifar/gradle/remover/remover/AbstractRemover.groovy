@@ -7,6 +7,8 @@ import org.gradle.internal.impldep.com.google.common.annotations.VisibleForTesti
 
 abstract class AbstractRemover {
 
+    private static final def FILE_TYPE_FILTER = ~/(.*\.xml)|(.*\.kt)|(.*\.java)|(.*\.gradle)/
+
     /**
      * directory/file name to find files like drawable, dimen, string
      */
@@ -22,8 +24,6 @@ abstract class AbstractRemover {
      * ex) theme should specified to Type.STYLE
      */
     final SearchPattern.Type type
-
-    final List<String> moduleSrcDirs = []
 
     String scanTargetFileTexts = ""
 
@@ -52,37 +52,48 @@ abstract class AbstractRemover {
         this.dryRun = extension.dryRun
         this.excludeNames = extension.excludeNames
 
-        moduleSrcDirs.clear()
-        moduleSrcDirs.addAll(
-                project.rootProject.allprojects
-                        .findAll { it.name != project.rootProject.name }
-                        .collect { "${it.projectDir.path}/src" }
-        )
+        List<String> moduleSrcDirs = project.rootProject.allprojects
+                .findAll { it.name != project.rootProject.name }
+                .collect { "${it.projectDir.path}" }
 
-        StringBuilder stringBuilder = new StringBuilder()
-        moduleSrcDirs.
-                collect { new File(it) }.
-                findAll { it.exists() }.
-                each { srcDirFile ->
-                    srcDirFile.eachDirRecurse { dir ->
-                        dir.eachFileMatch(~/(.*\.xml)|(.*\.kt)|(.*\.java)|(.*\.gradle)/) { f ->
-                            stringBuilder.append(f.text.replaceAll('\n', '').replaceAll(' ', ''))
-                        }
-                    }
-                }
-        scanTargetFileTexts = stringBuilder.toString()
+        scanTargetFileTexts = createScanTargetFileTexts(moduleSrcDirs)
 
         ColoredLogger.log "[${fileType}] ======== Start ${fileType} checking ========"
 
         moduleSrcDirs.each {
-            String moduleSrcName = it - "${project.rootProject.projectDir.path}/" - "/src"
+            String moduleSrcName = it - "${project.rootProject.projectDir.path}/"
             ColoredLogger.log "[${fileType}] ${moduleSrcName}"
 
-            File resDirFile = new File("${it}/main/res")
+            File resDirFile = new File("${it}/src/main/res")
             if (resDirFile.exists()) {
                 removeEach(resDirFile)
             }
         }
+    }
+
+    private static String createScanTargetFileTexts(List<String> moduleSrcDirs) {
+        StringBuilder stringBuilder = new StringBuilder()
+
+        moduleSrcDirs.collect { new File(it) }
+                .findAll { it.exists() }
+                .each { srcDirFile ->
+            srcDirFile.eachFileMatch(FILE_TYPE_FILTER) { f ->
+                stringBuilder.append(f.text.replaceAll('\n', '').replaceAll(' ', ''))
+            }
+        }
+
+        moduleSrcDirs
+                .collect { new File("${it}/src") }
+                .findAll { it.exists() }
+                .each { srcDirFile ->
+            srcDirFile.eachDirRecurse { dir ->
+                dir.eachFileMatch(FILE_TYPE_FILTER) { f ->
+                    stringBuilder.append(f.text.replaceAll('\n', '').replaceAll(' ', ''))
+                }
+            }
+        }
+
+        return stringBuilder.toString()
     }
 
     @VisibleForTesting
