@@ -42,6 +42,14 @@ apply plugin: "com.github.konifar.gradle.unused-resources-remover"
 $ ./gradlew removeUnusedResources
 ```
 
+## Hook to Clean Project(Optional)
+If you want to hook to `Clean Project`, add following code at the end.
+
+### app/build.gradle
+```gradle
+clean.dependsOn(removeUnusedResources)
+```
+
 # Advanced usage
 
 This plugin checks some basic resource files below.
