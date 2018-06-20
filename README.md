@@ -107,6 +107,11 @@ There are other optional configuration below
 ```gradle
 unusedResourcesRemover {
   ...
+  // Write module names
+  excludeModules = [
+    "example-module", // example-module is never checked
+  ]
+
   // Write file or directory names
   excludeNames = [
     "strings.xml", // strings.xml is never checked

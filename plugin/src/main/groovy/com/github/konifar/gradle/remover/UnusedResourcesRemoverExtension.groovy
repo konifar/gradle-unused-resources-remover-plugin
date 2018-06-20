@@ -11,6 +11,8 @@ class UnusedResourcesRemoverExtension {
 
     List<AbstractRemover> extraRemovers = []
 
+    List<String> excludeModules = []
+
     List<String> excludeNames = []
 
     boolean dryRun = false

@@ -28,6 +28,7 @@ abstract class AbstractRemover {
     String scanTargetFileTexts = ""
 
     // Extension settings
+    List<String> excludeModules = []
     List<String> excludeNames = []
     boolean dryRun = false
 
@@ -50,10 +51,12 @@ abstract class AbstractRemover {
 
     void remove(Project project, UnusedResourcesRemoverExtension extension) {
         this.dryRun = extension.dryRun
+        this.excludeModules = extension.excludeModules
         this.excludeNames = extension.excludeNames
 
         List<String> moduleSrcDirs = project.rootProject.allprojects
                 .findAll { it.name != project.rootProject.name }
+                .findAll { !excludeModules.contains(it.name) }
                 .collect { "${it.projectDir.path}" }
 
         scanTargetFileTexts = createScanTargetFileTexts(moduleSrcDirs)

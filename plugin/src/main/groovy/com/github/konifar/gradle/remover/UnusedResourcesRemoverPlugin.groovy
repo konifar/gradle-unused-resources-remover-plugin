@@ -71,6 +71,13 @@ class UnusedResourcesRemoverPlugin implements Plugin<Project> {
             }
         }
 
+        if (extension.excludeModules.size() > 0) {
+            ColoredLogger.log "excludeModules:"
+            extension.excludeModules.forEach {
+                ColoredLogger.log "  ${it}"
+            }
+        }
+
         if (extension.excludeNames.size() > 0) {
             ColoredLogger.log "excludeNames:"
             extension.excludeNames.forEach {
